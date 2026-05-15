@@ -54,11 +54,11 @@ interface OrderData {
 }
 
 const steps = [
-  { key: "pending", label: "Recibido", icon: Clock },
-  { key: "confirmed", label: "Confirmado", icon: CheckCircle },
-  { key: "preparing", label: "Preparando", icon: ChefHat },
-  { key: "ready", label: "Listo", icon: UtensilsCrossed },
-  { key: "served", label: "Servido", icon: CheckCircle },
+  { key: "pending", label: "Received", icon: Clock },
+  { key: "confirmed", label: "Confirmed", icon: CheckCircle },
+  { key: "preparing", label: "Preparing", icon: ChefHat },
+  { key: "ready", label: "Ready", icon: UtensilsCrossed },
+  { key: "served", label: "Served", icon: CheckCircle },
 ];
 
 const stepIndex: Record<string, number> = {
@@ -71,11 +71,11 @@ const stepIndex: Record<string, number> = {
 };
 
 const itemStatusLabels: Record<string, string> = {
-  pending: "En cola",
-  preparing: "Preparando",
-  ready: "Listo",
-  served: "Servido",
-  cancelled: "Cancelado",
+  pending: "In Queue",
+  preparing: "Preparing",
+  ready: "Ready",
+  served: "Served",
+  cancelled: "Cancelled",
 };
 
 const itemStatusVariants: Record<string, string> = {
@@ -151,7 +151,7 @@ export default function OrderStatusPage({
       const remainingSeconds = Math.ceil(remainingMs / 1000);
       setActionNotice({
         kind: "error",
-        message: `Espera ${remainingSeconds}s antes de volver a enviar esta solicitud.`,
+        message: `Wait ${remainingSeconds}s before sending this request again.`,
       });
       return;
     }
@@ -178,7 +178,7 @@ export default function OrderStatusPage({
             [action]: now + retryAfterSec * 1000,
           }));
         }
-        throw new Error(result.error?.message || "No se pudo enviar la solicitud");
+        throw new Error(result.error?.message || "Could not send the request");
       }
 
       const now = Date.now();
@@ -190,15 +190,15 @@ export default function OrderStatusPage({
       }));
       const successMessage =
         action === "request_bill"
-          ? "Tu solicitud de cuenta fue enviada al restaurante."
-          : "Tu solicitud de mozo fue enviada al restaurante.";
+          ? "Your bill request was sent to the restaurant."
+          : "Your waiter request was sent to the restaurant.";
       setActionNotice({ kind: "success", message: successMessage });
       toast.success(successMessage);
     } catch (err) {
       const errorMessage =
         err instanceof Error
           ? err.message
-          : "No se pudo enviar la solicitud. Intenta nuevamente.";
+          : "Could not send the request. Please try again.";
       setActionNotice({ kind: "error", message: errorMessage });
       toast.error(errorMessage);
     } finally {
@@ -211,7 +211,7 @@ export default function OrderStatusPage({
     const token = getToken();
 
     if (!orderId || !token) {
-      setError("No se encontro la order. Intenta realizar un nuevo pedido.");
+      setError("Order not found. Please place a new order.");
       setLoading(false);
       return;
     }
@@ -225,12 +225,12 @@ export default function OrderStatusPage({
       );
       const result = await res.json();
       if (!result.success) {
-        throw new Error(result.error?.message || "Error al obtener la order");
+        throw new Error(result.error?.message || "Error fetching the order");
       }
       setOrder(result.data);
       setError(null);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error inesperado");
+      setError(err instanceof Error ? err.message : "Unexpected error");
     } finally {
       setLoading(false);
     }
@@ -255,12 +255,12 @@ export default function OrderStatusPage({
       );
       const result = await res.json();
       if (!result.success) {
-        setError(result.error?.message || "No se pudo cancelar el pedido");
+        setError(result.error?.message || "Could not cancel the order");
         return;
       }
       await fetchOrder();
     } catch {
-      setError("Error al cancelar el pedido");
+      setError("Error cancelling the order");
     } finally {
       setCancelling(false);
       setCancelDialogOpen(false);
@@ -324,7 +324,7 @@ export default function OrderStatusPage({
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        <p className="text-sm text-muted-foreground">Cargando tu pedido...</p>
+        <p className="text-sm text-muted-foreground">Loading your order...</p>
       </div>
     );
   }
@@ -332,9 +332,9 @@ export default function OrderStatusPage({
   if (error || !order) {
     return (
       <div className="p-6 mt-12 text-center">
-        <p className="text-destructive font-medium mb-4">{error || "Order no encontrada"}</p>
+        <p className="text-destructive font-medium mb-4">{error || "Order not found"}</p>
         <Link href={`/${branchSlug}/${tableCode}/menu`}>
-          <Button variant="outline">Volver al Menu</Button>
+          <Button variant="outline">Back to Menu</Button>
         </Link>
       </div>
     );
@@ -359,14 +359,14 @@ export default function OrderStatusPage({
       {showConfirmation && (
         <div className="rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 text-center animate-in fade-in slide-in-from-top-2 duration-300">
           <CheckCircle className="h-8 w-8 text-green-600 dark:text-green-400 mx-auto mb-2" />
-          <p className="font-semibold text-green-800 dark:text-green-300">Pedido recibido</p>
-          <p className="text-sm text-green-600 dark:text-green-400">Tu order fue enviada a cocina</p>
+          <p className="font-semibold text-green-800 dark:text-green-300">Order received</p>
+          <p className="text-sm text-green-600 dark:text-green-400">Your order was sent to the kitchen</p>
         </div>
       )}
 
       {/* Header */}
       <div className="text-center pt-2">
-        <h1 className="text-2xl font-bold">Tu Pedido</h1>
+        <h1 className="text-2xl font-bold">Your Order</h1>
         <p className="text-muted-foreground mt-1">Order #{order.order_number}</p>
       </div>
 
@@ -375,8 +375,8 @@ export default function OrderStatusPage({
         <Card>
           <CardContent className="p-5 text-center">
             <XCircle className="h-12 w-12 text-red-500 mx-auto mb-3" />
-            <p className="font-semibold text-lg text-red-600 dark:text-red-400">Pedido Cancelado</p>
-            <p className="text-sm text-muted-foreground mt-1">Este pedido ha sido cancelado</p>
+            <p className="font-semibold text-lg text-red-600 dark:text-red-400">Order Cancelled</p>
+            <p className="text-sm text-muted-foreground mt-1">This order has been cancelled</p>
           </CardContent>
         </Card>
       ) : (
@@ -414,7 +414,7 @@ export default function OrderStatusPage({
                         </p>
                         {isCurrent && (
                           <p className="text-xs text-primary font-medium mt-0.5">
-                            Estado actual
+                            Current status
                           </p>
                         )}
                       </div>
@@ -436,7 +436,7 @@ export default function OrderStatusPage({
       {/* Items */}
       <Card>
         <CardHeader className="pb-3">
-          <CardTitle className="text-base">Detalle del Pedido</CardTitle>
+          <CardTitle className="text-base">Order Details</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
           {order.items.map((item) => (
@@ -475,7 +475,7 @@ export default function OrderStatusPage({
               )}
               {order.discount != null && order.discount > 0 && (
                 <div className="flex justify-between text-sm text-green-600 dark:text-green-400">
-                  <span>Descuento</span>
+                  <span>Discount</span>
                   <span>-{formatCurrency(order.discount)}</span>
                 </div>
               )}
@@ -493,7 +493,7 @@ export default function OrderStatusPage({
         <Card className="border-primary/20 bg-primary/5 hover:bg-primary/10 transition-colors cursor-pointer">
           <CardContent className="p-4 flex items-center gap-3">
             <Star className="h-5 w-5 text-primary shrink-0" />
-            <p className="text-sm font-medium flex-1">Ver mis puntos y recompensas</p>
+            <p className="text-sm font-medium flex-1">View my points and rewards</p>
             <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
           </CardContent>
         </Card>
@@ -508,7 +508,7 @@ export default function OrderStatusPage({
           onClick={() => setCancelDialogOpen(true)}
         >
           <XCircle className="h-4 w-4" />
-          Cancelar Pedido
+          Cancel Order
         </Button>
       )}
 
@@ -530,11 +530,11 @@ export default function OrderStatusPage({
             ) : (
               <RefreshCcw className="h-4 w-4 mr-2" />
             )}
-            {refreshing ? "Actualizando..." : "Actualizar"}
+            {refreshing ? "Updating..." : "Refresh"}
           </Button>
           <Link href={`/${branchSlug}/${tableCode}/menu`} className="flex-1">
             <Button variant="default" className="w-full">
-              Pedir Mas
+              Order More
             </Button>
           </Link>
         </div>
@@ -552,12 +552,12 @@ export default function OrderStatusPage({
             >
               <Receipt className="h-4 w-4" />
               {actionLoading === "request_bill"
-                ? "Enviando..."
+                ? "Sending..."
                 : requestBillCooldownSeconds > 0
                   ? `Reintentar en ${requestBillCooldownSeconds}s`
                   : actionSent.request_bill
-                    ? "Solicitar Cuenta (de nuevo)"
-                    : "Pedir la Cuenta"}
+                    ? "Request Bill (again)"
+                    : "Request Bill"}
             </Button>
             <Button
               variant="outline"
@@ -567,12 +567,12 @@ export default function OrderStatusPage({
             >
               <Bell className="h-4 w-4" />
               {actionLoading === "call_waiter"
-                ? "Enviando..."
+                ? "Sending..."
                 : callWaiterCooldownSeconds > 0
                   ? `Reintentar en ${callWaiterCooldownSeconds}s`
                   : actionSent.call_waiter
-                    ? "Llamar al Mozo (de nuevo)"
-                    : "Llamar al Mozo"}
+                    ? "Call Waiter (again)"
+                    : "Call Waiter"}
             </Button>
           </div>
           {actionNotice && (
@@ -589,7 +589,7 @@ export default function OrderStatusPage({
           )}
           {(requestBillCooldownSeconds > 0 || callWaiterCooldownSeconds > 0) && (
             <p className="text-xs text-muted-foreground">
-              Anti-spam activo: cada solicitud tiene 30 segundos de espera.
+              Anti-spam enabled: each request has a 30-second cooldown.
             </p>
           )}
         </>
@@ -599,7 +599,7 @@ export default function OrderStatusPage({
       {isCancelled && (
         <Link href={`/${branchSlug}/${tableCode}/menu`}>
           <Button variant="default" className="w-full">
-            Volver al Menu
+            Back to Menu
           </Button>
         </Link>
       )}
@@ -608,9 +608,9 @@ export default function OrderStatusPage({
       <Dialog open={cancelDialogOpen} onOpenChange={setCancelDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Cancelar Pedido</DialogTitle>
+            <DialogTitle>Cancel Order</DialogTitle>
             <DialogDescription>
-              Esta seguro que desea cancelar su pedido? Esta accion no se puede deshacer.
+              Are you sure you want to cancel your order? This action cannot be undone.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -619,7 +619,7 @@ export default function OrderStatusPage({
               onClick={() => setCancelDialogOpen(false)}
               disabled={cancelling}
             >
-              No, mantener pedido
+              No, keep order
             </Button>
             <Button
               variant="destructive"
@@ -629,10 +629,10 @@ export default function OrderStatusPage({
               {cancelling ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Cancelando...
+                  Cancelling...
                 </>
               ) : (
-                "Si, cancelar pedido"
+                "Yes, cancel order"
               )}
             </Button>
           </DialogFooter>

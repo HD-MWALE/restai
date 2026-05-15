@@ -65,9 +65,9 @@ export default function WaitingPage({
   if (!sessionId) {
     return (
       <div className="p-4 mt-8 text-center">
-        <p className="text-muted-foreground mb-4">No se encontro la sesion</p>
+        <p className="text-muted-foreground mb-4">Session not found</p>
         <Button variant="outline" onClick={() => router.push(`/${branchSlug}/${tableCode}`)}>
-          Volver al inicio
+          Return to home
         </Button>
       </div>
     );
@@ -79,12 +79,12 @@ export default function WaitingPage({
         <Card>
           <CardContent className="py-12 text-center">
             <XCircle className="h-16 w-16 text-destructive mx-auto mb-4" />
-            <h2 className="text-xl font-bold mb-2">Solicitud rechazada</h2>
+            <h2 className="text-xl font-bold mb-2">Request rejected</h2>
             <p className="text-muted-foreground mb-6">
-              Tu solicitud para ordenar fue rechazada. Consulta con el personal del restaurante.
+              Your request to order was rejected. Please check with the restaurant staff.
             </p>
             <Button onClick={() => router.push(`/${branchSlug}/${tableCode}`)}>
-              Intentar de nuevo
+              Try again
             </Button>
           </CardContent>
         </Card>
@@ -100,12 +100,12 @@ export default function WaitingPage({
             <Clock className="h-20 w-20 text-primary/20" />
             <Loader2 className="h-10 w-10 text-primary animate-spin absolute top-5 left-5" />
           </div>
-          <h2 className="text-xl font-bold mb-2">Esperando confirmacion</h2>
+          <h2 className="text-xl font-bold mb-2">Waiting for confirmation</h2>
           <p className="text-muted-foreground mb-2">
-            Un mozo confirmara tu mesa en breve...
+            A waiter will confirm your table shortly...
           </p>
           <p className="text-xs text-muted-foreground">
-            Mesa {tableCode}
+            Table {tableCode}
           </p>
         </CardContent>
       </Card>

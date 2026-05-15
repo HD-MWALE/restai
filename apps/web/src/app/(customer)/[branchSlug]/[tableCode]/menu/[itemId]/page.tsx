@@ -158,7 +158,7 @@ function ModifierGroupsAccordion({
                 <h2 className="text-sm font-semibold">{group.name}</h2>
                 {group.is_required && (
                   <span className="text-[10px] font-semibold text-red-400 bg-red-400/10 px-1.5 py-0.5 rounded-full">
-                    Requerido
+                    Required
                   </span>
                 )}
                 {selected.length > 0 && (
@@ -319,13 +319,13 @@ export default function ProductDetailPage({
       .then((res) => res.json())
       .then((result) => {
         if (!result.success) {
-          setError(result.error?.message || "Error al cargar el menu");
+          setError(result.error?.message || "Error loading menu");
           return;
         }
         setMenuData(result.data);
       })
       .catch(() => {
-        setError("Error inesperado");
+        setError("Unexpected error");
       })
       .finally(() => {
         setLoading(false);
@@ -369,7 +369,7 @@ export default function ProductDetailPage({
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3">
         <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-        <p className="text-sm text-muted-foreground">Cargando producto...</p>
+        <p className="text-sm text-muted-foreground">Loading product...</p>
       </div>
     );
   }
@@ -382,7 +382,7 @@ export default function ProductDetailPage({
           {error || "Error al cargar producto"}
         </p>
         <Button variant="outline" onClick={() => router.back()}>
-          Volver
+          Return
         </Button>
       </div>
     );
@@ -394,9 +394,9 @@ export default function ProductDetailPage({
     return (
       <div className="p-6 mt-12 text-center">
         <UtensilsCrossed className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-        <p className="font-medium mb-2">Producto no encontrado</p>
+        <p className="font-medium mb-2">Product not found</p>
         <p className="text-sm text-muted-foreground mb-4">
-          Este producto no existe o ya no esta disponible.
+          This product does not exist or is not available.
         </p>
         <Button
           variant="outline"
@@ -404,7 +404,7 @@ export default function ProductDetailPage({
             router.push(`/${branchSlug}/${tableCode}/menu`)
           }
         >
-          Volver al menu
+          Return to menu
         </Button>
       </div>
     );
@@ -466,7 +466,7 @@ export default function ProductDetailPage({
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center gap-3 bg-muted">
             <UtensilsCrossed className="h-16 w-16 text-muted-foreground/30" />
-            <p className="text-sm text-muted-foreground/50">Sin imagen</p>
+            <p className="text-sm text-muted-foreground/50">No image</p>
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
           </div>
         )}
@@ -518,9 +518,9 @@ export default function ProductDetailPage({
             <div className="flex items-center gap-2.5 bg-secondary/50 rounded-xl px-4 py-3">
               <ShoppingCart className="h-4 w-4 text-muted-foreground" />
               <p className="text-sm text-muted-foreground">
-                Ya tienes{" "}
+                You already have{" "}
                 <span className="font-semibold text-foreground">{cartQty}</span>{" "}
-                en tu carrito
+                in your cart
               </p>
             </div>
           )}
@@ -563,7 +563,7 @@ export default function ProductDetailPage({
                 : "bg-muted text-muted-foreground cursor-not-allowed",
             )}
           >
-            <span>Agregar</span>
+            <span>Add to cart</span>
             <span className="font-bold">{formatCurrency(totalPrice)}</span>
           </button>
         </div>

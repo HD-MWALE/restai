@@ -24,9 +24,9 @@ import { useCustomerStore } from "@/stores/customer-store";
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 const registerSchema = z.object({
-  customerName: z.string().min(1, "Ingresa tu nombre").max(255),
+  customerName: z.string().min(1, "Enter your name").max(255),
   customerPhone: z.string().max(20).optional(),
-  email: z.string().email("Email invalido").optional().or(z.literal("")),
+  email: z.string().email("Invalid email").optional().or(z.literal("")),
   birthDate: z.string().optional(),
 });
 
@@ -172,7 +172,7 @@ function CustomerEntryPageContent({
             setLoading(false);
             return;
           }
-          setError(result.error?.message || "Error al iniciar sesion");
+          setError(result.error?.message || "Error starting session");
           setLoading(false);
           return;
         }
@@ -202,7 +202,7 @@ function CustomerEntryPageContent({
         router.push(`/${branchSlug}/${tableCode}/waiting`);
       })
       .catch(() => {
-        setError("Error inesperado");
+        setError("Unexpected error");
         setLoading(false);
       });
   };
@@ -210,7 +210,7 @@ function CustomerEntryPageContent({
   if (checkingSession) {
     return (
       <div className="p-4 mt-8 flex items-center justify-center">
-        <div className="animate-pulse text-muted-foreground">Verificando mesa...</div>
+        <div className="animate-pulse text-muted-foreground">Checking table...</div>
       </div>
     );
   }
@@ -224,21 +224,21 @@ function CustomerEntryPageContent({
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10">
               <RefreshCw className="h-8 w-8 text-green-600" />
             </div>
-            <CardTitle className="text-2xl">Sesion activa</CardTitle>
+            <CardTitle className="text-2xl">Active session</CardTitle>
             <CardDescription>
-              Esta mesa tiene una sesion activa de {existingSession.customerName}
+              This table has an active session for {existingSession.customerName}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
             <Button className="w-full" onClick={handleReconnect}>
-              Reconectar a sesion existente
+              Reconnect to existing session
             </Button>
             <Button
               variant="outline"
               className="w-full"
               onClick={() => setExistingSession(null)}
             >
-              Iniciar nueva sesion
+              Start new session
             </Button>
           </CardContent>
         </Card>
@@ -255,9 +255,9 @@ function CustomerEntryPageContent({
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-amber-500/10">
               <UtensilsCrossed className="h-8 w-8 text-amber-600" />
             </div>
-            <CardTitle className="text-2xl">Mesa en espera</CardTitle>
+            <CardTitle className="text-2xl">Table pending</CardTitle>
             <CardDescription>
-              Esta mesa esta esperando aprobacion del personal. Intenta de nuevo en unos momentos.
+              This table is waiting for staff approval. Please try again in a few moments.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -270,7 +270,7 @@ function CustomerEntryPageContent({
                 void checkExistingSession();
               }}
             >
-              Verificar de nuevo
+              Check again
             </Button>
           </CardContent>
         </Card>
@@ -285,9 +285,9 @@ function CustomerEntryPageContent({
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <UtensilsCrossed className="h-8 w-8 text-primary" />
           </div>
-          <CardTitle className="text-2xl">Bienvenido</CardTitle>
+          <CardTitle className="text-2xl">Welcome</CardTitle>
           <CardDescription>
-            Mesa {tableCode} - Ingresa tus datos para empezar a ordenar
+            Table {tableCode} - Enter your details to start ordering
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -298,7 +298,7 @@ function CustomerEntryPageContent({
               </div>
             )}
             <div className="space-y-2">
-              <Label htmlFor="customerName">Tu nombre *</Label>
+              <Label htmlFor="customerName">Your name *</Label>
               <Input
                 id="customerName"
                 placeholder="Ingresa tu nombre"
@@ -311,7 +311,7 @@ function CustomerEntryPageContent({
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="customerPhone">Telefono (opcional)</Label>
+              <Label htmlFor="customerPhone">Phone (optional)</Label>
               <Input
                 id="customerPhone"
                 placeholder="987 654 321"
@@ -343,10 +343,10 @@ function CustomerEntryPageContent({
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground">
-                    Quieres acumular puntos?
+                    Do you want to earn points?
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    Registrate y gana puntos con cada pedido
+                    Sign up and earn points with every order
                   </p>
                 </div>
                 <div className={`h-5 w-9 rounded-full transition-colors relative ${
@@ -376,7 +376,7 @@ function CustomerEntryPageContent({
                   )}
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="birthDate">Fecha de nacimiento (opcional)</Label>
+                  <Label htmlFor="birthDate">Birth date (optional)</Label>
                   <Controller
                     control={control}
                     name="birthDate"
@@ -393,7 +393,7 @@ function CustomerEntryPageContent({
             )}
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Iniciando..." : "Ver Menu"}
+              {loading ? "Starting..." : "View Menu"}
             </Button>
           </CardContent>
         </form>

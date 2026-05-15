@@ -74,13 +74,13 @@ interface OrderData {
 }
 
 const orderStatusLabels: Record<string, string> = {
-  pending: "Pendiente",
-  confirmed: "Confirmado",
-  preparing: "Preparando",
-  ready: "Listo",
-  served: "Servido",
-  completed: "Completado",
-  cancelled: "Cancelado",
+  pending: "Pending",
+  confirmed: "Confirmed",
+  preparing: "Preparing",
+  ready: "Ready",
+  served: "Served",
+  completed: "Completed",
+  cancelled: "Cancelled",
 };
 
 const orderStatusVariants: Record<string, string> = {
@@ -186,7 +186,7 @@ export default function ProfilePage({
       const result = await res.json();
 
       if (!result.success) {
-        throw new Error(result.error?.message || "Error al canjear");
+        throw new Error(result.error?.message || "Error redeeming");
       }
 
       setRedeemResult(result.data);
@@ -216,7 +216,7 @@ export default function ProfilePage({
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        <p className="text-sm text-muted-foreground">Cargando perfil...</p>
+        <p className="text-sm text-muted-foreground">Loading profile...</p>
       </div>
     );
   }
@@ -231,7 +231,7 @@ export default function ProfilePage({
             Menu
           </Button>
         </Link>
-        <h1 className="text-xl font-bold flex-1">Mi Perfil</h1>
+        <h1 className="text-xl font-bold flex-1">My Profile</h1>
       </div>
 
       {/* Customer info */}
@@ -242,8 +242,8 @@ export default function ProfilePage({
               <User className="h-6 w-6 text-primary" />
             </div>
             <div>
-              <p className="font-semibold text-lg">{customerName || "Cliente"}</p>
-              <p className="text-sm text-muted-foreground">Mesa {tableCode}</p>
+              <p className="font-semibold text-lg">{customerName || "Customer"}</p>
+              <p className="text-sm text-muted-foreground">Table {tableCode}</p>
             </div>
           </div>
         </CardContent>
@@ -267,13 +267,13 @@ export default function ProfilePage({
               <span className="text-3xl font-bold text-primary">
                 {loyalty.points_balance.toLocaleString()}
               </span>
-              <span className="text-sm text-muted-foreground">puntos disponibles</span>
+              <span className="text-sm text-muted-foreground">points available</span>
             </div>
 
             {loyalty.next_tier && (
               <div className="space-y-1">
                 <div className="flex justify-between text-xs text-muted-foreground">
-                  <span>Progreso a {loyalty.next_tier.name}</span>
+                  <span>Progress to {loyalty.next_tier.name}</span>
                   <span>
                     {loyalty.total_points_earned.toLocaleString()} / {loyalty.next_tier.min_points.toLocaleString()}
                   </span>
@@ -291,7 +291,7 @@ export default function ProfilePage({
 
             <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
               <TrendingUp className="h-3 w-3" />
-              <span>Ganas puntos con cada pedido</span>
+              <span>Earn points with every order</span>
             </div>
           </CardContent>
         </Card>
@@ -303,7 +303,7 @@ export default function ProfilePage({
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center gap-2">
               <Gift className="h-4 w-4 text-primary" />
-              Recompensas Disponibles
+              Available Rewards
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -323,8 +323,8 @@ export default function ProfilePage({
                     <p className="font-medium text-sm truncate">{reward.name}</p>
                     <p className="text-xs text-muted-foreground">
                       {reward.discount_type === "percentage"
-                        ? `${reward.discount_value}% de descuento`
-                        : `${formatCurrency(reward.discount_value)} de descuento`}
+                        ? `${reward.discount_value}% discount`
+                        : `${formatCurrency(reward.discount_value)} discount`}
                     </p>
                   </div>
                   <div className="shrink-0 ml-3 flex flex-col items-end gap-1">
@@ -342,11 +342,11 @@ export default function ProfilePage({
                         className="h-7 text-xs px-3"
                         onClick={() => handleRedeemClick(reward)}
                       >
-                        Canjear
+                        Redeem
                       </Button>
                     ) : (
                       <p className="text-[10px] text-muted-foreground">
-                        Faltan {(reward.points_cost - loyalty.points_balance).toLocaleString()}
+                        Missing {(reward.points_cost - loyalty.points_balance).toLocaleString()}
                       </p>
                     )}
                   </div>
@@ -363,7 +363,7 @@ export default function ProfilePage({
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-green-600" />
-              Canjes Pendientes
+              Pending Redemptions
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -376,17 +376,17 @@ export default function ProfilePage({
                   <p className="font-medium text-sm">{r.reward_name}</p>
                   <p className="text-xs text-muted-foreground">
                     {r.discount_type === "percentage"
-                      ? `${r.discount_value}% de descuento`
-                      : `${formatCurrency(r.discount_value)} de descuento`}
+                      ? `${r.discount_value}% discount`
+                      : `${formatCurrency(r.discount_value)} discount`}
                   </p>
                 </div>
                 <Badge variant="secondary" className="text-[10px] bg-green-500/15 text-green-700 dark:text-green-400 border-green-500/20 shrink-0">
-                  Pendiente
+                  Pending
                 </Badge>
               </div>
             ))}
             <p className="text-[10px] text-muted-foreground text-center">
-              Se aplicara automaticamente en tu proximo pedido desde el carrito
+              It will be automatically applied to your next order from the cart
             </p>
           </CardContent>
         </Card>
@@ -398,7 +398,7 @@ export default function ProfilePage({
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center gap-2">
               <Ticket className="h-4 w-4 text-primary" />
-              Mis Cupones
+              My Coupons
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -416,10 +416,10 @@ export default function ProfilePage({
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
                     {coupon.type === "percentage"
-                      ? `${coupon.discount_value}% de descuento`
-                      : `${formatCurrency(coupon.discount_value)} de descuento`}
+                      ? `${coupon.discount_value}% discount`
+                      : `${formatCurrency(coupon.discount_value)} discount`}
                     {coupon.expires_at && (
-                      <> · Vence {new Date(coupon.expires_at).toLocaleDateString("es-PE")}</>
+                      <> · Expires {new Date(coupon.expires_at).toLocaleDateString("es-PE")}</>
                     )}
                   </p>
                 </div>
@@ -435,7 +435,7 @@ export default function ProfilePage({
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center gap-2">
               <ShoppingBag className="h-4 w-4 text-primary" />
-              Mis Pedidos
+              My Orders
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -480,7 +480,7 @@ export default function ProfilePage({
           <CardContent className="p-6 text-center">
             <Star className="h-10 w-10 text-muted-foreground/30 mx-auto mb-3" />
             <p className="text-sm text-muted-foreground">
-              Aun no tienes actividad. Realiza un pedido para empezar a acumular puntos.
+              You do not have any activity yet. Place an order to start earning points
             </p>
           </CardContent>
         </Card>
@@ -490,14 +490,14 @@ export default function ProfilePage({
       <Dialog open={redeemDialogOpen} onOpenChange={setRedeemDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Canjear Recompensa</DialogTitle>
+            <DialogTitle>Redeem Reward</DialogTitle>
             <DialogDescription>
               {selectedReward && loyalty && (
                 <>
-                  Canjear <strong>{selectedReward.name}</strong> por{" "}
+                  Redeem <strong>{selectedReward.name}</strong> por{" "}
                   <strong>{selectedReward.points_cost.toLocaleString()} pts</strong>?
                   <br />
-                  Tu balance quedara en{" "}
+                  Your balance will become{" "}
                   <strong>
                     {(loyalty.points_balance - selectedReward.points_cost).toLocaleString()} pts
                   </strong>
@@ -511,16 +511,16 @@ export default function ProfilePage({
               onClick={() => setRedeemDialogOpen(false)}
               disabled={redeeming}
             >
-              Cancelar
+              Cancel
             </Button>
             <Button onClick={handleConfirmRedeem} disabled={redeeming}>
               {redeeming ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Canjeando...
+                  Redeeming...
                 </>
               ) : (
-                "Confirmar Canje"
+                "Confirm Redemption"
               )}
             </Button>
           </DialogFooter>
@@ -533,29 +533,29 @@ export default function ProfilePage({
           <DialogHeader>
             <DialogTitle className="text-center">
               <CheckCircle className="h-12 w-12 text-green-600 mx-auto mb-3" />
-              Recompensa Canjeada
+              Reward Redeemed
             </DialogTitle>
             <DialogDescription className="text-center">
               {redeemResult && (
                 <>
                   {redeemResult.discount.type === "percentage"
-                    ? `${redeemResult.discount.value}% de descuento`
-                    : `${formatCurrency(redeemResult.discount.value)} de descuento`}
+                    ? `${redeemResult.discount.value}% discount`
+                    : `${formatCurrency(redeemResult.discount.value)} discount`}
                   <br />
                   <span className="text-xs">
-                    Balance actual: {redeemResult.newBalance.toLocaleString()} pts
+                    Current balance: {redeemResult.newBalance.toLocaleString()} pts
                   </span>
                 </>
               )}
               <br />
               <strong className="text-foreground text-sm mt-2 block">
-                Ve al carrito para aplicar el descuento en tu proximo pedido
+                Go to the cart to apply the discount to your next order
               </strong>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button className="w-full" onClick={() => setSuccessDialogOpen(false)}>
-              Entendido
+              Understood
             </Button>
           </DialogFooter>
         </DialogContent>

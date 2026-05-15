@@ -255,9 +255,9 @@ export default function CustomerMenuPage({
           <UtensilsCrossed className="h-8 w-8 text-destructive" />
         </div>
         <p className="text-destructive font-medium mb-2">Error</p>
-        <p className="text-sm text-muted-foreground mb-4">{error || "Error al cargar menu"}</p>
+        <p className="text-sm text-muted-foreground mb-4">{error || "Error loading menu"}</p>
         <Button variant="outline" onClick={() => window.location.reload()}>
-          Reintentar
+          Retry
         </Button>
       </div>
     );
@@ -298,7 +298,7 @@ export default function CustomerMenuPage({
           >
             {itemsByCategory(category.id).length === 0 ? (
               <p className="text-sm text-muted-foreground py-12 text-center">
-                No hay productos disponibles en esta categoria
+                No products available in this category
               </p>
             ) : (
               <div className="grid grid-cols-2 gap-4">
@@ -373,7 +373,7 @@ export default function CustomerMenuPage({
                             }}
                           >
                             <Plus className="h-4 w-4" />
-                            <span className="text-[9px] font-medium leading-none mt-0.5">Agregar</span>
+                            <span className="text-[9px] font-medium leading-none mt-0.5">Add</span>
                           </button>
                         )}
                       </div>
@@ -431,10 +431,10 @@ export default function CustomerMenuPage({
             )}
             <span className="text-xs font-medium text-foreground">
               {actionLoading === "request_bill"
-                ? "Enviando..."
+                ? "Sending..."
                 : actionSent.request_bill
-                  ? "Cuenta Solicitada"
-                  : "Pedir la Cuenta"}
+                  ? "Bill Requested"
+                  : "Request the Bill"}
             </span>
           </button>
           <button
@@ -455,10 +455,10 @@ export default function CustomerMenuPage({
             )}
             <span className="text-xs font-medium text-foreground">
               {actionLoading === "call_waiter"
-                ? "Enviando..."
+                ? "Sending..."
                 : actionSent.call_waiter
-                  ? "Mozo Solicitado"
-                  : "Llamar al Mozo"}
+                  ? "Waiter Called"
+                  : "Call the Waiter"}
             </span>
           </button>
         </div>
@@ -475,7 +475,7 @@ export default function CustomerMenuPage({
                   {itemCount}
                 </Badge>
               </div>
-              <span className="font-semibold">Ver Carrito</span>
+              <span className="font-semibold">View Cart</span>
               <span className="font-bold">{formatCurrency(cartTotal)}</span>
             </Button>
           </div>

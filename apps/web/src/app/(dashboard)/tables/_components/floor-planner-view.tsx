@@ -240,12 +240,12 @@ export function FloorPlannerView({
         {/* Empty state */}
         {tables.length === 0 && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <p className="text-muted-foreground">No hay mesas para mostrar</p>
+            <p className="text-muted-foreground">No tables to display</p>
           </div>
         )}
       </div>
       <p className="text-xs text-muted-foreground">
-        Arrastra las mesas para posicionarlas. Usa la rueda del raton para hacer zoom. Clic y arrastra el fondo para desplazarte.
+        Drag the tables to position them. Use the mouse wheel to zoom. Click and drag the background to move around.
       </p>
     </div>
   );

@@ -43,7 +43,7 @@ export default function RegisterPage() {
       setLoading(true);
       await registerUser(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error al registrarse");
+      setError(err instanceof Error ? err.message : "Error registering");
     } finally {
       setLoading(false);
     }
@@ -55,9 +55,9 @@ export default function RegisterPage() {
         <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
           <span className="text-2xl font-bold text-primary-foreground">R</span>
         </div>
-        <CardTitle className="text-2xl">Crear Cuenta</CardTitle>
+        <CardTitle className="text-2xl">Create Account</CardTitle>
         <CardDescription>
-          Registra tu restaurante en RestAI
+          Register your restaurant on RestAI
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -68,10 +68,10 @@ export default function RegisterPage() {
             </div>
           )}
           <div className="space-y-2">
-            <Label htmlFor="organizationName">Nombre del restaurante</Label>
+            <Label htmlFor="organizationName">Restaurant Name</Label>
             <Input
               id="organizationName"
-              placeholder="Mi Restaurante"
+              placeholder="My Restaurant"
               {...register("organizationName")}
               onChange={(e) => onOrgNameChange(e.target.value)}
             />
@@ -82,10 +82,10 @@ export default function RegisterPage() {
             )}
           </div>
           <div className="space-y-2">
-            <Label htmlFor="slug">Identificador (URL)</Label>
+            <Label htmlFor="slug">Identifier (URL)</Label>
             <Input
               id="slug"
-              placeholder="mi-restaurante"
+              placeholder="my-restaurant"
               {...register("slug")}
             />
             {errors.slug && (
@@ -93,10 +93,10 @@ export default function RegisterPage() {
             )}
           </div>
           <div className="space-y-2">
-            <Label htmlFor="name">Tu nombre</Label>
+            <Label htmlFor="name">Your Name</Label>
             <Input
               id="name"
-              placeholder="Juan Perez"
+              placeholder="John Doe"
               {...register("name")}
             />
             {errors.name && (
@@ -116,7 +116,7 @@ export default function RegisterPage() {
             )}
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Contrasena</Label>
+            <Label htmlFor="password">Password</Label>
             <Input
               id="password"
               type="password"
@@ -132,12 +132,12 @@ export default function RegisterPage() {
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Creando cuenta..." : "Crear Cuenta"}
+            {loading ? "Creating account..." : "Create Account"}
           </Button>
           <p className="text-sm text-muted-foreground">
-            Ya tienes cuenta?{" "}
+            Already have an account?{" "}
             <Link href="/login" className="text-primary hover:underline">
-              Inicia sesion
+              Sign in
             </Link>
           </p>
         </CardFooter>

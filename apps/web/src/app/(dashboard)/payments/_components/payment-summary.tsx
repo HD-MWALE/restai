@@ -19,15 +19,15 @@ export function PaymentSummary({ summary }: PaymentSummaryProps) {
     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
       <Card>
         <CardContent className="p-4">
-          <p className="text-xs text-muted-foreground">Total Ingresos</p>
+          <p className="text-xs text-muted-foreground">Total Sales</p>
           <p className="text-xl font-bold">{formatCurrency(summary?.grandTotal || 0)}</p>
-          <p className="text-xs text-muted-foreground">{summary?.totalCount || 0} pagos hoy</p>
+          <p className="text-xs text-muted-foreground">{summary?.totalCount || 0} payments today</p>
         </CardContent>
       </Card>
       <Card>
         <CardContent className="p-4">
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
-            <Banknote className="h-3 w-3" /> Efectivo
+            <Banknote className="h-3 w-3" /> Cash Payments
           </div>
           <p className="text-lg font-bold">{formatCurrency(getMethodTotal(summary, "cash"))}</p>
         </CardContent>
@@ -35,7 +35,7 @@ export function PaymentSummary({ summary }: PaymentSummaryProps) {
       <Card>
         <CardContent className="p-4">
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
-            <CreditCard className="h-3 w-3" /> Tarjeta
+            <CreditCard className="h-3 w-3" /> Card Payments
           </div>
           <p className="text-lg font-bold">{formatCurrency(getMethodTotal(summary, "card"))}</p>
         </CardContent>
@@ -52,7 +52,7 @@ export function PaymentSummary({ summary }: PaymentSummaryProps) {
       </Card>
       <Card>
         <CardContent className="p-4">
-          <p className="text-xs text-muted-foreground">Propinas</p>
+          <p className="text-xs text-muted-foreground">Total Tips</p>
           <p className="text-lg font-bold">{formatCurrency(summary?.tipTotal || 0)}</p>
         </CardContent>
       </Card>

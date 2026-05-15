@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import type { AppEnv } from "../types.js";
 import { authMiddleware } from "../middleware/auth.js";
 import { tenantMiddleware } from "../middleware/tenant.js";
-import { uploadToR2, deleteFromR2, getPublicUrl } from "../lib/r2.js";
+import { uploadToMinIO, deleteFromMinIO, getPublicUrl } from "../lib/minio.js";
 
 const ALLOWED_TYPES = new Set([
   "image/jpeg",
@@ -92,7 +92,7 @@ uploads.post("/", async (c) => {
   const key = `${tenant.organizationId}/${uploadType}/${uuid}.${ext}`;
 
   const buffer = new Uint8Array(await file.arrayBuffer());
-  await uploadToR2(key, buffer, file.type);
+  await uploadToMinIO(key, buffer, file.type);
 
   const url = getPublicUrl(key);
   return c.json({ success: true, data: { url, key } });
@@ -111,7 +111,7 @@ uploads.delete("/*", async (c) => {
     );
   }
 
-  await deleteFromR2(key);
+  await deleteFromMinIO(key);
   return c.json({ success: true, data: { deleted: key } });
 });
 

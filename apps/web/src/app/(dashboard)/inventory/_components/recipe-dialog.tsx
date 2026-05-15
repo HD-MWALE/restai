@@ -73,7 +73,7 @@ export function CreateRecipeDialog({
         ingredients: [{ inventoryItemId: "", quantityUsed: "" }],
       });
       onOpenChange(false);
-      toast.success("Receta guardada exitosamente");
+      toast.success("Recipe saved successfully");
     } catch (err) {
       toast.error(`Error: ${(err as Error).message}`);
     }
@@ -83,16 +83,16 @@ export function CreateRecipeDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Configurar Receta</DialogTitle>
+          <DialogTitle>Configure Recipe</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="recipeMenuItem">
-              ID del Item del Menu (UUID)
+              Menu Item ID (UUID)
             </Label>
             <Input
               id="recipeMenuItem"
-              placeholder="UUID del item del menu"
+              placeholder="Menu item UUID"
               value={form.menuItemId}
               onChange={(e) =>
                 setForm({ ...form, menuItemId: e.target.value })
@@ -101,7 +101,7 @@ export function CreateRecipeDialog({
             />
           </div>
           <div className="space-y-2">
-            <Label>Ingredientes</Label>
+            <Label>Ingredients</Label>
             {form.ingredients.map((ing, index) => (
               <div key={index} className="flex gap-2 items-center">
                 <Select
@@ -115,7 +115,7 @@ export function CreateRecipeDialog({
                   }
                 >
                   <SelectTrigger className="flex-1">
-                    <SelectValue placeholder="Seleccionar item..." />
+                    <SelectValue placeholder="Select item..." />
                   </SelectTrigger>
                   <SelectContent>
                     {items.map((item: any) => (
@@ -130,7 +130,7 @@ export function CreateRecipeDialog({
                   type="number"
                   step="0.001"
                   min="0"
-                  placeholder="Cant."
+                  placeholder="Qty."
                   value={ing.quantityUsed}
                   onChange={(e) =>
                     updateIngredient(
@@ -159,15 +159,15 @@ export function CreateRecipeDialog({
               className="w-full"
             >
               <Plus className="h-3 w-3 mr-1" />
-              Agregar ingrediente
+              Add ingredient
             </Button>
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancelar
+              Cancel
             </Button>
             <Button type="submit" disabled={createRecipe.isPending || !form.menuItemId}>
-              {createRecipe.isPending ? "Guardando..." : "Guardar Receta"}
+              {createRecipe.isPending ? "Saving..." : "Save Recipe"}
             </Button>
           </DialogFooter>
         </form>

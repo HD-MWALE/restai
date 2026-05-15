@@ -48,32 +48,32 @@ const STATUS: Record<
   }
 > = {
   available: {
-    label: "Libre",
+    label: "Available",
     bg: "bg-emerald-50 dark:bg-emerald-950/30",
     text: "text-emerald-700 dark:text-emerald-300",
     number: "text-emerald-900 dark:text-emerald-100",
-    actionLabel: "Ocupar",
+    actionLabel: "Occupy",
     actionTarget: "occupied",
     actionBg: "bg-blue-600 hover:bg-blue-700 text-white",
   },
   occupied: {
-    label: "Ocupada",
+    label: "Occupied",
     bg: "bg-blue-50 dark:bg-blue-950/30",
     text: "text-blue-700 dark:text-blue-300",
     number: "text-blue-900 dark:text-blue-100",
-    actionLabel: "Liberar",
+    actionLabel: "Free up",
     actionTarget: "available",
     actionBg: "bg-emerald-600 hover:bg-emerald-700 text-white",
   },
   reserved: {
-    label: "Reservada",
+    label: "Reserved",
     bg: "bg-amber-50 dark:bg-amber-950/30",
     text: "text-amber-700 dark:text-amber-300",
     number: "text-amber-900 dark:text-amber-100",
     actionBg: "",
   },
   maintenance: {
-    label: "Mant.",
+    label: "Maintenance",
     bg: "bg-red-50 dark:bg-red-950/30",
     text: "text-red-700 dark:text-red-300",
     number: "text-red-900 dark:text-red-100",
@@ -100,8 +100,8 @@ export function TableCard({
       : "ring-2 ring-orange-500/70";
   const requestLabel =
     serviceRequest?.type === "request_bill"
-      ? "Solicita cuenta"
-      : "Solicita mozo";
+      ? "Requests bill"
+      : "Requests waiter";
 
   return (
     <div
@@ -138,15 +138,15 @@ export function TableCard({
 
       {/* Capacity */}
       <p className="text-xs text-muted-foreground -mt-1">
-        {table.capacity} {table.capacity === 1 ? "persona" : "personas"}
+        {table.capacity} {table.capacity === 1 ? "person" : "people"}
       </p>
 
       {/* Actions row */}
       <div className="flex items-center gap-1 mt-auto">
         <IconBtn icon={<QrCode className="h-3.5 w-3.5" />} title="QR" onClick={() => onQr(table)} />
-        <IconBtn icon={<History className="h-3.5 w-3.5" />} title="Historial" onClick={() => onHistory(table)} />
+        <IconBtn icon={<History className="h-3.5 w-3.5" />} title="History" onClick={() => onHistory(table)} />
         {waiterAssignmentEnabled && (
-          <IconBtn icon={<UserPlus className="h-3.5 w-3.5" />} title="Asignar" onClick={() => onAssign(table)} />
+          <IconBtn icon={<UserPlus className="h-3.5 w-3.5" />} title="Assign" onClick={() => onAssign(table)} />
         )}
 
         <div className="flex-1" />
@@ -167,7 +167,7 @@ export function TableCard({
 
         <IconBtn
           icon={<Trash2 className="h-3.5 w-3.5" />}
-          title="Eliminar"
+          title="Delete"
           onClick={() => onDelete(table)}
           destructive
         />

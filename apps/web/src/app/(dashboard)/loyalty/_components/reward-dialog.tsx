@@ -77,7 +77,7 @@ export function RewardDialog({
         {
           onSuccess: () => {
             onOpenChange(false);
-            toast.success("Recompensa actualizada");
+            toast.success("Reward updated");
           },
           onError: (err) => toast.error(`Error: ${(err as Error).message}`),
         },
@@ -96,7 +96,7 @@ export function RewardDialog({
           onSuccess: () => {
             setForm(defaultForm);
             onOpenChange(false);
-            toast.success("Recompensa creada exitosamente");
+            toast.success("Reward created successfully");
           },
           onError: (err) => toast.error(`Error: ${(err as Error).message}`),
         },
@@ -110,44 +110,44 @@ export function RewardDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{isEdit ? "Editar Recompensa" : "Crear Recompensa"}</DialogTitle>
+          <DialogTitle>{isEdit ? "Edit Reward" : "Create Reward"}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="rwd-name">Nombre *</Label>
+            <Label htmlFor="rwd-name">Name *</Label>
             <Input id="rwd-name" value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="rwd-desc">Descripcion</Label>
+            <Label htmlFor="rwd-desc">Description</Label>
             <Input id="rwd-desc" value={form.description} onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))} />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="rwd-cost">Costo en puntos</Label>
+            <Label htmlFor="rwd-cost">Points cost</Label>
             <Input id="rwd-cost" type="number" min={1} value={form.pointsCost} onChange={(e) => setForm((p) => ({ ...p, pointsCost: parseInt(e.target.value) || 1 }))} />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="rwd-dtype">Tipo de descuento</Label>
+            <Label htmlFor="rwd-dtype">Discount type</Label>
             <Select value={form.discountType} onValueChange={(v) => setForm((p) => ({ ...p, discountType: v as "percentage" | "fixed" }))}>
               <SelectTrigger>
                 <SelectValue placeholder="Tipo de descuento" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="percentage">Porcentaje (%)</SelectItem>
-                <SelectItem value="fixed">Monto fijo (centimos)</SelectItem>
+                <SelectItem value="percentage">Percentage (%)</SelectItem>
+                <SelectItem value="fixed">Fixed amount (cents)</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="rwd-dval">Valor del descuento</Label>
+            <Label htmlFor="rwd-dval">Discount value</Label>
             <Input id="rwd-dval" type="number" min={1} value={form.discountValue} onChange={(e) => setForm((p) => ({ ...p, discountValue: parseInt(e.target.value) || 1 }))} />
             <p className="text-xs text-muted-foreground">
-              {form.discountType === "percentage" ? "Porcentaje de descuento (ej. 10 = 10%)" : "Monto en centimos (ej. 500 = S/ 5.00)"}
+              {form.discountType === "percentage" ? "Discount percentage (e.g. 10 = 10%)" : "Amount in cents (e.g. 500 = S/ 5.00)"}
             </p>
           </div>
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancelar</Button>
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
             <Button type="submit" disabled={isPending || !form.name}>
-              {isPending ? (isEdit ? "Guardando..." : "Creando...") : (isEdit ? "Guardar" : "Crear Recompensa")}
+              {isPending ? (isEdit ? "Saving..." : "Creating...") : (isEdit ? "Save" : "Create Reward")}
             </Button>
           </DialogFooter>
         </form>

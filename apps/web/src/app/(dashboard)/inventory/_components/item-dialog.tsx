@@ -53,7 +53,7 @@ export function CreateItemDialog({
         category: "",
       });
       onOpenChange(false);
-      toast.success("Item creado exitosamente");
+      toast.success("Item created successfully");
     } catch (err) {
       toast.error(`Error: ${(err as Error).message}`);
     }
@@ -63,24 +63,24 @@ export function CreateItemDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Nuevo Item de Inventario</DialogTitle>
+          <DialogTitle>New Inventory Item</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="itemName">Nombre *</Label>
+            <Label htmlFor="itemName">Name *</Label>
             <Input
               id="itemName"
-              placeholder="Ej: Arroz, Pollo, Aceite..."
+              placeholder="Ex: Rice, Chicken, Oil..."
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               required
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="itemCategory">Categoria</Label>
+            <Label htmlFor="itemCategory">Category</Label>
             <Input
               id="itemCategory"
-              placeholder="Ej: Carnes, Verduras, Lacteos..."
+              placeholder="Ex: Meat, Vegetables, Dairy..."
               value={form.category}
               onChange={(e) =>
                 setForm({ ...form, category: e.target.value })
@@ -89,26 +89,26 @@ export function CreateItemDialog({
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="itemUnit">Unidad</Label>
+              <Label htmlFor="itemUnit">Unit</Label>
               <Select
                 value={form.unit}
                 onValueChange={(v) => setForm({ ...form, unit: v })}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Seleccionar unidad..." />
+                  <SelectValue placeholder="Select unit..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="kg">Kilogramos (kg)</SelectItem>
-                  <SelectItem value="g">Gramos (g)</SelectItem>
-                  <SelectItem value="lt">Litros (lt)</SelectItem>
-                  <SelectItem value="ml">Mililitros (ml)</SelectItem>
-                  <SelectItem value="und">Unidades (und)</SelectItem>
-                  <SelectItem value="paq">Paquetes (paq)</SelectItem>
+                  <SelectItem value="kg">Kilograms (kg)</SelectItem>
+                  <SelectItem value="g">Grams (g)</SelectItem>
+                  <SelectItem value="lt">Liters (lt)</SelectItem>
+                  <SelectItem value="ml">Mililiters (ml)</SelectItem>
+                  <SelectItem value="und">Units (pcs)</SelectItem>
+                  <SelectItem value="paq">Packages (pkg)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="itemCost">Costo por unidad (S/)</Label>
+              <Label htmlFor="itemCost">Cost per unit (S/)</Label>
               <Input
                 id="itemCost"
                 type="number"
@@ -124,7 +124,7 @@ export function CreateItemDialog({
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="itemStock">Stock Inicial</Label>
+              <Label htmlFor="itemStock">Initial Stock</Label>
               <Input
                 id="itemStock"
                 type="number"
@@ -138,7 +138,7 @@ export function CreateItemDialog({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="itemMinStock">Stock Minimo</Label>
+              <Label htmlFor="itemMinStock">Minimum Stock</Label>
               <Input
                 id="itemMinStock"
                 type="number"
@@ -154,10 +154,10 @@ export function CreateItemDialog({
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancelar
+              Cancel
             </Button>
             <Button type="submit" disabled={createItem.isPending || !form.name}>
-              {createItem.isPending ? "Creando..." : "Crear Item"}
+              {createItem.isPending ? "Creating..." : "Create Item"}
             </Button>
           </DialogFooter>
         </form>

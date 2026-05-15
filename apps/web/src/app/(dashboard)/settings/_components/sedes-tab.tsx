@@ -16,10 +16,7 @@ import {
 import { Plus, Pencil, Store } from "lucide-react";
 import { useBranches, useCreateBranch, useUpdateBranchById } from "@/hooks/use-settings";
 import { toast } from "sonner";
-
-function Skeleton({ className }: { className?: string }) {
-  return <div className={`animate-pulse bg-muted rounded ${className ?? ""}`} />;
-}
+import { Skeleton } from "@/components/ui/skeleton";
 
 function slugify(text: string) {
   return text
@@ -76,7 +73,7 @@ export function SedesTab() {
           address: branchDialogForm.address,
           phone: branchDialogForm.phone,
         });
-        toast.success("Sede actualizada correctamente");
+        toast.success("Branch updated successfully");
       } else {
         await createBranch.mutateAsync({
           name: branchDialogForm.name,
@@ -84,11 +81,11 @@ export function SedesTab() {
           address: branchDialogForm.address || undefined,
           phone: branchDialogForm.phone || undefined,
         });
-        toast.success("Sede creada correctamente");
+        toast.success("Branch created successfully");
       }
       setBranchDialogOpen(false);
     } catch (err: any) {
-      toast.error(err.message || "Error al guardar sede");
+      toast.error(err.message || "Error saving branch");
     }
   };
 
@@ -96,12 +93,12 @@ export function SedesTab() {
     <>
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold">Todas las Sedes</h2>
-          <p className="text-sm text-muted-foreground">Gestiona las sedes de tu organizacion</p>
+          <h2 className="text-lg font-semibold">All Branches</h2>
+          <p className="text-sm text-muted-foreground">Manage your organization branches</p>
         </div>
         <Button size="sm" onClick={openCreateBranchDialog}>
           <Plus className="h-4 w-4 mr-2" />
-          Nueva Sede
+          New Branch
         </Button>
       </div>
 
@@ -114,10 +111,10 @@ export function SedesTab() {
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
             <Store className="h-12 w-12 text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">No hay sedes configuradas</p>
+            <p className="text-muted-foreground">No branches configured</p>
             <Button className="mt-4" size="sm" onClick={openCreateBranchDialog}>
               <Plus className="h-4 w-4 mr-2" />
-              Crear primera sede
+              Create first branch
             </Button>
           </CardContent>
         </Card>
@@ -157,14 +154,14 @@ export function SedesTab() {
       <Dialog open={branchDialogOpen} onOpenChange={setBranchDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{editingBranch ? "Editar Sede" : "Nueva Sede"}</DialogTitle>
+            <DialogTitle>{editingBranch ? "Edit Branch" : "New Branch"}</DialogTitle>
             <DialogDescription>
-              {editingBranch ? "Modifica los datos de la sede" : "Agrega una nueva sede a tu organizacion"}
+              {editingBranch ? "Edit branch details" : "Add a new branch to your organization"}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div className="space-y-2">
-              <Label htmlFor="dialogBranchName">Nombre</Label>
+              <Label htmlFor="dialogBranchName">Name</Label>
               <Input
                 id="dialogBranchName"
                 placeholder="Sede Centro"
@@ -191,11 +188,11 @@ export function SedesTab() {
                 }}
               />
               <p className="text-xs text-muted-foreground">
-                Identificador unico para URLs y codigos QR
+                Unique identifier for URLs and QR codes
               </p>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="dialogBranchAddress">Direccion</Label>
+              <Label htmlFor="dialogBranchAddress">Address</Label>
               <Input
                 id="dialogBranchAddress"
                 placeholder="Av. Principal 123"
@@ -204,7 +201,7 @@ export function SedesTab() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="dialogBranchPhone">Telefono</Label>
+              <Label htmlFor="dialogBranchPhone">Phone</Label>
               <Input
                 id="dialogBranchPhone"
                 placeholder="+51 999 999 999"
@@ -215,13 +212,13 @@ export function SedesTab() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setBranchDialogOpen(false)}>
-              Cancelar
+              Cancel
             </Button>
             <Button
               onClick={handleBranchDialogSave}
               disabled={!branchDialogForm.name || !branchDialogForm.slug || createBranch.isPending || updateBranchById.isPending}
             >
-              {(createBranch.isPending || updateBranchById.isPending) ? "Guardando..." : editingBranch ? "Guardar" : "Crear Sede"}
+              {(createBranch.isPending || updateBranchById.isPending) ? "Saving..." : editingBranch ? "Save" : "Create Branch"}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -82,7 +82,7 @@ export function ModifierGroupDialog({
   const handleDeleteExistingModifier = async (modId: string) => {
     try {
       await deleteModifier.mutateAsync(modId);
-      toast.success("Modificador eliminado");
+      toast.success("Modifier deleted");
     } catch (err: any) {
       toast.error(err.message || "Error");
     }
@@ -114,11 +114,11 @@ export function ModifierGroupDialog({
           });
         }
 
-        toast.success("Grupo actualizado");
+        toast.success("Group updated");
       } else {
         const validMods = newModifiers.filter((m) => m.name.trim());
         if (validMods.length === 0) {
-          toast.error("Agrega al menos un modificador");
+          toast.error("Add at least one modifier");
           return;
         }
 
@@ -138,11 +138,11 @@ export function ModifierGroupDialog({
           });
         }
 
-        toast.success("Grupo creado");
+        toast.success("Group created");
       }
       onOpenChange(false);
     } catch (err: any) {
-      toast.error(err.message || "Error al guardar grupo");
+      toast.error(err.message || "Error saving group");
     }
   };
 
@@ -151,22 +151,22 @@ export function ModifierGroupDialog({
       <DialogContent className="max-w-lg max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {isEdit ? "Editar Grupo" : "Nuevo Grupo de Modificadores"}
+            {isEdit ? "Edit Group" : "New Modifier Group"}
           </DialogTitle>
           <DialogDescription>
             {isEdit
-              ? "Actualiza el grupo y gestiona sus modificadores"
-              : "Crea un grupo con sus opciones. Ej: Tamano, Extras, Salsas"}
+              ? "Update the group and manage its modifiers"
+              : "Create a group with its options. Example: Size, Extras, Sauces"}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="grp-name">Nombre del grupo</Label>
+            <Label htmlFor="grp-name">Group name</Label>
             <Input
               id="grp-name"
               value={groupName}
               onChange={(e) => setGroupName(e.target.value)}
-              placeholder="Ej: Tamano, Extras"
+              placeholder="Example: Size, Extras"
               required
             />
           </div>
@@ -199,7 +199,7 @@ export function ModifierGroupDialog({
                   onChange={(e) => setIsRequired(e.target.checked)}
                   className="rounded border-input accent-primary"
                 />
-                Obligatorio
+                Required
               </label>
             </div>
           </div>
@@ -207,7 +207,7 @@ export function ModifierGroupDialog({
           {/* Existing modifiers (edit mode) */}
           {isEdit && existingModifiers.length > 0 && (
             <div className="space-y-2">
-              <Label>Modificadores existentes</Label>
+              <Label>Existing modifiers</Label>
               <div className="space-y-1.5">
                 {existingModifiers.map((mod: any) => (
                   <div
@@ -239,7 +239,7 @@ export function ModifierGroupDialog({
           {/* New modifiers */}
           <div className="space-y-2">
             <Label>
-              {isEdit ? "Agregar modificadores" : "Modificadores"}
+              {isEdit ? "Add modifiers" : "Modifiers"}
             </Label>
             <div className="space-y-2">
               {newModifiers.map((mod, idx) => (
@@ -249,7 +249,7 @@ export function ModifierGroupDialog({
                     onChange={(e) =>
                       handleModChange(idx, "name", e.target.value)
                     }
-                    placeholder="Nombre"
+                    placeholder="Name"
                     className="flex-1"
                   />
                   <Input
@@ -282,7 +282,7 @@ export function ModifierGroupDialog({
               onClick={handleAddRow}
             >
               <Plus className="h-3 w-3 mr-1" />
-              Agregar opcion
+              Add option
             </Button>
           </div>
 
@@ -293,14 +293,14 @@ export function ModifierGroupDialog({
               onClick={() => onOpenChange(false)}
               disabled={loading}
             >
-              Cancelar
+              Cancel
             </Button>
             <Button type="submit" disabled={loading}>
               {loading
-                ? "Guardando..."
+                ? "Saving..."
                 : isEdit
-                  ? "Actualizar"
-                  : "Crear grupo"}
+                  ? "Update"
+                  : "Create group"}
             </Button>
           </DialogFooter>
         </form>

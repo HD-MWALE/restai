@@ -120,7 +120,7 @@ tables.patch(
 
     if (!updated) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Mesa no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Table not found" } },
         404,
       );
     }
@@ -153,7 +153,7 @@ tables.patch(
 
     if (!updated) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Mesa no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Table not found" } },
         404,
       );
     }
@@ -183,7 +183,7 @@ tables.delete(
 
     if (!deleted) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Mesa no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Table not found" } },
         404,
       );
     }
@@ -217,7 +217,7 @@ tables.patch(
 
     if (!table) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Mesa no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Table not found" } },
         404,
       );
     }
@@ -284,7 +284,7 @@ tables.post(
 
     if (!table) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Mesa no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Table not found" } },
         404,
       );
     }
@@ -561,7 +561,7 @@ tables.get(
     } catch (e: any) {
       if (e.message === "TABLE_NOT_FOUND") {
         return c.json(
-          { success: false, error: { code: "NOT_FOUND", message: "Mesa no encontrada" } },
+          { success: false, error: { code: "NOT_FOUND", message: "Table not found" } },
           404,
         );
       }
@@ -648,7 +648,7 @@ tables.post(
 
     if (!table) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Mesa no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Table not found" } },
         404,
       );
     }

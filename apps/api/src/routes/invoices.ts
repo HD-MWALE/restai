@@ -27,37 +27,37 @@ invoices.post(
     const docNumber = body.customerDocNumber;
     const docType = body.customerDocType;
 
-    if (docType === "dni" && (docNumber.length !== 8 || !/^\d{8}$/.test(docNumber))) {
+    if (docType === "nid" && (docNumber.length !== 8 || !/^\d{8}$/.test(docNumber))) {
       return c.json(
-        { success: false, error: { code: "BAD_REQUEST", message: "DNI debe ser 8 digitos" } },
+        { success: false, error: { code: "BAD_REQUEST", message: "Receipt Number must be 8 digits" } },
         400,
       );
     }
-    if (docType === "ruc") {
+    if (docType === "tpin") {
       if (docNumber.length !== 11 || !/^\d{11}$/.test(docNumber)) {
         return c.json(
-          { success: false, error: { code: "BAD_REQUEST", message: "RUC debe ser 11 digitos" } },
+          { success: false, error: { code: "BAD_REQUEST", message: "TPIN must be 11 digits" } },
           400,
         );
       }
       if (!docNumber.startsWith("10") && !docNumber.startsWith("20")) {
         return c.json(
-          { success: false, error: { code: "BAD_REQUEST", message: "RUC debe empezar con 10 o 20" } },
+          { success: false, error: { code: "BAD_REQUEST", message: "TPIN must start with 10 or 20" } },
           400,
         );
       }
     }
-    if (docType === "ce" && (docNumber.length < 9 || docNumber.length > 12)) {
+    if (docType === "foreigner_id" && (docNumber.length < 9 || docNumber.length > 12)) {
       return c.json(
-        { success: false, error: { code: "BAD_REQUEST", message: "CE debe tener entre 9 y 12 caracteres" } },
+        { success: false, error: { code: "BAD_REQUEST", message: "CE must have between 9 and 12 characters" } },
         400,
       );
     }
 
-    // Factura requires RUC
-    if (body.type === "factura" && docType !== "ruc") {
+    // Factura requires TPIN
+    if (body.type === "invoice" && docType !== "tpin") {
       return c.json(
-        { success: false, error: { code: "BAD_REQUEST", message: "Factura requiere RUC" } },
+        { success: false, error: { code: "BAD_REQUEST", message: "Invoice requires TPIN" } },
         400,
       );
     }
@@ -76,7 +76,7 @@ invoices.post(
 
     if (!order) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Orden no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Order not found" } },
         404,
       );
     }
@@ -183,7 +183,7 @@ invoices.get(
 
     if (!invoice) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Comprobante no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Receipt not found" } },
         404,
       );
     }

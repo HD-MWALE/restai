@@ -2,16 +2,16 @@ import { z } from "zod";
 
 // Auth validators
 export const loginSchema = z.object({
-  email: z.string().email("Email inválido"),
-  password: z.string().min(8, "La contraseña debe tener al menos 8 caracteres"),
+  email: z.string().email("Invalid email"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
 export const registerOrgSchema = z.object({
-  organizationName: z.string().min(2, "Nombre muy corto").max(255),
-  slug: z.string().min(2).max(100).regex(/^[a-z0-9-]+$/, "Solo letras minúsculas, números y guiones"),
-  email: z.string().email("Email inválido"),
-  password: z.string().min(8, "Mínimo 8 caracteres"),
-  name: z.string().min(2, "Nombre muy corto").max(255),
+  organizationName: z.string().min(2, "Name too short").max(255),
+  slug: z.string().min(2).max(100).regex(/^[a-z0-9-]+$/, "Only lowercase letters, numbers, and hyphens"),
+  email: z.string().email("Invalid email"),
+  password: z.string().min(8, "Minimum 8 characters"),
+  name: z.string().min(2, "Name too short").max(255),
 });
 
 export const createUserSchema = z.object({
@@ -19,7 +19,7 @@ export const createUserSchema = z.object({
   password: z.string().min(8),
   name: z.string().min(2).max(255),
   role: z.enum(["org_admin", "branch_manager", "cashier", "waiter", "kitchen"]),
-  branchIds: z.array(z.string().uuid()).min(1, "Debe asignar al menos una sede"),
+  branchIds: z.array(z.string().uuid()).min(1, "Must assign at least one branch"),
 });
 
 // Branch validators
@@ -50,7 +50,7 @@ export const createMenuItemSchema = z.object({
   categoryId: z.string().uuid(),
   name: z.string().min(1).max(255),
   description: z.string().max(1000).optional(),
-  price: z.number().int().min(0, "El precio no puede ser negativo"),
+  price: z.number().int().min(0, "Price cannot be negative"),
   imageUrl: z.string().url().optional(),
   isAvailable: z.boolean().default(true),
   sortOrder: z.number().int().min(0).default(0),
@@ -122,7 +122,7 @@ export const createOrderSchema = z.object({
   type: z.enum(["dine_in", "takeout", "delivery"]).default("dine_in"),
   customerName: z.string().max(255).optional(),
   notes: z.string().max(500).optional(),
-  items: z.array(createOrderItemSchema).min(1, "La orden debe tener al menos un item"),
+  items: z.array(createOrderItemSchema).min(1, "La order debe tener al menos un item"),
   couponCode: z.string().max(50).optional(),
   redemptionId: z.string().uuid().optional(),
 });
@@ -147,9 +147,9 @@ export const createPaymentSchema = z.object({
 // Invoice validators
 export const createInvoiceSchema = z.object({
   orderId: z.string().uuid(),
-  type: z.enum(["boleta", "factura"]),
+  type: z.enum(["boleta", "invoice"]),
   customerName: z.string().min(1).max(255),
-  customerDocType: z.enum(["dni", "ruc", "ce"]),
+  customerDocType: z.enum(["nid", "tpin", "foreigner_id"]),
   customerDocNumber: z.string().min(8).max(20),
 });
 

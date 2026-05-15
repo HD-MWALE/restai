@@ -25,7 +25,7 @@ export function PasswordDialog({ open, onOpenChange, member }: PasswordDialogPro
 
   const handleChange = async () => {
     if (!member || newPassword.length < 8) {
-      toast.error("La contrasena debe tener al menos 8 caracteres");
+      toast.error("Password must be at least 8 characters");
       return;
     }
     try {
@@ -34,7 +34,7 @@ export function PasswordDialog({ open, onOpenChange, member }: PasswordDialogPro
       onOpenChange(false);
       setNewPassword("");
     } catch (err: any) {
-      toast.error(err.message || "Error al cambiar contrasena");
+      toast.error(err.message || "Error changing password");
     }
   };
 
@@ -42,7 +42,7 @@ export function PasswordDialog({ open, onOpenChange, member }: PasswordDialogPro
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Cambiar Contrasena</DialogTitle>
+          <DialogTitle>Change Password</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           {member && (
@@ -51,15 +51,15 @@ export function PasswordDialog({ open, onOpenChange, member }: PasswordDialogPro
             </p>
           )}
           <div className="space-y-2">
-            <Label>Nueva Contrasena</Label>
+            <Label>New Password</Label>
             <Input
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="Minimo 8 caracteres"
+              placeholder="Minimum 8 characters"
             />
             {newPassword.length > 0 && newPassword.length < 8 && (
-              <p className="text-xs text-destructive">Debe tener al menos 8 caracteres</p>
+              <p className="text-xs text-destructive">Must be at least 8 characters</p>
             )}
           </div>
           <Button
@@ -67,7 +67,7 @@ export function PasswordDialog({ open, onOpenChange, member }: PasswordDialogPro
             onClick={handleChange}
             disabled={changePassword.isPending || newPassword.length < 8}
           >
-            {changePassword.isPending ? "Cambiando..." : "Cambiar Contrasena"}
+            {changePassword.isPending ? "Cambiando..." : "Change Password"}
           </Button>
         </div>
       </DialogContent>

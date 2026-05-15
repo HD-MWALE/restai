@@ -7,7 +7,7 @@ import { createPaymentSchema, idParamSchema } from "@restai/validators";
 import { authMiddleware } from "../middleware/auth.js";
 import { tenantMiddleware, requireBranch } from "../middleware/tenant.js";
 import { requirePermission } from "../middleware/rbac.js";
-import { peruStartOfDay, peruEndOfDay } from "../lib/timezone.js";
+import { malawiStartOfDay, malawiEndOfDay } from "../lib/timezone.js";
 
 const payments = new Hono<AppEnv>();
 
@@ -19,8 +19,8 @@ payments.use("*", requireBranch);
 payments.get("/summary", requirePermission("payments:read"), async (c) => {
   const tenant = c.get("tenant") as any;
 
-  const startOfDay = peruStartOfDay();
-  const endOfDay = peruEndOfDay();
+  const startOfDay = malawiStartOfDay();
+  const endOfDay = malawiEndOfDay();
 
   const conditions = [
     eq(schema.payments.branch_id, tenant.branchId),
@@ -173,7 +173,7 @@ payments.post(
 
     if (!order) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Orden no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Order no encontrada" } },
         404,
       );
     }
@@ -196,7 +196,7 @@ payments.post(
     const remaining = order.total - previouslyPaid;
     if (remaining <= 0) {
       return c.json(
-        { success: false, error: { code: "BAD_REQUEST", message: "La orden ya está pagada" } },
+        { success: false, error: { code: "BAD_REQUEST", message: "La order ya está pagada" } },
         400,
       );
     }

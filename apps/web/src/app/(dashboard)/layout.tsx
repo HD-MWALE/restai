@@ -49,34 +49,34 @@ const navGroups: NavGroup[] = [
   {
     label: "General",
     items: [
-      { href: "/", label: "Panel", icon: LayoutDashboard },
+      { href: "/", label: "Dashboard", icon: LayoutDashboard },
     ],
   },
   {
-    label: "Operaciones",
+    label: "Operations",
     items: [
       { href: "/pos", label: "POS", icon: Smartphone },
-      { href: "/orders", label: "Ordenes", icon: ClipboardList },
-      { href: "/tables", label: "Mesas", icon: Grid3X3 },
-      { href: "/kitchen", label: "Cocina", icon: ChefHat },
-      { href: "/connections", label: "Conexiones", icon: Wifi },
+      { href: "/orders", label: "Orders", icon: ClipboardList },
+      { href: "/tables", label: "Tables", icon: Grid3X3 },
+      { href: "/kitchen", label: "Kitchen", icon: ChefHat },
+      { href: "/connections", label: "Connections", icon: Wifi },
       { href: "/menu", label: "Menu", icon: UtensilsCrossed },
     ],
   },
   {
-    label: "Gestion",
+    label: "Management",
     items: [
-      { href: "/inventory", label: "Inventario", icon: Package },
-      { href: "/staff", label: "Personal", icon: Users },
-      { href: "/payments", label: "Pagos", icon: CreditCard },
+      { href: "/inventory", label: "Inventory", icon: Package },
+      { href: "/staff", label: "Staff", icon: Users },
+      { href: "/payments", label: "Payments", icon: CreditCard },
     ],
   },
   {
-    label: "Negocio",
+    label: "Business",
     items: [
-      { href: "/loyalty", label: "Fidelizacion", icon: Heart },
-      { href: "/reports", label: "Reportes", icon: BarChart3 },
-      { href: "/settings", label: "Configuracion", icon: Settings },
+      { href: "/loyalty", label: "Loyalty", icon: Heart },
+      { href: "/reports", label: "Reports", icon: BarChart3 },
+      { href: "/settings", label: "Settings", icon: Settings },
     ],
   },
 ];
@@ -158,7 +158,7 @@ export default function DashboardLayout({
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-muted-foreground">Cargando...</div>
+        <div className="animate-pulse text-muted-foreground">Loading...</div>
       </div>
     );
   }
@@ -194,7 +194,7 @@ export default function DashboardLayout({
                 {orgName}
               </p>
               <p className="text-[11px] text-muted-foreground truncate leading-tight">
-                Gestion de restaurante
+                Restaurant management
               </p>
             </div>
           )}
@@ -204,11 +204,11 @@ export default function DashboardLayout({
         {!collapsed && canSwitchBranch && (
           <div className="px-3 py-2 border-b border-sidebar-border">
             <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1 block">
-              Sede activa
+              Active branch
             </label>
             <Select value={selectedBranchId || undefined} onValueChange={handleBranchChange}>
               <SelectTrigger className="h-auto text-xs bg-sidebar-accent/50 text-sidebar-foreground border-sidebar-border py-1.5 focus:ring-sidebar-ring">
-                <SelectValue placeholder="Seleccionar sede" />
+                <SelectValue placeholder="Select branch" />
               </SelectTrigger>
               <SelectContent>
                 {availableBranches.map((branch: Branch) => (
@@ -301,12 +301,12 @@ export default function DashboardLayout({
                   {user.name}
                 </p>
                 <p className="text-[11px] text-muted-foreground truncate leading-tight">
-                  {user.role === "owner" ? "Propietario" : user.role === "admin" ? "Administrador" : "Personal"}
+                  {user.role === "owner" ? "Owner" : user.role === "admin" ? "Administrator" : "Staff"}
                 </p>
               </div>
               <button
                 onClick={handleLogout}
-                title="Cerrar sesion"
+                title="Log out"
                 className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-sidebar-accent transition-colors"
               >
                 <LogOut className="h-4 w-4" />
@@ -319,7 +319,7 @@ export default function DashboardLayout({
               </div>
               <button
                 onClick={handleLogout}
-                title="Cerrar sesion"
+                title="Log out"
                 className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-sidebar-accent transition-colors"
               >
                 <LogOut className="h-3.5 w-3.5" />
@@ -356,7 +356,7 @@ export default function DashboardLayout({
                 <div className="md:hidden">
                   <Select value={selectedBranchId || undefined} onValueChange={handleBranchChange}>
                     <SelectTrigger className="h-auto text-xs py-1.5 w-auto min-w-[8rem]">
-                      <SelectValue placeholder="Sede" />
+                      <SelectValue placeholder="Branch" />
                     </SelectTrigger>
                     <SelectContent>
                       {availableBranches.map((branch: Branch) => (
@@ -415,11 +415,11 @@ export default function DashboardLayout({
               {canSwitchBranch && (
                 <div className="px-3 py-2 border-b border-sidebar-border">
                   <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1 block">
-                    Sede activa
+                    Active branch
                   </label>
                   <Select value={selectedBranchId || undefined} onValueChange={handleBranchChange}>
                     <SelectTrigger className="h-auto text-xs bg-sidebar-accent/50 text-sidebar-foreground border-sidebar-border py-1.5 focus:ring-sidebar-ring">
-                      <SelectValue placeholder="Seleccionar sede" />
+                      <SelectValue placeholder="Select branch" />
                     </SelectTrigger>
                     <SelectContent>
                       {availableBranches.map((branch: Branch) => (

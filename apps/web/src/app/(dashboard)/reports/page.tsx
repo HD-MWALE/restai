@@ -18,12 +18,12 @@ import { PaymentMethodsChart } from "./_components/payment-methods-chart";
 import { TopItemsList } from "./_components/top-items-list";
 
 const METHOD_LABELS: Record<string, string> = {
-  cash: "Efectivo",
-  card: "Tarjeta",
+  cash: "Cash",
+  card: "Card",
   yape: "Yape",
   plin: "Plin",
-  transfer: "Transferencia",
-  other: "Otro",
+  transfer: "Bank Transfer",
+  other: "Other",
 };
 
 function getDefaultDates() {
@@ -120,10 +120,10 @@ export default function ReportsPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold">Reportes</h1>
+          <h1 className="text-2xl font-bold">Reports</h1>
         </div>
         <div className="p-4 rounded-lg border border-destructive/50 bg-destructive/5 flex items-center justify-between">
-          <p className="text-sm text-destructive">Error al cargar reportes: {(error as Error).message}</p>
+          <p className="text-sm text-destructive">Failed to load reports: {(error as Error).message}</p>
           <Button
             variant="outline"
             size="sm"
@@ -134,7 +134,7 @@ export default function ReportsPage() {
             }}
           >
             <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`} />
-            Reintentar
+            Retry
           </Button>
         </div>
       </div>
@@ -145,12 +145,12 @@ export default function ReportsPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Reportes</h1>
-          <p className="text-muted-foreground">Analisis de ventas y productos</p>
+          <h1 className="text-2xl font-bold">Reports</h1>
+          <p className="text-muted-foreground">Sales & Product Analysis</p>
         </div>
         <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4">
           <div className="space-y-2 min-w-[220px]">
-            <Label className="text-xs text-muted-foreground block pl-0.5">Desde</Label>
+            <Label className="text-xs text-muted-foreground block pl-0.5">From</Label>
             <DatePicker
               value={draftStartDate}
               onChange={(d) => setDraftStartDate(d ?? "")}
@@ -158,7 +158,7 @@ export default function ReportsPage() {
             />
           </div>
           <div className="space-y-2 min-w-[220px]">
-            <Label className="text-xs text-muted-foreground block pl-0.5">Hasta</Label>
+            <Label className="text-xs text-muted-foreground block pl-0.5">To</Label>
             <DatePicker
               value={draftEndDate}
               onChange={(d) => setDraftEndDate(d ?? "")}
@@ -172,7 +172,7 @@ export default function ReportsPage() {
             onClick={applyFilters}
           >
             <Check className="h-4 w-4" />
-            Aplicar
+            Apply
           </Button>
           <Button
             variant="outline"
@@ -185,7 +185,7 @@ export default function ReportsPage() {
             }}
           >
             <RefreshCw className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`} />
-            Actualizar
+            Update
           </Button>
         </div>
       </div>
@@ -197,7 +197,7 @@ export default function ReportsPage() {
           className="h-8 active:translate-y-px active:scale-[0.98]"
           onClick={() => applyRange(getTodayRange())}
         >
-          Hoy
+          Today
         </Button>
         <Button
           type="button"
@@ -206,7 +206,7 @@ export default function ReportsPage() {
           className="h-8 active:translate-y-px active:scale-[0.98]"
           onClick={() => applyRange(getLastDaysRange(7))}
         >
-          Ultimos 7 dias
+          Last 7 days
         </Button>
         <Button
           type="button"
@@ -215,7 +215,7 @@ export default function ReportsPage() {
           className="h-8 active:translate-y-px active:scale-[0.98]"
           onClick={() => applyRange(getLastDaysRange(30))}
         >
-          Ultimos 30 dias
+          Last 30 days
         </Button>
         <Button
           type="button"
@@ -224,18 +224,18 @@ export default function ReportsPage() {
           className="h-8 active:translate-y-px active:scale-[0.98]"
           onClick={() => applyRange(getCurrentMonthRange())}
         >
-          Este mes
+          This month
         </Button>
         {isRefreshing && (
           <span className="text-xs text-muted-foreground inline-flex items-center gap-2">
             <span className="h-1.5 w-6 rounded-full bg-muted-foreground/40 animate-pulse" />
-            Actualizando reportes...
+            Updating reports...
           </span>
         )}
       </div>
       {invalidDateRange && (
         <p className="text-sm text-destructive">
-          El rango de fechas no es valido: "Desde" debe ser menor o igual a "Hasta".
+          Invalid date range: 'From' must be before or equal to 'To'.
         </p>
       )}
 

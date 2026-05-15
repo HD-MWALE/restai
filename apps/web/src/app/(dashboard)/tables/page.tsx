@@ -182,7 +182,7 @@ export default function TablesPage() {
         return [
           {
             id: payload.sessionId,
-            customer_name: payload.customerName || "Cliente",
+            customer_name: payload.customerName || "Customer",
             customer_phone: null,
             started_at: new Date(msg.timestamp).toISOString(),
             table_id: payload.tableId,
@@ -228,7 +228,7 @@ export default function TablesPage() {
           tableId: payload.tableId,
           tableNumber: payload.tableNumber,
           tableSessionId: payload.tableSessionId,
-          customerName: payload.customerName || "Cliente",
+          customerName: payload.customerName || "Customer",
           timestamp: msg.timestamp,
         },
         ...prev,
@@ -237,8 +237,8 @@ export default function TablesPage() {
 
     toast.info(
       requestType === "request_bill"
-        ? `Mesa ${payload.tableNumber}: ${payload.customerName || "Cliente"} solicita la cuenta`
-        : `Mesa ${payload.tableNumber}: ${payload.customerName || "Cliente"} solicita mozo`
+        ? `Table ${payload.tableNumber}: ${payload.customerName || "Customer"} solicita la cuenta`
+        : `Table ${payload.tableNumber}: ${payload.customerName || "Customer"} solicita mozo`
     );
   }, [currentTableIds, refetchPendingSessions]);
 
@@ -288,7 +288,7 @@ export default function TablesPage() {
           </p>
           <Button variant="outline" size="sm" onClick={() => refetch()}>
             <RefreshCw className="h-4 w-4 mr-2" />
-            Reintentar
+            Retry
           </Button>
         </div>
       </div>
@@ -299,11 +299,11 @@ export default function TablesPage() {
     <div className="space-y-6">
       {/* Header */}
       <PageHeader
-        title="Mesas y Espacios"
+        title="Tables and Spaces"
         description={
           isLoading
-            ? "Cargando..."
-            : `${counts.available} disponibles, ${counts.occupied} ocupadas de ${counts.total} mesas`
+            ? "Loading..."
+            : `${counts.available} available, ${counts.occupied} occupied de ${counts.total} tables`
         }
         actions={
           <>
@@ -327,11 +327,11 @@ export default function TablesPage() {
             </div>
             <Button variant="outline" onClick={() => setCreateSpaceDialog(true)}>
               <LayoutGrid className="h-4 w-4 mr-2" />
-              Nuevo Espacio
+              New Space
             </Button>
             <Button onClick={() => setCreateTableDialog(true)}>
               <Plus className="h-4 w-4 mr-2" />
-              Nueva Mesa
+              New Table
             </Button>
           </>
         }
@@ -341,9 +341,9 @@ export default function TablesPage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
           { label: "Total", value: counts.total, color: "text-foreground" },
-          { label: "Disponibles", value: counts.available, color: "text-green-600 dark:text-green-400" },
-          { label: "Ocupadas", value: counts.occupied, color: "text-blue-600 dark:text-blue-400" },
-          { label: "Reservadas", value: counts.reserved, color: "text-orange-600 dark:text-orange-400" },
+          { label: "Available", value: counts.available, color: "text-green-600 dark:text-green-400" },
+          { label: "Occupied", value: counts.occupied, color: "text-blue-600 dark:text-blue-400" },
+          { label: "Reserved", value: counts.reserved, color: "text-orange-600 dark:text-orange-400" },
         ].map((stat) => (
           <Card key={stat.label}>
             <CardContent className="p-4">
@@ -362,7 +362,7 @@ export default function TablesPage() {
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center gap-2">
               <Bell className="h-4 w-4 text-amber-600" />
-              Solicitudes pendientes ({pendingSessions.length})
+              Pending requests ({pendingSessions.length})
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -375,7 +375,7 @@ export default function TablesPage() {
                   <div>
                     <p className="font-medium">{session.customer_name}</p>
                     <p className="text-sm text-muted-foreground">
-                      Mesa {session.table_number}
+                      Table {session.table_number}
                       {session.customer_phone && ` · ${session.customer_phone}`}
                     </p>
                   </div>
@@ -395,7 +395,7 @@ export default function TablesPage() {
                       onClick={() => approveSession.mutate(session.id)}
                     >
                       <Check className="h-4 w-4 mr-1" />
-                      Aceptar
+                      Accept
                     </Button>
                   </div>
                 </div>
@@ -412,13 +412,13 @@ export default function TablesPage() {
             <div className="flex items-center gap-2">
               <Bell className="h-4 w-4 text-blue-600" />
               <p className="text-sm font-medium">
-                Solicitudes activas: {requestSummary.total}
+                Active requests: {requestSummary.total}
               </p>
-              <Badge variant="outline">Cuenta: {requestSummary.requestBillCount}</Badge>
-              <Badge variant="outline">Mozo: {requestSummary.callWaiterCount}</Badge>
+              <Badge variant="outline">Bill: {requestSummary.requestBillCount}</Badge>
+              <Badge variant="outline">Waiter: {requestSummary.callWaiterCount}</Badge>
             </div>
             <Button size="sm" onClick={() => setRequestsDialogOpen(true)}>
-              Ver solicitudes
+              View requests
             </Button>
           </CardContent>
         </Card>
@@ -428,13 +428,13 @@ export default function TablesPage() {
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <div className="flex items-center gap-2 overflow-x-auto">
           <TabsList>
-            <TabsTrigger value="all">Todas</TabsTrigger>
+            <TabsTrigger value="all">All</TabsTrigger>
             {spaces.map((space: any) => (
               <TabsTrigger key={space.id} value={space.id}>
                 {space.name}
               </TabsTrigger>
             ))}
-            <TabsTrigger value="unassigned">Sin espacio</TabsTrigger>
+            <TabsTrigger value="unassigned">Unassigned</TabsTrigger>
           </TabsList>
         </div>
 
@@ -477,7 +477,7 @@ export default function TablesPage() {
             onHistory={setHistoryDialog}
             onAssign={setAssignDialog}
             onDelete={(table) =>
-              setDeleteConfirm({ type: "table", id: table.id, name: `Mesa ${table.number}` })
+              setDeleteConfirm({ type: "table", id: table.id, name: `Table ${table.number}` })
             }
             onStatusChange={handleStatusChange}
           />
@@ -489,13 +489,13 @@ export default function TablesPage() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              Solicitudes de mesa ({serviceRequests.length})
+              Table requests ({serviceRequests.length})
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-3 max-h-[60vh] overflow-y-auto pr-1">
             {serviceRequests.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-6">
-                No hay solicitudes activas.
+                No active requests.
               </p>
             ) : (
               serviceRequests.map((request) => (
@@ -504,12 +504,12 @@ export default function TablesPage() {
                   className="flex items-center justify-between p-3 rounded-lg bg-background border"
                 >
                   <div>
-                    <p className="font-medium">Mesa {request.tableNumber}</p>
+                    <p className="font-medium">Table {request.tableNumber}</p>
                     <p className="text-sm text-muted-foreground">
                       {request.customerName} ·{" "}
                       {request.type === "request_bill"
-                        ? "Solicita la cuenta"
-                        : "Solicita mozo"}
+                        ? "Requests the bill"
+                        : "Requests waiter"}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -520,7 +520,7 @@ export default function TablesPage() {
                       })}
                     </Badge>
                     <Button size="sm" onClick={() => dismissServiceRequest(request.id)}>
-                      Atendido
+                      Attended
                     </Button>
                   </div>
                 </div>
@@ -530,7 +530,7 @@ export default function TablesPage() {
           {serviceRequests.length > 0 && (
             <div className="flex justify-end">
               <Button variant="outline" size="sm" onClick={clearServiceRequests}>
-                Limpiar todo
+                Clear all
               </Button>
             </div>
           )}
@@ -543,11 +543,11 @@ export default function TablesPage() {
       <ConfirmDialog
         open={!!deleteConfirm}
         onOpenChange={(open) => !open && setDeleteConfirm(null)}
-        title="Confirmar Eliminacion"
+        title="Confirm Deletion"
         description={
           deleteConfirm?.type === "space"
-            ? `Estas seguro de eliminar el espacio "${deleteConfirm.name}"? Solo se puede eliminar si no tiene mesas asignadas.`
-            : `Estas seguro de eliminar "${deleteConfirm?.name}"? Esta accion no se puede deshacer.`
+            ? `Are you sure you want to delete the space "${deleteConfirm.name}"? Can only be deleted if it has no assigned tables.`
+            : `Estas seguro de eliminar "${deleteConfirm?.name}"? This action cannot be undone.`
         }
         onConfirm={handleDelete}
         loading={deleteTable.isPending || deleteSpace.isPending}

@@ -36,12 +36,12 @@ export function ItemsTab({
         <SearchInput
           value={search}
           onChange={setSearch}
-          placeholder="Buscar item..."
+          placeholder="Search item..."
           className="flex-1"
         />
         <Button onClick={onNewItem}>
           <Plus className="h-4 w-4 mr-2" />
-          Nuevo Item
+          New Item
         </Button>
       </div>
 
@@ -52,22 +52,22 @@ export function ItemsTab({
               <thead>
                 <tr className="border-b border-border bg-muted/50">
                   <th className="text-left p-3 text-sm font-medium text-muted-foreground">
-                    Nombre
+                    Name
                   </th>
                   <th className="text-center p-3 text-sm font-medium text-muted-foreground hidden sm:table-cell">
-                    Unidad
+                    Unit
                   </th>
                   <th className="text-right p-3 text-sm font-medium text-muted-foreground">
-                    Stock Actual
+                    Current Stock
                   </th>
                   <th className="text-right p-3 text-sm font-medium text-muted-foreground hidden md:table-cell">
-                    Stock Min.
+                    Min. Stock
                   </th>
                   <th className="text-right p-3 text-sm font-medium text-muted-foreground hidden md:table-cell">
-                    Costo
+                    Cost
                   </th>
                   <th className="text-center p-3 text-sm font-medium text-muted-foreground">
-                    Estado
+                    Status
                   </th>
                 </tr>
               </thead>
@@ -102,8 +102,8 @@ export function ItemsTab({
                       className="p-8 text-center text-sm text-muted-foreground"
                     >
                       {search
-                        ? "No se encontraron items"
-                        : "No hay items en inventario"}
+                        ? "No items found"
+                        : "No inventory items"}
                     </td>
                   </tr>
                 ) : (
@@ -155,7 +155,7 @@ export function ItemsTab({
                           <Badge
                             variant={isLow ? "destructive" : "secondary"}
                           >
-                            {isLow ? "Bajo" : "OK"}
+                            {isLow ? "Low" : "OK"}
                           </Badge>
                         </td>
                       </tr>

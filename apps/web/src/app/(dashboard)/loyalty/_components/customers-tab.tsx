@@ -14,20 +14,20 @@ import { ConfirmDialog } from "@/components/confirm-dialog";
 import { CreateCustomerDialog } from "./customer-dialog";
 
 const tierConfig: Record<string, { label: string; color: string }> = {
-  Bronce: {
-    label: "Bronce",
+  Bronze: {
+    label: "Bronze",
     color: "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300",
   },
-  Plata: {
-    label: "Plata",
+  Silver: {
+    label: "Silver",
     color: "bg-gray-100 text-gray-800 dark:bg-gray-700/40 dark:text-gray-300",
   },
-  Oro: {
-    label: "Oro",
+  Gold: {
+    label: "Gold",
     color: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
   },
-  Platino: {
-    label: "Platino",
+  Platinum: {
+    label: "Platinum",
     color: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
   },
 };
@@ -60,9 +60,9 @@ export function CustomersTab() {
   if (error) {
     return (
       <div className="p-4 rounded-lg border border-destructive/50 bg-destructive/10 flex items-center justify-between">
-        <p className="text-sm text-destructive">Error al cargar clientes: {(error as Error).message}</p>
+        <p className="text-sm text-destructive">Error loading customers: {(error as Error).message}</p>
         <Button variant="outline" size="sm" onClick={() => refetch()}>
-          <RefreshCw className="h-4 w-4 mr-2" />Reintentar
+          <RefreshCw className="h-4 w-4 mr-2" />Retry
         </Button>
       </div>
     );
@@ -74,11 +74,11 @@ export function CustomersTab() {
         <SearchInput
           value={search}
           onChange={handleSearch}
-          placeholder="Buscar por nombre, email o telefono..."
+          placeholder="Search by name, email or phone..."
           className="flex-1"
         />
         <Button onClick={() => setShowCreate(true)}>
-          <Plus className="h-4 w-4 mr-2" />Registrar Cliente
+          <Plus className="h-4 w-4 mr-2" />Register Customer
         </Button>
       </div>
 
@@ -88,10 +88,10 @@ export function CustomersTab() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-border bg-muted/50">
-                  <th className="text-left p-3 text-sm font-medium text-muted-foreground">Cliente</th>
-                  <th className="text-left p-3 text-sm font-medium text-muted-foreground hidden sm:table-cell">Telefono</th>
+                  <th className="text-left p-3 text-sm font-medium text-muted-foreground">Customer</th>
+                  <th className="text-left p-3 text-sm font-medium text-muted-foreground hidden sm:table-cell">Phone</th>
                   <th className="text-center p-3 text-sm font-medium text-muted-foreground">Tier</th>
-                  <th className="text-right p-3 text-sm font-medium text-muted-foreground">Puntos</th>
+                  <th className="text-right p-3 text-sm font-medium text-muted-foreground">Points</th>
                   <th className="w-10 p-3" />
                 </tr>
               </thead>
@@ -109,13 +109,13 @@ export function CustomersTab() {
                 ) : customers.length === 0 ? (
                   <tr>
                     <td colSpan={5} className="p-8 text-center text-sm text-muted-foreground">
-                      {debouncedSearch ? "No se encontraron clientes" : "No hay clientes registrados"}
+                      {debouncedSearch ? "No customers found" : "No customers registered"}
                     </td>
                   </tr>
                 ) : (
                   customers.map((customer: any) => {
-                    const tierName = customer.tier_name || "Bronce";
-                    const tier = tierConfig[tierName] || tierConfig.Bronce;
+                    const tierName = customer.tier_name || "Bronze";
+                    const tier = tierConfig[tierName] || tierConfig.Bronze;
                     return (
                       <tr key={customer.id} className="border-b border-border last:border-0 hover:bg-muted/50 transition-colors">
                         <td className="p-3">
@@ -152,7 +152,7 @@ export function CustomersTab() {
       {pagination.totalPages > 1 && (
         <div className="flex items-center justify-between">
           <p className="text-sm text-muted-foreground">
-            {pagination.total} clientes en total
+            {pagination.total} customers in total
           </p>
           <div className="flex items-center gap-2">
             <Button
@@ -162,10 +162,10 @@ export function CustomersTab() {
               onClick={() => setPage(page - 1)}
             >
               <ChevronLeft className="h-4 w-4" />
-              Anterior
+              Previous
             </Button>
             <span className="text-sm text-muted-foreground">
-              Pagina {pagination.page} de {pagination.totalPages}
+              Page {pagination.page} of {pagination.totalPages}
             </span>
             <Button
               variant="outline"
@@ -173,7 +173,7 @@ export function CustomersTab() {
               disabled={page >= pagination.totalPages}
               onClick={() => setPage(page + 1)}
             >
-              Siguiente
+              Next
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
@@ -185,9 +185,9 @@ export function CustomersTab() {
       <ConfirmDialog
         open={!!deleteConfirm}
         onOpenChange={(v) => !v && setDeleteConfirm(null)}
-        title="Eliminar cliente"
-        description={`Se eliminara a "${deleteConfirm?.name}" y todos sus datos de loyalty (puntos, transacciones, cupones). Los pedidos existentes se conservaran. Esta accion no se puede deshacer.`}
-        confirmLabel="Eliminar"
+        title="Delete customer"
+        description={`"${deleteConfirm?.name}" will be deleted along with all loyalty data (points, transactions, coupons). Existing orders will be kept. This action cannot be undone.`}
+        confirmLabel="Delete"
         onConfirm={() => {
           if (deleteConfirm) {
             deleteCustomer.mutate(deleteConfirm.id, {

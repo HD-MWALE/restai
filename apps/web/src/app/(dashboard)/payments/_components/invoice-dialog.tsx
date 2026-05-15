@@ -22,9 +22,9 @@ interface InvoiceDialogProps {
 
 export function InvoiceDialog({ open, onOpenChange, payment }: InvoiceDialogProps) {
   const [form, setForm] = useState({
-    type: "boleta",
+    type: "receipt",
     customerName: "",
-    customerDocType: "dni",
+    customerDocType: "nid",
     customerDocNumber: "",
   });
 
@@ -42,9 +42,9 @@ export function InvoiceDialog({ open, onOpenChange, payment }: InvoiceDialogProp
       });
       onOpenChange(false);
       setForm({
-        type: "boleta",
+        type: "receipt",
         customerName: "",
-        customerDocType: "dni",
+        customerDocType: "nid",
         customerDocNumber: "",
       });
     } catch {}
@@ -54,52 +54,52 @@ export function InvoiceDialog({ open, onOpenChange, payment }: InvoiceDialogProp
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Generar Comprobante</DialogTitle>
+          <DialogTitle>Generate Receipt</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="invoiceType">Tipo de Comprobante</Label>
+            <Label htmlFor="invoiceType">Document Type</Label>
             <Select value={form.type} onValueChange={(v) => setForm({ ...form, type: v })}>
               <SelectTrigger>
                 <SelectValue placeholder="Seleccionar tipo" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="boleta">Boleta</SelectItem>
-                <SelectItem value="factura">Factura</SelectItem>
+                <SelectItem value="receipt">Receipt</SelectItem>
+                <SelectItem value="invoice">Invoice</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="customerName">Nombre del Cliente</Label>
+            <Label htmlFor="customerName">Customer Name</Label>
             <Input
               id="customerName"
-              placeholder="Nombre o razon social"
+              placeholder="Name or business name"
               value={form.customerName}
               onChange={(e) => setForm({ ...form, customerName: e.target.value })}
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="docType">Tipo de Documento</Label>
+              <Label htmlFor="docType">Document Type</Label>
               <Select value={form.customerDocType} onValueChange={(v) => setForm({ ...form, customerDocType: v })}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Tipo doc." />
+                  <SelectValue placeholder="Doc type." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="dni">DNI</SelectItem>
-                  <SelectItem value="ruc">RUC</SelectItem>
-                  <SelectItem value="ce">CE</SelectItem>
+                  <SelectItem value="nid">NID</SelectItem>
+                  <SelectItem value="tpin">TPIN</SelectItem>
+                  <SelectItem value="foreigner_id">CE</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="docNumber">Numero de Documento</Label>
+              <Label htmlFor="docNumber">Document Number</Label>
               <Input
                 id="docNumber"
                 placeholder={
-                  form.customerDocType === "dni"
+                  form.customerDocType === "nid"
                     ? "12345678"
-                    : form.customerDocType === "ruc"
+                    : form.customerDocType === "tpin"
                     ? "20123456789"
                     : "AB1234567"
                 }
@@ -118,7 +118,7 @@ export function InvoiceDialog({ open, onOpenChange, payment }: InvoiceDialogProp
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancelar
+            Cancel
           </Button>
           <Button
             onClick={handleCreate}
@@ -128,7 +128,7 @@ export function InvoiceDialog({ open, onOpenChange, payment }: InvoiceDialogProp
               !form.customerDocNumber
             }
           >
-            {createInvoice.isPending ? "Generando..." : "Generar Comprobante"}
+            {createInvoice.isPending ? "Generating..." : "Generate Receipt"}
           </Button>
         </DialogFooter>
       </DialogContent>

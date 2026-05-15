@@ -7,8 +7,8 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "RestAI - Sistema de Restaurantes",
-  description: "Plataforma inteligente para gestion de restaurantes",
+  title: "Smart Restaurant Management System",
+  description: "The Intelligent restaurant management solution",
 };
 
 export default function RootLayout({

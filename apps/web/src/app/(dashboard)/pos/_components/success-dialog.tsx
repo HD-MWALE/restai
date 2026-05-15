@@ -27,7 +27,7 @@ export function SuccessDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Orden Creada</DialogTitle>
+          <DialogTitle>Order Creada</DialogTitle>
         </DialogHeader>
         <div className="py-6 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
@@ -37,12 +37,12 @@ export function SuccessDialog({
             <p className="text-2xl font-bold font-mono">{orderNumber}</p>
           )}
           <p className="text-sm text-muted-foreground mt-2">
-            La orden aparecera en la cocina automaticamente
+            The order will automatically appear in the kitchen
           </p>
         </div>
         <DialogFooter>
           <Button onClick={() => onOpenChange(false)} className="w-full">
-            Nueva Orden
+            New Order
           </Button>
         </DialogFooter>
       </DialogContent>

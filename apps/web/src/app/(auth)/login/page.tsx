@@ -25,12 +25,13 @@ export default function LoginPage() {
   });
 
   const onSubmit = async (data: LoginInput) => {
+    console.log("NEXT_PUBLIC_API_URL =", process.env.NEXT_PUBLIC_API_URL);
     try {
       setError(null);
       setLoading(true);
       await login(data.email, data.password);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error al iniciar sesion");
+      setError(err instanceof Error ? err.message : "Error signing in");
     } finally {
       setLoading(false);
     }
@@ -43,7 +44,7 @@ export default function LoginPage() {
           <span className="text-2xl font-bold text-primary-foreground">R</span>
         </div>
         <CardTitle className="text-2xl">RestAI</CardTitle>
-        <CardDescription>Inicia sesion en tu cuenta</CardDescription>
+        <CardDescription>Sign in to your account</CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent className="space-y-4">
@@ -65,7 +66,7 @@ export default function LoginPage() {
             )}
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Contrasena</Label>
+            <Label htmlFor="password">Password</Label>
             <Input
               id="password"
               type="password"
@@ -81,12 +82,12 @@ export default function LoginPage() {
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Ingresando..." : "Iniciar Sesion"}
+            {loading ? "Signing in..." : "Sign In"}
           </Button>
           <p className="text-sm text-muted-foreground">
-            No tienes cuenta?{" "}
+            Don't have an account?{" "}
             <Link href="/register" className="text-primary hover:underline">
-              Registrate
+              Sign up
             </Link>
           </p>
         </CardFooter>

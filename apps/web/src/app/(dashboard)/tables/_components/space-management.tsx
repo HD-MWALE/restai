@@ -34,7 +34,7 @@ export function SpaceInfoCard({ space, tableCount, onEdit, onDelete }: SpaceInfo
             <p className="text-sm text-muted-foreground">{space.description}</p>
           )}
           <p className="text-xs text-muted-foreground">
-            Piso {space.floor_number} - {tableCount} mesas
+            Floor {space.floor_number} - {tableCount} tables
           </p>
         </div>
         <div className="flex gap-2">
@@ -86,29 +86,29 @@ export function CreateSpaceDialog({ open, onOpenChange }: CreateSpaceDialogProps
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Nuevo Espacio</DialogTitle>
+          <DialogTitle>New Space</DialogTitle>
         </DialogHeader>
         <div className="space-y-4 py-4">
           <div className="space-y-2">
-            <Label htmlFor="space-name">Nombre del espacio</Label>
+            <Label htmlFor="space-name">Space name</Label>
             <Input
               id="space-name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Ej: Salon Principal, Terraza"
+              placeholder="E.g. Main Hall, Terrace"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="space-description">Descripcion (opcional)</Label>
+            <Label htmlFor="space-description">Description (optional)</Label>
             <Input
               id="space-description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Area al aire libre..."
+              placeholder="Outdoor area..."
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="space-floor">Piso</Label>
+            <Label htmlFor="space-floor">Floor</Label>
             <Input
               id="space-floor"
               type="number"
@@ -121,13 +121,13 @@ export function CreateSpaceDialog({ open, onOpenChange }: CreateSpaceDialogProps
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancelar
+            Cancel
           </Button>
           <Button
             onClick={handleCreate}
             disabled={createSpace.isPending || !name.trim()}
           >
-            {createSpace.isPending ? "Creando..." : "Crear Espacio"}
+            {createSpace.isPending ? "Creating..." : "Create Space"}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -179,11 +179,11 @@ export function EditSpaceDialog({ space, onClose }: EditSpaceDialogProps) {
     <Dialog open={!!space} onOpenChange={(open) => !open && onClose()}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Editar Espacio</DialogTitle>
+          <DialogTitle>Edit Space</DialogTitle>
         </DialogHeader>
         <div className="space-y-4 py-4">
           <div className="space-y-2">
-            <Label htmlFor="edit-space-name">Nombre</Label>
+            <Label htmlFor="edit-space-name">Name</Label>
             <Input
               id="edit-space-name"
               value={name}
@@ -191,7 +191,7 @@ export function EditSpaceDialog({ space, onClose }: EditSpaceDialogProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="edit-space-desc">Descripcion</Label>
+            <Label htmlFor="edit-space-desc">Description</Label>
             <Input
               id="edit-space-desc"
               value={description}
@@ -199,7 +199,7 @@ export function EditSpaceDialog({ space, onClose }: EditSpaceDialogProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="edit-space-floor">Piso</Label>
+            <Label htmlFor="edit-space-floor">Floor</Label>
             <Input
               id="edit-space-floor"
               type="number"
@@ -211,13 +211,13 @@ export function EditSpaceDialog({ space, onClose }: EditSpaceDialogProps) {
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onClose}>
-            Cancelar
+            Cancel
           </Button>
           <Button
             onClick={handleUpdate}
             disabled={updateSpace.isPending || !name.trim()}
           >
-            {updateSpace.isPending ? "Guardando..." : "Guardar"}
+            {updateSpace.isPending ? "Saving..." : "Save"}
           </Button>
         </DialogFooter>
       </DialogContent>

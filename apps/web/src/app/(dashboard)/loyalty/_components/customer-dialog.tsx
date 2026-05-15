@@ -38,7 +38,7 @@ export function CreateCustomerDialog({
         onSuccess: () => {
           setForm({ name: "", phone: "", email: "", birthDate: "" });
           onOpenChange(false);
-          toast.success("Cliente registrado exitosamente");
+          toast.success("Customer registered successfully");
         },
         onError: (err) => toast.error(`Error: ${(err as Error).message}`),
       },
@@ -49,15 +49,15 @@ export function CreateCustomerDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Registrar Cliente</DialogTitle>
+          <DialogTitle>Register Customer</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="cust-name">Nombre *</Label>
+            <Label htmlFor="cust-name">Name *</Label>
             <Input id="cust-name" value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="cust-phone">Telefono</Label>
+            <Label htmlFor="cust-phone">Phone</Label>
             <Input id="cust-phone" value={form.phone} onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))} />
           </div>
           <div className="space-y-2">
@@ -65,13 +65,13 @@ export function CreateCustomerDialog({
             <Input id="cust-email" type="email" value={form.email} onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))} />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="cust-birth">Fecha de nacimiento</Label>
+            <Label htmlFor="cust-birth">Date of birth</Label>
             <DatePicker id="cust-birth" value={form.birthDate} onChange={(d) => setForm((p) => ({ ...p, birthDate: d ?? "" }))} />
           </div>
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancelar</Button>
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
             <Button type="submit" disabled={createCustomer.isPending || !form.name}>
-              {createCustomer.isPending ? "Guardando..." : "Guardar"}
+              {createCustomer.isPending ? "Saving..." : "Save"}
             </Button>
           </DialogFooter>
         </form>

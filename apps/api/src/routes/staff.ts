@@ -94,7 +94,7 @@ staff.post(
 
     if (existing) {
       return c.json(
-        { success: false, error: { code: "CONFLICT", message: "El email ya esta registrado" } },
+        { success: false, error: { code: "CONFLICT", message: "Email already registered" } },
         409,
       );
     }
@@ -167,7 +167,7 @@ staff.patch(
 
     if (!user) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Usuario no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "User not found" } },
         404,
       );
     }
@@ -213,7 +213,7 @@ staff.patch(
   zValidator(
     "json",
     z.object({
-      password: z.string().min(8, "La contraseña debe tener al menos 8 caracteres").max(255),
+      password: z.string().min(8, "Password must be at least 8 characters").max(255),
     }),
   ),
   async (c) => {
@@ -233,7 +233,7 @@ staff.patch(
 
     if (!user) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Usuario no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "User not found" } },
         404,
       );
     }
@@ -278,7 +278,7 @@ staff.post(
 
     if (existingShift) {
       return c.json(
-        { success: false, error: { code: "CONFLICT", message: "Ya tienes un turno activo" } },
+        { success: false, error: { code: "CONFLICT", message: "You have an active shift" } },
         409,
       );
     }
@@ -358,14 +358,14 @@ staff.patch(
 
     if (!shift) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Turno no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Shift not found" } },
         404,
       );
     }
 
     if (shift.end_time) {
       return c.json(
-        { success: false, error: { code: "BAD_REQUEST", message: "El turno ya fue cerrado" } },
+        { success: false, error: { code: "BAD_REQUEST", message: "Shift was already closed" } },
         400,
       );
     }

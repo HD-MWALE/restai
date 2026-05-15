@@ -194,7 +194,7 @@ const wsUrl = "ws://localhost:3001/ws";
 - No podia ver el menu
 - No podia agregar items al carrito
 - No podia hacer pedidos
-- No podia ver el estado de su orden
+- No podia ver el estado de su order
 - No podia llamar al mozo ni pedir la cuenta
 - El WebSocket no conectaba
 
@@ -227,7 +227,7 @@ Cualquier error de JavaScript no manejado (un `.map()` sobre `undefined`, una pr
 Escenarios reales:
 - **Dashboard**: Un admin abre la pagina de reportes, la API devuelve un formato inesperado, pantalla blanca. No puede acceder a ningun otro modulo sin recargar manualmente.
 - **Cliente**: Un comensal esta viendo el menu, ocurre un error de red momentaneo, pantalla blanca en su telefono. Piensa que el sistema esta caido, llama al mozo confundido.
-- **Cocina**: El display de cocina tiene un error de renderizado, pantalla blanca. La cocina deja de recibir pedidos hasta que alguien recarga la pagina.
+- **Kitchen**: El display de kitchen tiene un error de renderizado, pantalla blanca. La cocina deja de recibir pedidos hasta que alguien recarga la pagina.
 
 ### Ahora
 Tres niveles de error boundaries:

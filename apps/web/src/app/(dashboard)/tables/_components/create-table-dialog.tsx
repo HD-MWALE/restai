@@ -51,11 +51,11 @@ export function CreateTableDialog({ open, onOpenChange, spaces }: CreateTableDia
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Nueva Mesa</DialogTitle>
+          <DialogTitle>New Table</DialogTitle>
         </DialogHeader>
         <div className="space-y-4 py-4">
           <div className="space-y-2">
-            <Label htmlFor="table-number">Numero de mesa</Label>
+            <Label htmlFor="table-number">Table number</Label>
             <Input
               id="table-number"
               type="number"
@@ -66,7 +66,7 @@ export function CreateTableDialog({ open, onOpenChange, spaces }: CreateTableDia
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="table-capacity">Capacidad (personas)</Label>
+            <Label htmlFor="table-capacity">Capacity (people)</Label>
             <Input
               id="table-capacity"
               type="number"
@@ -78,13 +78,13 @@ export function CreateTableDialog({ open, onOpenChange, spaces }: CreateTableDia
             />
           </div>
           <div className="space-y-2">
-            <Label>Espacio (opcional)</Label>
+            <Label>Space (optional)</Label>
             <Select value={newTableSpaceId} onValueChange={setNewTableSpaceId}>
               <SelectTrigger>
-                <SelectValue placeholder="Sin espacio" />
+                <SelectValue placeholder="No space" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="none">Sin espacio</SelectItem>
+                <SelectItem value="none">No space</SelectItem>
                 {spaces.map((space: any) => (
                   <SelectItem key={space.id} value={space.id}>
                     {space.name}
@@ -96,13 +96,13 @@ export function CreateTableDialog({ open, onOpenChange, spaces }: CreateTableDia
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancelar
+            Cancel
           </Button>
           <Button
             onClick={handleCreateTable}
             disabled={createTable.isPending || !newTableNumber}
           >
-            {createTable.isPending ? "Creando..." : "Crear Mesa"}
+            {createTable.isPending ? "Creating..." : "Create Table"}
           </Button>
         </DialogFooter>
       </DialogContent>

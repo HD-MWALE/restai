@@ -11,9 +11,9 @@ const COLUMN_CONFIG: Record<
   TabKey,
   { icon: React.ComponentType<{ className?: string }>; label: string; emptyLabel: string }
 > = {
-  pending: { icon: Clock, label: "Pendientes", emptyLabel: "Sin ordenes pendientes" },
-  preparing: { icon: ChefHat, label: "En Preparacion", emptyLabel: "Nada en preparacion" },
-  ready: { icon: CheckCircle, label: "Listos", emptyLabel: "Sin ordenes listas" },
+  pending: { icon: Clock, label: "Pending", emptyLabel: "No pending orders" },
+  preparing: { icon: ChefHat, label: "Preparing", emptyLabel: "Nothing being prepared" },
+  ready: { icon: CheckCircle, label: "Ready", emptyLabel: "No ready orders" },
 };
 
 function KanbanColumn({ status }: { status: TabKey }) {

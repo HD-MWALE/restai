@@ -37,10 +37,10 @@ export function HistoryDialog({ table, onClose }: HistoryDialogProps) {
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            Historial - Mesa {table?.number}
+            History - Table {table?.number}
           </DialogTitle>
           <DialogDescription>
-            Sesiones pasadas, pedidos e ingresos
+            Past sessions, orders, and revenue
           </DialogDescription>
         </DialogHeader>
         {table && (
@@ -48,24 +48,24 @@ export function HistoryDialog({ table, onClose }: HistoryDialogProps) {
             {/* Date range filter */}
             <div className="flex gap-3 items-end">
               <div className="space-y-1 flex-1">
-                <Label className="text-xs">Desde</Label>
+                <Label className="text-xs">From</Label>
                 <DatePicker
                   value={historyFrom}
                   onChange={setHistoryFrom}
-                  placeholder="Fecha inicio"
+                  placeholder="Start date"
                 />
               </div>
               <div className="space-y-1 flex-1">
-                <Label className="text-xs">Hasta</Label>
+                <Label className="text-xs">To</Label>
                 <DatePicker
                   value={historyTo}
                   onChange={setHistoryTo}
-                  placeholder="Fecha fin"
+                  placeholder="End date"
                 />
               </div>
               {(historyFrom || historyTo) && (
                 <Button variant="ghost" size="sm" onClick={() => { setHistoryFrom(undefined); setHistoryTo(undefined); }}>
-                  Limpiar
+                  Clear
                 </Button>
               )}
             </div>
@@ -77,21 +77,21 @@ export function HistoryDialog({ table, onClose }: HistoryDialogProps) {
                   <CardContent className="p-3 text-center">
                     <DollarSign className="h-4 w-4 mx-auto mb-1 text-green-600" />
                     <p className="text-lg font-bold">S/ {(historyData.summary.total_revenue / 100).toFixed(2)}</p>
-                    <p className="text-xs text-muted-foreground">Ingresos totales</p>
+                    <p className="text-xs text-muted-foreground">Total revenue</p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="p-3 text-center">
                     <ShoppingCart className="h-4 w-4 mx-auto mb-1 text-blue-600" />
                     <p className="text-lg font-bold">{historyData.summary.total_orders}</p>
-                    <p className="text-xs text-muted-foreground">Pedidos</p>
+                    <p className="text-xs text-muted-foreground">Orders</p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="p-3 text-center">
                     <Clock className="h-4 w-4 mx-auto mb-1 text-orange-600" />
                     <p className="text-lg font-bold">{historyData.summary.avg_duration_minutes} min</p>
-                    <p className="text-xs text-muted-foreground">Duracion promedio</p>
+                    <p className="text-xs text-muted-foreground">Average duration</p>
                   </CardContent>
                 </Card>
               </div>
@@ -106,7 +106,7 @@ export function HistoryDialog({ table, onClose }: HistoryDialogProps) {
               </div>
             ) : historyData?.sessions.length === 0 ? (
               <p className="text-center text-sm text-muted-foreground py-8">
-                No hay sesiones registradas para esta mesa
+                No sessions recorded for this table
               </p>
             ) : (
               <div className="space-y-2">
@@ -139,7 +139,7 @@ export function HistoryDialog({ table, onClose }: HistoryDialogProps) {
                         )}
                         <span className="flex items-center gap-1">
                           <ShoppingCart className="h-3 w-3" />
-                          {session.order_count} pedidos
+                          {session.order_count} orders
                         </span>
                         <span className="flex items-center gap-1">
                           <DollarSign className="h-3 w-3" />
@@ -155,7 +155,7 @@ export function HistoryDialog({ table, onClose }: HistoryDialogProps) {
         )}
         <DialogFooter>
           <Button variant="outline" onClick={onClose}>
-            Cerrar
+            Close
           </Button>
         </DialogFooter>
       </DialogContent>

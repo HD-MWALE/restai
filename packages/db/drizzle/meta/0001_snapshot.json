@@ -3528,7 +3528,7 @@
       "schema": "public",
       "values": [
         "boleta",
-        "factura"
+        "invoice"
       ]
     },
     "public.loyalty_transaction_type": {

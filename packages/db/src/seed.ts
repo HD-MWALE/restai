@@ -12,8 +12,8 @@ async function seed() {
     .limit(1);
 
   if (existingOrg) {
-    console.log("ℹ️ Seed ya fue ejecutado anteriormente (slug: demo).");
-    console.log("   No se realizaron cambios para evitar duplicados.");
+    console.log("ℹ️ Seed was already executed previously (slug: demo).");
+    console.log("   No changes were made to avoid duplicates.");
     process.exit(0);
   }
 
@@ -21,7 +21,7 @@ async function seed() {
   const [org] = await db
     .insert(schema.organizations)
     .values({
-      name: "Restaurante Demo",
+      name: "Demo Restaurant",
       slug: "demo",
       plan: "pro",
       settings: { theme: "default" },
@@ -35,7 +35,7 @@ async function seed() {
     .insert(schema.branches)
     .values({
       organization_id: org.id,
-      name: "Sede Principal",
+      name: "Main Branch",
       slug: "principal",
       address: "Av. Javier Prado 1234, San Isidro, Lima",
       phone: "+51 1 234 5678",
@@ -72,10 +72,10 @@ async function seed() {
 
   // 4. Create staff users
   const staffData = [
-    { email: "gerente@restai.pe", name: "Maria Garcia", role: "branch_manager" as const, password: "gerente123" },
-    { email: "cajero@restai.pe", name: "Carlos Lopez", role: "cashier" as const, password: "cajero1234" },
+    { email: "manager@restai.pe", name: "Maria Garcia", role: "branch_manager" as const, password: "gerente123" },
+    { email: "cashier@restai.pe", name: "Carlos Lopez", role: "cashier" as const, password: "cajero1234" },
     { email: "mesero@restai.pe", name: "Juan Perez", role: "waiter" as const, password: "mesero1234" },
-    { email: "cocina@restai.pe", name: "Rosa Martinez", role: "kitchen" as const, password: "cocina1234" },
+    { email: "kitchen@restai.pe", name: "Rosa Martinez", role: "kitchen" as const, password: "cocina1234" },
   ];
 
   for (const s of staffData) {
@@ -226,10 +226,10 @@ async function seed() {
   console.log("\n🎉 Seed completado!");
   console.log("\n📋 Credenciales de acceso:");
   console.log("   Admin:    admin@restai.pe / admin12345");
-  console.log("   Gerente:  gerente@restai.pe / gerente123");
-  console.log("   Cajero:   cajero@restai.pe / cajero1234");
-  console.log("   Mesero:   mesero@restai.pe / mesero1234");
-  console.log("   Cocina:   cocina@restai.pe / cocina1234");
+  console.log("   Manager:  manager@restai.pe / gerente123");
+  console.log("   Cashier:   cashier@restai.pe / cajero1234");
+  console.log("   Waiter:   mesero@restai.pe / mesero1234");
+  console.log("   Kitchen:   kitchen@restai.pe / cocina1234");
 
   process.exit(0);
 }

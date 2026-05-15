@@ -3,9 +3,9 @@ export const ROLES = {
   super_admin: { level: 0, label: "Super Admin" },
   org_admin: { level: 1, label: "Org Admin" },
   branch_manager: { level: 2, label: "Branch Manager" },
-  cashier: { level: 3, label: "Cajero" },
-  waiter: { level: 4, label: "Mesero" },
-  kitchen: { level: 5, label: "Cocina" },
+  cashier: { level: 3, label: "Cashier" },
+  waiter: { level: 4, label: "Waiter" },
+  kitchen: { level: 5, label: "Kitchen" },
 } as const;
 
 export type Role = keyof typeof ROLES;
@@ -108,6 +108,6 @@ export const PAYMENT_METHODS = {
 
 // Invoice types
 export const INVOICE_TYPES = {
-  boleta: { label: "Boleta de Venta", doc_types: ["dni", "ce"] },
-  factura: { label: "Factura", doc_types: ["ruc"] },
+  boleta: { label: "Boleta de Venta", doc_types: ["nid", "foreigner_id"] },
+  invoice: { label: "Factura", doc_types: ["tpin"] },
 } as const;

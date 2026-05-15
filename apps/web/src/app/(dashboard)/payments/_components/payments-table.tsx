@@ -15,12 +15,12 @@ import { formatCurrency, formatDate, cn } from "@/lib/utils";
 import { SearchInput } from "@/components/search-input";
 
 const methodLabels: Record<string, string> = {
-  cash: "Efectivo",
-  card: "Tarjeta",
+  cash: "Cash",
+  card: "Card",
   yape: "Yape",
   plin: "Plin",
-  transfer: "Transferencia",
-  other: "Otro",
+  transfer: "Bank Transfer",
+  other: "Other",
 };
 
 const methodIcons: Record<string, React.ReactNode> = {
@@ -82,7 +82,7 @@ export function PaymentsTable({
                 : "bg-background text-muted-foreground border-border hover:bg-muted"
             )}
           >
-            {method === "all" ? "Todos" : methodLabels[method]}
+            {method === "all" ? "All" : methodLabels[method]}
           </button>
         ))}
       </div>
@@ -91,7 +91,7 @@ export function PaymentsTable({
       <SearchInput
         value={search}
         onChange={onSearchChange}
-        placeholder="Buscar por orden o referencia..."
+        placeholder="Search by order or reference..."
       />
 
       {/* Payment list table */}
@@ -101,13 +101,13 @@ export function PaymentsTable({
             <table className="w-full">
               <thead>
                 <tr className="border-b bg-muted/50">
-                  <th className="text-left p-3 text-sm font-medium text-muted-foreground">Orden</th>
-                  <th className="text-left p-3 text-sm font-medium text-muted-foreground">Metodo</th>
-                  <th className="text-right p-3 text-sm font-medium text-muted-foreground">Monto</th>
-                  <th className="text-right p-3 text-sm font-medium text-muted-foreground hidden sm:table-cell">Propina</th>
-                  <th className="text-left p-3 text-sm font-medium text-muted-foreground hidden md:table-cell">Referencia</th>
-                  <th className="text-right p-3 text-sm font-medium text-muted-foreground hidden lg:table-cell">Fecha</th>
-                  <th className="text-center p-3 text-sm font-medium text-muted-foreground">Acciones</th>
+                  <th className="text-left p-3 text-sm font-medium text-muted-foreground">Order</th>
+                  <th className="text-left p-3 text-sm font-medium text-muted-foreground">Payment Method</th>
+                  <th className="text-right p-3 text-sm font-medium text-muted-foreground">Payment Amount</th>
+                  <th className="text-right p-3 text-sm font-medium text-muted-foreground hidden sm:table-cell">Tip Amount</th>
+                  <th className="text-left p-3 text-sm font-medium text-muted-foreground hidden md:table-cell">Reference</th>
+                  <th className="text-right p-3 text-sm font-medium text-muted-foreground hidden lg:table-cell">Date</th>
+                  <th className="text-center p-3 text-sm font-medium text-muted-foreground">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -126,7 +126,7 @@ export function PaymentsTable({
                 ) : filteredPayments.length === 0 ? (
                   <tr>
                     <td colSpan={7} className="p-8 text-center text-sm text-muted-foreground">
-                      {search || methodFilter !== "all" ? "No se encontraron pagos" : "No hay pagos registrados"}
+                      {search || methodFilter !== "all" ? "No matching payments found" : "No payments recorded yet"}
                     </td>
                   </tr>
                 ) : (
@@ -159,14 +159,14 @@ export function PaymentsTable({
                             onClick={() => onInvoice(payment)}
                           >
                             <FileText className="h-3 w-3 mr-1" />
-                            Comprobante
+                            Invoice
                           </Button>
                           <Button
                             variant="ghost"
                             size="sm"
                             className="h-8 w-8 p-0"
                             onClick={() => onReceipt(payment)}
-                            title="Imprimir Boleta"
+                            title="Print Receipt"
                           >
                             <Printer className="h-4 w-4" />
                           </Button>

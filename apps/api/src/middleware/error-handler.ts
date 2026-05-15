@@ -37,7 +37,7 @@ export const errorHandler: ErrorHandler = (err, c) => {
         success: false,
         error: {
           code: "VALIDATION_ERROR",
-          message: "Datos de entrada inválidos",
+          message: "Invalid input data",
           details,
         },
       },
@@ -91,7 +91,7 @@ export const errorHandler: ErrorHandler = (err, c) => {
       success: false,
       error: {
         code: "INTERNAL_ERROR",
-        message: status === 500 ? "Error interno del servidor" : err.message,
+        message: status === 500 ? "Internal server error" : err.message,
       },
     },
     status,

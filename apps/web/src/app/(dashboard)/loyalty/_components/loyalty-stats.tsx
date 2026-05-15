@@ -14,29 +14,29 @@ export function LoyaltyStats() {
   return (
     <StatsGrid>
       <StatCard
-        title="Clientes registrados"
+        title="Registered customers"
         value={(stats?.totalCustomers ?? 0).toLocaleString()}
         icon={Users}
         iconColor="text-blue-600 dark:text-blue-400"
         iconBg="bg-blue-100 dark:bg-blue-900/30"
       />
       <StatCard
-        title="Puntos en circulacion"
+        title="Points in circulation"
         value={(stats?.totalPointsBalance ?? 0).toLocaleString()}
         icon={Star}
         iconColor="text-yellow-600 dark:text-yellow-400"
         iconBg="bg-yellow-100 dark:bg-yellow-900/30"
       />
       <StatCard
-        title="Recompensas canjeadas"
+        title="Rewards redeemed"
         value={(stats?.totalRedemptions ?? 0).toLocaleString()}
         icon={Gift}
         iconColor="text-green-600 dark:text-green-400"
         iconBg="bg-green-100 dark:bg-green-900/30"
       />
       <StatCard
-        title="Programa activo"
-        value={stats?.activeProgram ? "Si" : "No"}
+        title="Active program"
+        value={stats?.activeProgram ? "Yes" : "No"}
         icon={CheckCircle2}
         iconColor={
           stats?.activeProgram

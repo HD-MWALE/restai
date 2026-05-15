@@ -89,7 +89,7 @@ spaces.patch(
 
     if (!updated) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Espacio no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Space not found" } },
         404,
       );
     }
@@ -125,7 +125,7 @@ spaces.delete(
           success: false,
           error: {
             code: "BAD_REQUEST",
-            message: "No se puede eliminar un espacio que tiene mesas asignadas",
+            message: "You cannot delete a space that has assigned tables",
           },
         },
         400,
@@ -144,7 +144,7 @@ spaces.delete(
 
     if (!deleted) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Espacio no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Space not found" } },
         404,
       );
     }

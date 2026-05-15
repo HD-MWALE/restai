@@ -41,7 +41,7 @@ export function TierDialog({
       updateTier.mutate(
         { id: editData.id, name: form.name, minPoints: form.minPoints, multiplier: form.multiplier },
         {
-          onSuccess: () => { onOpenChange(false); toast.success("Nivel actualizado"); },
+          onSuccess: () => { onOpenChange(false); toast.success("Tier updated"); },
           onError: (err) => toast.error(`Error: ${(err as Error).message}`),
         },
       );
@@ -49,7 +49,7 @@ export function TierDialog({
       createTier.mutate(
         { programId, name: form.name, minPoints: form.minPoints, multiplier: form.multiplier },
         {
-          onSuccess: () => { setForm({ name: "", minPoints: 0, multiplier: 100 }); onOpenChange(false); toast.success("Nivel creado"); },
+          onSuccess: () => { setForm({ name: "", minPoints: 0, multiplier: 100 }); onOpenChange(false); toast.success("Tier created"); },
           onError: (err) => toast.error(`Error: ${(err as Error).message}`),
         },
       );
@@ -60,27 +60,27 @@ export function TierDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{isEdit ? "Editar Nivel" : "Crear Nivel"}</DialogTitle>
+          <DialogTitle>{isEdit ? "Edit Tier" : "Create Tier"}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="tier-name">Nombre del nivel</Label>
-            <Input id="tier-name" value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} required placeholder="Ej: Diamante" />
+            <Label htmlFor="tier-name">Tier name</Label>
+            <Input id="tier-name" value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} required placeholder="Example: Diamond" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="tier-min">Puntos minimos</Label>
+            <Label htmlFor="tier-min">Minimum points</Label>
             <Input id="tier-min" type="number" min={0} value={form.minPoints} onChange={(e) => setForm((p) => ({ ...p, minPoints: parseInt(e.target.value) || 0 }))} />
-            <p className="text-xs text-muted-foreground">Puntos necesarios para alcanzar este nivel</p>
+            <p className="text-xs text-muted-foreground">Points required to reach this tier</p>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="tier-mult">Multiplicador (%)</Label>
+            <Label htmlFor="tier-mult">Multiplier (%)</Label>
             <Input id="tier-mult" type="number" min={100} value={form.multiplier} onChange={(e) => setForm((p) => ({ ...p, multiplier: parseInt(e.target.value) || 100 }))} />
-            <p className="text-xs text-muted-foreground">100 = 1x, 150 = 1.5x, 200 = 2x puntos</p>
+            <p className="text-xs text-muted-foreground">100 = 1x, 150 = 1.5x, 200 = 2x points</p>
           </div>
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancelar</Button>
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
             <Button type="submit" disabled={createTier.isPending || updateTier.isPending || !form.name}>
-              {(createTier.isPending || updateTier.isPending) ? "Guardando..." : isEdit ? "Guardar" : "Crear Nivel"}
+              {(createTier.isPending || updateTier.isPending) ? "Saving..." : isEdit ? "Save" : "Create Tier"}
             </Button>
           </DialogFooter>
         </form>

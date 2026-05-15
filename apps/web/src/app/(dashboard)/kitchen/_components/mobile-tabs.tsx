@@ -10,18 +10,18 @@ import { useKitchenContext } from "./kitchen-context";
 type TabKey = "pending" | "preparing" | "ready";
 
 const TAB_CONFIG: { key: TabKey; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
-  { key: "pending", label: "Pendientes", icon: Clock },
-  { key: "preparing", label: "Preparando", icon: ChefHat },
-  { key: "ready", label: "Listos", icon: CheckCircle },
+  { key: "pending", label: "Pending", icon: Clock },
+  { key: "preparing", label: "Preparing", icon: ChefHat },
+  { key: "ready", label: "Ready", icon: CheckCircle },
 ];
 
 const COLUMN_CONFIG: Record<
   TabKey,
   { icon: React.ComponentType<{ className?: string }>; label: string; emptyLabel: string }
 > = {
-  pending: { icon: Clock, label: "Pendientes", emptyLabel: "Sin ordenes pendientes" },
-  preparing: { icon: ChefHat, label: "En Preparacion", emptyLabel: "Nada en preparacion" },
-  ready: { icon: CheckCircle, label: "Listos", emptyLabel: "Sin ordenes listas" },
+  pending: { icon: Clock, label: "Pending", emptyLabel: "No pending orders" },
+  preparing: { icon: ChefHat, label: "Preparing", emptyLabel: "Nothing being prepared" },
+  ready: { icon: CheckCircle, label: "Ready", emptyLabel: "No ready orders" },
 };
 
 function MobileColumn({ status }: { status: TabKey }) {

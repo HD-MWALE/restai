@@ -6,6 +6,13 @@
 const PERU_OFFSET_MS = -5 * 60 * 60 * 1000;
 
 /**
+ * Malawi timezone utilities.
+ * Malawi is always UTC+2 (no DST).
+ */
+
+const MALAWI_OFFSET_MS = 2 * 60 * 60 * 1000;
+
+/**
  * Returns the start of "today" in Peru timezone (UTC-5),
  * expressed as a UTC Date object.
  */
@@ -22,4 +29,31 @@ export function peruStartOfDay(date: Date = new Date()): Date {
  */
 export function peruEndOfDay(date: Date = new Date()): Date {
   return new Date(peruStartOfDay(date).getTime() + 24 * 60 * 60 * 1000);
+}
+
+
+/**
+ * Returns the start of "today" in Malawi timezone (UTC+2),
+ * expressed as a UTC Date object.
+ */
+export function malawiStartOfDay(date: Date = new Date()): Date {
+  const malawiTime = new Date(date.getTime() + MALAWI_OFFSET_MS);
+
+  return new Date(
+    Date.UTC(
+      malawiTime.getUTCFullYear(),
+      malawiTime.getUTCMonth(),
+      malawiTime.getUTCDate(),
+    ) - MALAWI_OFFSET_MS,
+  );
+}
+
+/**
+ * Returns the end of "today" in Malawi timezone (UTC+2),
+ * expressed as a UTC Date object (start of next day).
+ */
+export function malawiEndOfDay(date: Date = new Date()): Date {
+  return new Date(
+    malawiStartOfDay(date).getTime() + 24 * 60 * 60 * 1000,
+  );
 }

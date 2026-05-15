@@ -43,8 +43,8 @@ export function ProductGrid({
     <div className="flex-1 flex flex-col min-w-0">
       <div className="mb-3">
         <PageHeader
-          title="Punto de Venta"
-          description="Selecciona productos para crear una orden"
+          title="Point of Sale"
+          description="Select products to create an order"
         />
       </div>
 
@@ -52,7 +52,7 @@ export function ProductGrid({
       <div className="relative mb-3">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
-          placeholder="Buscar producto..."
+          placeholder="Search product..."
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
           className="pl-9"
@@ -96,7 +96,7 @@ export function ProductGrid({
           </div>
         ) : filteredItems.length === 0 ? (
           <div className="text-center py-12 text-muted-foreground">
-            No se encontraron productos
+            No products found
           </div>
         ) : (
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">

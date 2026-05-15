@@ -42,23 +42,23 @@ import { formatDate } from "@/lib/utils";
 import { toast } from "sonner";
 
 const tierConfig: Record<string, { label: string; color: string }> = {
-  Bronce: {
-    label: "Bronce",
+  Bronze: {
+    label: "Bronze",
     color:
       "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300",
   },
-  Plata: {
-    label: "Plata",
+  Silver: {
+    label: "Silver",
     color:
       "bg-gray-100 text-gray-800 dark:bg-gray-700/40 dark:text-gray-300",
   },
-  Oro: {
-    label: "Oro",
+  Gold: {
+    label: "Gold",
     color:
       "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
   },
-  Platino: {
-    label: "Platino",
+  Platinum: {
+    label: "Platinum",
     color:
       "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
   },
@@ -66,22 +66,22 @@ const tierConfig: Record<string, { label: string; color: string }> = {
 
 const txTypeConfig: Record<string, { label: string; color: string }> = {
   earned: {
-    label: "Ganado",
+    label: "Earned",
     color:
       "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
   },
   redeemed: {
-    label: "Canjeado",
+    label: "Redeemed",
     color:
       "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
   },
   adjusted: {
-    label: "Ajuste",
+    label: "Adjusted",
     color:
       "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
   },
   expired: {
-    label: "Expirado",
+    label: "Expired",
     color: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
   },
 };
@@ -123,7 +123,7 @@ export default function CustomerDetailPage({
         onSuccess: () => {
           setRedeemOpen(false);
           setSelectedRewardId("none");
-          toast.success("Recompensa canjeada exitosamente");
+          toast.success("Reward redeemed successfully");
           refetch();
         },
         onError: (err) => {
@@ -141,15 +141,15 @@ export default function CustomerDetailPage({
           className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4 mr-1" />
-          Volver
+          Back
         </Link>
         <div className="p-4 rounded-lg border border-destructive/50 bg-destructive/10 flex items-center justify-between">
           <p className="text-sm text-destructive">
-            Error al cargar cliente: {(error as Error).message}
+            Error loading customer: {(error as Error).message}
           </p>
           <Button variant="outline" size="sm" onClick={() => refetch()}>
             <RefreshCw className="h-4 w-4 mr-2" />
-            Reintentar
+            Retry
           </Button>
         </div>
       </div>
@@ -185,13 +185,13 @@ export default function CustomerDetailPage({
           <ArrowLeft className="h-4 w-4 mr-1" />
           Volver
         </Link>
-        <p className="text-muted-foreground">Cliente no encontrado</p>
+        <p className="text-muted-foreground">Customer not found</p>
       </div>
     );
   }
 
-  const tierName = loyalty?.tier_name || "Bronce";
-  const tier = tierConfig[tierName] || tierConfig.Bronce;
+  const tierName = loyalty?.tier_name || "Bronze";
+  const tier = tierConfig[tierName] || tierConfig.Bronze;
 
   return (
     <div className="space-y-6">
@@ -200,7 +200,7 @@ export default function CustomerDetailPage({
         className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
       >
         <ArrowLeft className="h-4 w-4 mr-1" />
-        Volver a clientes
+        Back to customers
       </Link>
 
       {/* Customer Info + Loyalty Cards */}
@@ -233,7 +233,7 @@ export default function CustomerDetailPage({
               </div>
             )}
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              Cliente desde {formatDate(customer.created_at)}
+              Customer since {formatDate(customer.created_at)}
             </div>
           </CardContent>
         </Card>
@@ -244,7 +244,7 @@ export default function CustomerDetailPage({
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
                 <Star className="h-5 w-5" />
-                Puntos de Lealtad
+                Loyalty Points
               </CardTitle>
               <span
                 className={`text-xs px-2 py-1 rounded-full font-medium ${tier.color}`}
@@ -264,7 +264,7 @@ export default function CustomerDetailPage({
                     {(loyalty.points_balance || 0).toLocaleString()}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    puntos disponibles
+                    available points
                   </p>
                 </div>
                 <div className="flex justify-center gap-6 text-sm">
@@ -273,20 +273,20 @@ export default function CustomerDetailPage({
                       {(loyalty.total_points_earned || 0).toLocaleString()}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      total ganados
+                      total earned
                     </p>
                   </div>
                 </div>
                 <div className="flex justify-center">
                   <Button onClick={() => setRedeemOpen(true)} size="sm">
                     <Gift className="h-4 w-4 mr-2" />
-                    Canjear Recompensa
+                    Redeem Reward
                   </Button>
                 </div>
               </div>
             ) : (
               <p className="text-sm text-muted-foreground text-center py-4">
-                No inscrito en programa de lealtad
+                Not enrolled in loyalty program
               </p>
             )}
           </CardContent>
@@ -299,7 +299,7 @@ export default function CustomerDetailPage({
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
               <Gift className="h-5 w-5" />
-              Recompensas Disponibles
+              Available Rewards
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -343,7 +343,7 @@ export default function CustomerDetailPage({
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
             <Trophy className="h-5 w-5" />
-            Historial de Transacciones
+            Transaction History
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
@@ -352,16 +352,16 @@ export default function CustomerDetailPage({
               <thead>
                 <tr className="border-b border-border bg-muted/50">
                   <th className="text-left p-3 text-sm font-medium text-muted-foreground">
-                    Fecha
+                    Date
                   </th>
                   <th className="text-center p-3 text-sm font-medium text-muted-foreground">
-                    Tipo
+                    Type
                   </th>
                   <th className="text-right p-3 text-sm font-medium text-muted-foreground">
-                    Puntos
+                    Points
                   </th>
                   <th className="text-left p-3 text-sm font-medium text-muted-foreground hidden sm:table-cell">
-                    Descripcion
+                    Description
                   </th>
                 </tr>
               </thead>
@@ -372,7 +372,7 @@ export default function CustomerDetailPage({
                       colSpan={4}
                       className="p-8 text-center text-sm text-muted-foreground"
                     >
-                      No hay transacciones registradas
+                      No transactions registered
                     </td>
                   </tr>
                 ) : (
@@ -425,7 +425,7 @@ export default function CustomerDetailPage({
       <Dialog open={redeemOpen} onOpenChange={setRedeemOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Canjear Recompensa</DialogTitle>
+            <DialogTitle>Redeem Reward</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">
@@ -436,7 +436,7 @@ export default function CustomerDetailPage({
             </p>
             <Select value={selectedRewardId} onValueChange={setSelectedRewardId}>
               <SelectTrigger>
-                <SelectValue placeholder="Seleccionar recompensa..." />
+                <SelectValue placeholder="Select reward..." />
               </SelectTrigger>
               <SelectContent>
                 {rewards.map((r: any) => (
@@ -449,7 +449,7 @@ export default function CustomerDetailPage({
                   >
                     {r.name} - {r.points_cost.toLocaleString()} pts
                     {r.points_cost > (loyalty?.points_balance || 0)
-                      ? " (insuficientes)"
+                      ? " (insufficient)"
                       : ""}
                   </SelectItem>
                 ))}
@@ -462,13 +462,13 @@ export default function CustomerDetailPage({
               variant="outline"
               onClick={() => setRedeemOpen(false)}
             >
-              Cancelar
+              Cancel
             </Button>
             <Button
               onClick={handleRedeem}
               disabled={redeemReward.isPending || !selectedRewardId || selectedRewardId === "none"}
             >
-              {redeemReward.isPending ? "Canjeando..." : "Canjear"}
+              {redeemReward.isPending ? "Redeeming..." : "Redeem"}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -38,7 +38,7 @@ export function CreateStaffDialog({ open, onOpenChange }: CreateStaffDialogProps
 
   const handleCreate = async () => {
     if (!form.name || !form.email || !form.password) {
-      toast.error("Completa todos los campos requeridos");
+      toast.error("Fill in all required fields");
       return;
     }
     try {
@@ -49,11 +49,11 @@ export function CreateStaffDialog({ open, onOpenChange }: CreateStaffDialogProps
         role: form.role,
         branchIds: form.branchIds,
       });
-      toast.success("Miembro de staff creado");
+      toast.success("Staff member created");
       onOpenChange(false);
       setForm({ name: "", email: "", password: "", role: "waiter", branchIds: selectedBranchId ? [selectedBranchId] : [] });
     } catch (err: any) {
-      toast.error(err.message || "Error al crear staff");
+      toast.error(err.message || "Error creating staff");
     }
   };
 
@@ -61,15 +61,15 @@ export function CreateStaffDialog({ open, onOpenChange }: CreateStaffDialogProps
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Agregar Miembro de Staff</DialogTitle>
+          <DialogTitle>Add Staff Member</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label>Nombre</Label>
+            <Label>Name</Label>
             <Input
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              placeholder="Nombre completo"
+              placeholder="Full name"
             />
           </div>
           <div className="space-y-2">
@@ -82,31 +82,31 @@ export function CreateStaffDialog({ open, onOpenChange }: CreateStaffDialogProps
             />
           </div>
           <div className="space-y-2">
-            <Label>Contrasena</Label>
+            <Label>Password</Label>
             <Input
               type="password"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
-              placeholder="Minimo 8 caracteres"
+              placeholder="Minimum 8 characters"
             />
           </div>
           <div className="space-y-2">
-            <Label>Rol</Label>
+            <Label>Role</Label>
             <Select value={form.role} onValueChange={(v) => setForm({ ...form, role: v })}>
               <SelectTrigger>
-                <SelectValue placeholder="Seleccionar rol" />
+                <SelectValue placeholder="Select role" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="org_admin">Admin</SelectItem>
-                <SelectItem value="branch_manager">Gerente</SelectItem>
-                <SelectItem value="cashier">Cajero</SelectItem>
-                <SelectItem value="waiter">Mesero</SelectItem>
-                <SelectItem value="kitchen">Cocina</SelectItem>
+                <SelectItem value="branch_manager">Manager</SelectItem>
+                <SelectItem value="cashier">Cashier</SelectItem>
+                <SelectItem value="waiter">Waiter</SelectItem>
+                <SelectItem value="kitchen">Kitchen</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
-            <Label>Sedes asignadas *</Label>
+            <Label>Assigned branches *</Label>
             <div className="border rounded-md max-h-40 overflow-y-auto">
               {branches.map((branch) => {
                 const isChecked = form.branchIds.includes(branch.id);
@@ -137,7 +137,7 @@ export function CreateStaffDialog({ open, onOpenChange }: CreateStaffDialogProps
               })}
             </div>
             {form.branchIds.length === 0 && (
-              <p className="text-xs text-destructive">Selecciona al menos una sede</p>
+              <p className="text-xs text-destructive">Select at least one branch</p>
             )}
           </div>
           <Button
@@ -145,7 +145,7 @@ export function CreateStaffDialog({ open, onOpenChange }: CreateStaffDialogProps
             onClick={handleCreate}
             disabled={createStaff.isPending || form.branchIds.length === 0}
           >
-            {createStaff.isPending ? "Creando..." : "Crear Miembro"}
+            {createStaff.isPending ? "Creating..." : "Create Member"}
           </Button>
         </div>
       </DialogContent>

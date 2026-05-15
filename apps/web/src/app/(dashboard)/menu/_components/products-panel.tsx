@@ -84,7 +84,7 @@ export function ProductsPanel({
 
   const activeCategoryName =
     selectedCategoryId === "all"
-      ? "Todos los productos"
+      ? "All Products"
       : categoryList.find((c: any) => c.id === selectedCategoryId)?.name ?? "Productos";
 
   const handleToggleAvailability = (item: any) => {
@@ -96,7 +96,7 @@ export function ProductsPanel({
       {
         onSuccess: () =>
           toast.success(
-            `${item.name} ${!(item.isAvailable ?? item.is_available) ? "disponible" : "no disponible"}`
+            `${item.name} ${!(item.isAvailable ?? item.is_available) ? "available" : "unavailable"}`
           ),
       }
     );
@@ -111,16 +111,16 @@ export function ProductsPanel({
     try {
       if (confirmDelete.type === "category") {
         await deleteCat.mutateAsync(confirmDelete.id);
-        toast.success("Categoria eliminada");
+        toast.success("Category deleted");
         if (selectedCategoryId === confirmDelete.id) {
           setSelectedCategoryId("all");
         }
       } else {
         await deleteItem.mutateAsync(confirmDelete.id);
-        toast.success("Producto eliminado");
+        toast.success("Product deleted");
       }
     } catch (err: any) {
-      toast.error(err.message || "Error al eliminar");
+      toast.error(err.message || "Error deleting");
     }
     setConfirmDelete(null);
   };
@@ -150,7 +150,7 @@ export function ProductsPanel({
       <div className="text-center py-12 border border-dashed border-border rounded-lg">
         <UtensilsCrossed className="h-8 w-8 mx-auto text-muted-foreground mb-3" />
         <p className="text-sm text-muted-foreground mb-4">
-          No hay categorias en el menu
+          There are no categories in the menu
         </p>
         <Button
           variant="outline"
@@ -160,7 +160,7 @@ export function ProductsPanel({
           }}
         >
           <Plus className="h-4 w-4 mr-2" />
-          Crear primera categoria
+          Create first category
         </Button>
         {catDialogOpen && (
           <CategoryDialog
@@ -181,7 +181,7 @@ export function ProductsPanel({
       {/* Left sidebar: categories */}
       <div className="w-56 shrink-0">
         <div className="sticky top-4 space-y-1">
-          {/* "Todos" option */}
+          {/* "All" option */}
           <button
             onClick={() => setSelectedCategoryId("all")}
             className={`w-full flex items-center justify-between rounded-md px-3 py-2 text-sm transition-colors text-left ${
@@ -190,7 +190,7 @@ export function ProductsPanel({
                 : "hover:bg-muted text-foreground"
             }`}
           >
-            <span className="truncate">Todos</span>
+            <span className="truncate">All</span>
             <span
               className={`text-xs tabular-nums ${
                 selectedCategoryId === "all"
@@ -280,7 +280,7 @@ export function ProductsPanel({
             className="w-full flex items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
           >
             <Plus className="h-3.5 w-3.5" />
-            Nueva categoria
+            New category
           </button>
         </div>
       </div>
@@ -292,8 +292,8 @@ export function ProductsPanel({
           <div className="flex-1 min-w-0">
             <h2 className="text-lg font-semibold truncate">{activeCategoryName}</h2>
             <p className="text-sm text-muted-foreground">
-              {visibleItems.length} producto{visibleItems.length !== 1 ? "s" : ""}
-              {search ? ` encontrado${visibleItems.length !== 1 ? "s" : ""}` : ""}
+              {visibleItems.length} product{visibleItems.length !== 1 ? "s" : ""}
+              {search ? ` found${visibleItems.length !== 1 ? "s" : ""}` : ""}
             </p>
           </div>
           <Button
@@ -312,7 +312,7 @@ export function ProductsPanel({
         <SearchInput
           value={search}
           onChange={setSearch}
-          placeholder="Buscar en esta categoria..."
+          placeholder="Search in this category..."
         />
 
         {/* Products grid */}
@@ -320,7 +320,7 @@ export function ProductsPanel({
           <div className="text-center py-12 border border-dashed border-border rounded-lg">
             <UtensilsCrossed className="h-8 w-8 mx-auto text-muted-foreground mb-3" />
             <p className="text-sm text-muted-foreground mb-3">
-              {search ? "No se encontraron productos" : "Sin productos en esta categoria"}
+              {search ? "No products found" : "No products in this category"}
             </p>
             {!search && (
               <Button
@@ -332,7 +332,7 @@ export function ProductsPanel({
                 }}
               >
                 <Plus className="h-4 w-4 mr-1" />
-                Agregar producto
+                Add product
               </Button>
             )}
           </div>
@@ -366,7 +366,7 @@ export function ProductsPanel({
                         variant="secondary"
                         className="absolute top-2 left-2 text-[9px]"
                       >
-                        No disp.
+                        Unavailable
                       </Badge>
                     )}
                     {/* Actions overlay */}
@@ -376,8 +376,8 @@ export function ProductsPanel({
                         onClick={() => handleToggleAvailability(item)}
                         title={
                           available
-                            ? "Marcar no disponible"
-                            : "Marcar disponible"
+                            ? "Mark as unavailable"
+                            : "Mark as available"
                         }
                       >
                         {available ? (
@@ -480,8 +480,8 @@ export function ProductsPanel({
           onOpenChange={(v) => {
             if (!v) setConfirmDelete(null);
           }}
-          title={`Eliminar ${confirmDelete.type === "category" ? "categoria" : "producto"}`}
-          description={`Estas seguro que deseas eliminar "${confirmDelete.name}"? Esta accion no se puede deshacer.`}
+          title={`Delete ${confirmDelete.type === "category" ? "Category" : "Product"}`}
+          description={`Are you sure you want to delete "${confirmDelete.name}"? This action cannot be undone.`}
           onConfirm={handleConfirmDelete}
           loading={deleteCat.isPending || deleteItem.isPending}
         />

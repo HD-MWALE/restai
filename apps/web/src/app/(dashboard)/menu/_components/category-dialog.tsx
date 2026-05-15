@@ -48,18 +48,18 @@ export function CategoryDialog({
           description: description.trim() || undefined,
           imageUrl: imageUrl || undefined,
         });
-        toast.success("Categoria actualizada");
+        toast.success("Category updated");
       } else {
         await createCat.mutateAsync({
           name: name.trim(),
           description: description.trim() || undefined,
           imageUrl: imageUrl || undefined,
         });
-        toast.success("Categoria creada");
+        toast.success("Category created");
       }
       onOpenChange(false);
     } catch (err: any) {
-      toast.error(err.message || "Error al guardar");
+      toast.error(err.message || "Error saving");
     }
   };
 
@@ -68,31 +68,31 @@ export function CategoryDialog({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {isEdit ? "Editar Categoria" : "Nueva Categoria"}
+            {isEdit ? "Edit Category" : "New Category"}
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="cat-name">Nombre</Label>
+            <Label htmlFor="cat-name">Name</Label>
             <Input
               id="cat-name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Ej: Entradas"
+              placeholder="Example: Appetizers"
               required
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="cat-desc">Descripcion</Label>
+            <Label htmlFor="cat-desc">Description</Label>
             <Input
               id="cat-desc"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Descripcion opcional"
+              placeholder="Optional description"
             />
           </div>
           <div className="space-y-2">
-            <Label>Imagen</Label>
+            <Label>Image</Label>
             <ImageUploadButton
               currentUrl={imageUrl || null}
               onUploaded={(url) => setImageUrl(url)}
@@ -106,10 +106,10 @@ export function CategoryDialog({
               onClick={() => onOpenChange(false)}
               disabled={loading}
             >
-              Cancelar
+              Cancel
             </Button>
             <Button type="submit" disabled={loading}>
-              {loading ? "Guardando..." : isEdit ? "Actualizar" : "Crear"}
+              {loading ? "Saving..." : isEdit ? "Update" : "Create"}
             </Button>
           </DialogFooter>
         </form>

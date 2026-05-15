@@ -48,7 +48,7 @@ branches.post(
 
     if (existing.length > 0) {
       return c.json(
-        { success: false, error: { code: "CONFLICT", message: "El slug de sucursal ya existe" } },
+        { success: false, error: { code: "CONFLICT", message: "Branch slug already exists" } },
         409,
       );
     }
@@ -135,7 +135,7 @@ branches.patch(
 
     if (!updated) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Sucursal no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Branch not found" } },
         404,
       );
     }

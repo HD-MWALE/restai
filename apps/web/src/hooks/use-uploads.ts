@@ -32,7 +32,7 @@ export function useUploadImage() {
 
       const json = await res.json();
       if (!json.success) {
-        throw new Error(json.error?.message || "Error al subir imagen");
+        throw new Error(json.error?.message || "Error uploading image");
       }
       return json.data;
     },

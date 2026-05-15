@@ -7,7 +7,7 @@ export function requirePermission(permission: string) {
     const user = c.get("user") as any;
     if (!user) {
       return c.json(
-        { success: false, error: { code: "UNAUTHORIZED", message: "No autenticado" } },
+        { success: false, error: { code: "UNAUTHORIZED", message: "Not authenticated" } },
         401,
       );
     }
@@ -16,7 +16,7 @@ export function requirePermission(permission: string) {
       PERMISSIONS[user.role as keyof typeof PERMISSIONS] as readonly string[] | undefined;
     if (!userPermissions) {
       return c.json(
-        { success: false, error: { code: "FORBIDDEN", message: "Rol no válido" } },
+        { success: false, error: { code: "FORBIDDEN", message: "Invalid role" } },
         403,
       );
     }
@@ -34,7 +34,7 @@ export function requirePermission(permission: string) {
 
     if (!hasPermission) {
       return c.json(
-        { success: false, error: { code: "FORBIDDEN", message: "Sin permisos" } },
+        { success: false, error: { code: "FORBIDDEN", message: "Permission denied" } },
         403,
       );
     }

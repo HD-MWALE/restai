@@ -39,9 +39,9 @@ export function ModifierGroupsPanel() {
     if (!confirmDelete) return;
     try {
       await deleteGroup.mutateAsync(confirmDelete.id);
-      toast.success("Grupo eliminado");
+      toast.success("Group deleted");
     } catch (err: any) {
-      toast.error(err.message || "Error al eliminar");
+      toast.error(err.message || "Error deleting");
     }
     setConfirmDelete(null);
   };
@@ -60,12 +60,11 @@ export function ModifierGroupsPanel() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">
-          {groupList.length} grupo{groupList.length !== 1 ? "s" : ""} creado
-          {groupList.length !== 1 ? "s" : ""}
+          {groupList.length} group{groupList.length !== 1 ? "s" : ""} created
         </p>
         <Button size="sm" onClick={() => setCreateOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
-          Nuevo grupo
+          New group
         </Button>
       </div>
 
@@ -73,15 +72,14 @@ export function ModifierGroupsPanel() {
         <div className="text-center py-12 border border-dashed border-border rounded-lg">
           <Settings2 className="h-8 w-8 mx-auto text-muted-foreground mb-3" />
           <p className="text-sm text-muted-foreground mb-3">
-            No hay grupos de modificadores
+            No modifier groups yet
           </p>
           <p className="text-xs text-muted-foreground mb-4">
-            Los modificadores permiten personalizar los productos (tamano,
-            extras, salsas, etc.)
+            Modifiers let you customize products (size, extras, sauces, etc.)
           </p>
           <Button variant="outline" size="sm" onClick={() => setCreateOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
-            Crear primer grupo
+            Create first group
           </Button>
         </div>
       ) : (
@@ -111,19 +109,18 @@ export function ModifierGroupsPanel() {
                       <p className="text-sm font-medium">{group.name}</p>
                       <div className="flex items-center gap-2 mt-0.5">
                         <span className="text-[11px] text-muted-foreground">
-                          {modifiers.length} opcion
-                          {modifiers.length !== 1 ? "es" : ""}
+                          {modifiers.length} option
+                          {modifiers.length !== 1 ? "s" : ""}
                         </span>
                         <span className="text-[11px] text-muted-foreground">
-                          Min: {group.min_selections} / Max:{" "}
-                          {group.max_selections}
+                          Min: {group.min_selections} / Max: {group.max_selections}
                         </span>
                         {group.is_required && (
                           <Badge
                             variant="secondary"
                             className="text-[9px] px-1.5 py-0"
                           >
-                            Obligatorio
+                            Required
                           </Badge>
                         )}
                       </div>
@@ -168,7 +165,7 @@ export function ModifierGroupsPanel() {
                           <span className="text-muted-foreground">
                             {mod.price > 0
                               ? `+${formatCurrency(mod.price)}`
-                              : "Gratis"}
+                              : "Free"}
                           </span>
                         </div>
                       ))}
@@ -178,7 +175,7 @@ export function ModifierGroupsPanel() {
                 {isExpanded && modifiers.length === 0 && (
                   <div className="border-t border-border bg-muted/20 px-4 py-3">
                     <p className="text-xs text-muted-foreground text-center">
-                      Sin modificadores. Edita el grupo para agregar opciones.
+                      No modifiers yet. Edit the group to add options.
                     </p>
                   </div>
                 )}
@@ -210,8 +207,8 @@ export function ModifierGroupsPanel() {
           onOpenChange={(v) => {
             if (!v) setConfirmDelete(null);
           }}
-          title="Eliminar grupo"
-          description={`Eliminar "${confirmDelete.name}" y todos sus modificadores? Los productos vinculados perderan este grupo.`}
+          title="Delete group"
+          description={`Delete "${confirmDelete.name}" and all its modifiers? Linked products will lose this group.`}
           onConfirm={handleDelete}
           loading={deleteGroup.isPending}
         />

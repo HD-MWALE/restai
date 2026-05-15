@@ -3,7 +3,7 @@ CREATE TYPE "public"."coupon_type" AS ENUM('percentage', 'fixed', 'item_free', '
 CREATE TYPE "public"."discount_type" AS ENUM('percentage', 'fixed');--> statement-breakpoint
 CREATE TYPE "public"."doc_type" AS ENUM('dni', 'ruc', 'ce');--> statement-breakpoint
 CREATE TYPE "public"."inventory_movement_type" AS ENUM('purchase', 'consumption', 'waste', 'adjustment');--> statement-breakpoint
-CREATE TYPE "public"."invoice_type" AS ENUM('boleta', 'factura');--> statement-breakpoint
+CREATE TYPE "public"."invoice_type" AS ENUM('boleta', 'invoice');--> statement-breakpoint
 CREATE TYPE "public"."loyalty_transaction_type" AS ENUM('earned', 'redeemed', 'adjusted', 'expired');--> statement-breakpoint
 CREATE TYPE "public"."order_item_status" AS ENUM('pending', 'preparing', 'ready', 'served');--> statement-breakpoint
 CREATE TYPE "public"."order_status" AS ENUM('pending', 'confirmed', 'preparing', 'ready', 'served', 'completed', 'cancelled');--> statement-breakpoint

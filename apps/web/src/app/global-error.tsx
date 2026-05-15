@@ -25,7 +25,7 @@ export default function GlobalError({
             Algo salió mal
           </h2>
           <p style={{ color: "#666" }}>
-            {error.message || "Error inesperado"}
+            {error.message || "Unexpected error"}
           </p>
           <button
             onClick={reset}
@@ -38,7 +38,7 @@ export default function GlobalError({
               cursor: "pointer",
             }}
           >
-            Intentar de nuevo
+            Try again
           </button>
         </div>
       </body>

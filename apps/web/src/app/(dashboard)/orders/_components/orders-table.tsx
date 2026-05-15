@@ -7,19 +7,19 @@ import { ChevronLeft, ChevronRight, DollarSign, Printer } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
 
 const statusConfig: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
-  pending: { label: "Pendiente", variant: "outline" },
-  confirmed: { label: "Confirmado", variant: "secondary" },
-  preparing: { label: "Preparando", variant: "default" },
-  ready: { label: "Listo", variant: "default" },
-  served: { label: "Servido", variant: "secondary" },
-  completed: { label: "Completado", variant: "secondary" },
-  cancelled: { label: "Cancelado", variant: "destructive" },
+  pending: { label: "Pending", variant: "outline" },
+  confirmed: { label: "Confirmed", variant: "secondary" },
+  preparing: { label: "Preparing", variant: "default" },
+  ready: { label: "Ready", variant: "default" },
+  served: { label: "Served", variant: "secondary" },
+  completed: { label: "Completed", variant: "secondary" },
+  cancelled: { label: "Cancelled", variant: "destructive" },
 };
 
 const paymentStatusConfig: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline"; className?: string }> = {
-  paid: { label: "Pagado", variant: "default", className: "bg-green-600 hover:bg-green-600" },
-  partial: { label: "Parcial", variant: "default", className: "bg-amber-500 hover:bg-amber-500" },
-  unpaid: { label: "Sin pagar", variant: "outline" },
+  paid: { label: "Paid", variant: "default", className: "bg-green-600 hover:bg-green-600" },
+  partial: { label: "Partial", variant: "default", className: "bg-amber-500 hover:bg-amber-500" },
+  unpaid: { label: "Unpaid", variant: "outline" },
 };
 
 function Skeleton({ className }: { className?: string }) {
@@ -97,19 +97,19 @@ export function OrdersTable({
               <thead>
                 <tr className="border-b bg-muted/50">
                   <th className="text-left p-3 text-sm font-medium text-muted-foreground">
-                    Orden
+                    Order
                   </th>
                   <th className="text-left p-3 text-sm font-medium text-muted-foreground">
-                    Mesa
+                    Table
                   </th>
                   <th className="text-left p-3 text-sm font-medium text-muted-foreground hidden sm:table-cell">
-                    Cliente
+                    Customer
                   </th>
                   <th className="text-left p-3 text-sm font-medium text-muted-foreground">
-                    Estado
+                    Status
                   </th>
                   <th className="text-left p-3 text-sm font-medium text-muted-foreground hidden sm:table-cell">
-                    Pago
+                    Payment Status
                   </th>
                   <th className="text-left p-3 text-sm font-medium text-muted-foreground hidden md:table-cell">
                     Items
@@ -118,10 +118,10 @@ export function OrdersTable({
                     Total
                   </th>
                   <th className="text-right p-3 text-sm font-medium text-muted-foreground hidden lg:table-cell">
-                    Hora
+                    Time
                   </th>
                   <th className="text-center p-3 text-sm font-medium text-muted-foreground hidden md:table-cell">
-                    Accion
+                    Action
                   </th>
                 </tr>
               </thead>
@@ -208,7 +208,7 @@ export function OrdersTable({
                                 onClick={() => onUpdateStatus(order.id, nextStatus)}
                               >
                                 {isUpdatingCurrentStep ? (
-                                  <InlineActionLoading label="Actualizando..." />
+                                  <InlineActionLoading label="Updating..." />
                                 ) : (
                                   statusConfig[nextStatus]?.label || nextStatus
                                 )}
@@ -223,11 +223,11 @@ export function OrdersTable({
                                 onClick={() => onCharge(order)}
                               >
                                 {isOpeningCharge ? (
-                                  <InlineActionLoading label="Abriendo..." />
+                                  <InlineActionLoading label="Opening..." />
                                 ) : (
                                   <>
                                     <DollarSign className="h-3 w-3 mr-1" />
-                                    Cobrar
+                                    Charge
                                   </>
                                 )}
                               </Button>
@@ -237,7 +237,7 @@ export function OrdersTable({
                               size="sm"
                               className="h-8 w-8 p-0"
                               onClick={() => onPrintReceipt(order)}
-                              title="Imprimir Boleta"
+                              title="Print Receipt"
                             >
                               <Printer className="h-4 w-4" />
                             </Button>
@@ -255,7 +255,7 @@ export function OrdersTable({
 
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">
-          {pagination.total} ordenes en total
+          {pagination.total} total orders
         </p>
         {pagination.totalPages > 1 && (
           <div className="flex items-center gap-2">
@@ -266,10 +266,10 @@ export function OrdersTable({
               onClick={() => onPageChange(Math.max(1, page - 1))}
             >
               <ChevronLeft className="h-4 w-4" />
-              Anterior
+              Previous
             </Button>
             <span className="text-sm text-muted-foreground">
-              Pagina {pagination.page} de {pagination.totalPages}
+              Page {pagination.page} of {pagination.totalPages}
             </span>
             <Button
               variant="outline"
@@ -277,7 +277,7 @@ export function OrdersTable({
               disabled={page >= pagination.totalPages}
               onClick={() => onPageChange(page + 1)}
             >
-              Siguiente
+              Next
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>

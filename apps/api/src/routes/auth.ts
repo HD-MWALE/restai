@@ -28,7 +28,7 @@ auth.post("/register", zValidator("json", registerOrgSchema), async (c) => {
 
   if (existing.length > 0) {
     return c.json(
-      { success: false, error: { code: "CONFLICT", message: "El email ya está registrado" } },
+      { success: false, error: { code: "CONFLICT", message: "Email already registered" } },
       409,
     );
   }
@@ -42,7 +42,7 @@ auth.post("/register", zValidator("json", registerOrgSchema), async (c) => {
 
   if (existingOrg.length > 0) {
     return c.json(
-      { success: false, error: { code: "CONFLICT", message: "El slug de organización ya existe" } },
+      { success: false, error: { code: "CONFLICT", message: "Organization slug already exists" } },
       409,
     );
   }
@@ -72,7 +72,7 @@ auth.post("/register", zValidator("json", registerOrgSchema), async (c) => {
       .insert(schema.branches)
       .values({
         organization_id: org.id,
-        name: "Sede Principal",
+        name: "Main Branch",
         slug: body.slug,
       })
       .returning({ id: schema.branches.id });
@@ -136,7 +136,7 @@ auth.post("/login", zValidator("json", loginSchema), async (c) => {
 
   if (!user || !user.is_active) {
     return c.json(
-      { success: false, error: { code: "UNAUTHORIZED", message: "Credenciales inválidas" } },
+      { success: false, error: { code: "UNAUTHORIZED", message: "Invalid credentials" } },
       401,
     );
   }
@@ -144,7 +144,7 @@ auth.post("/login", zValidator("json", loginSchema), async (c) => {
   const valid = await verifyPassword(user.password_hash, password);
   if (!valid) {
     return c.json(
-      { success: false, error: { code: "UNAUTHORIZED", message: "Credenciales inválidas" } },
+      { success: false, error: { code: "UNAUTHORIZED", message: "Invalid credentials" } },
       401,
     );
   }
@@ -202,7 +202,7 @@ auth.post(
       payload = await verifyRefreshToken(refreshToken);
     } catch {
       return c.json(
-        { success: false, error: { code: "UNAUTHORIZED", message: "Refresh token inválido" } },
+        { success: false, error: { code: "UNAUTHORIZED", message: "Invalid refresh token" } },
         401,
       );
     }
@@ -215,7 +215,7 @@ auth.post(
 
     if (!user || !user.is_active) {
       return c.json(
-        { success: false, error: { code: "UNAUTHORIZED", message: "Usuario no encontrado" } },
+        { success: false, error: { code: "UNAUTHORIZED", message: "User not found" } },
         401,
       );
     }
@@ -253,7 +253,7 @@ auth.post(
       // Even if token is invalid, just return success
     }
 
-    return c.json({ success: true, data: { message: "Sesión cerrada" } });
+    return c.json({ success: true, data: { message: "Session closed" } });
   },
 );
 
@@ -275,7 +275,7 @@ auth.get("/me", authMiddleware, async (c) => {
 
   if (!user) {
     return c.json(
-      { success: false, error: { code: "NOT_FOUND", message: "Usuario no encontrado" } },
+      { success: false, error: { code: "NOT_FOUND", message: "User not found" } },
       404,
     );
   }

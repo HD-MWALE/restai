@@ -21,8 +21,8 @@ export default function LoyaltyPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Fidelizacion"
-        description="Gestiona tus clientes, programa de puntos, recompensas y cupones"
+        title="Loyalty"
+        description="Manage your customers, points program, rewards, and coupons"
       />
 
       <LoyaltyStats />
@@ -31,19 +31,19 @@ export default function LoyaltyPage() {
         <TabsList>
           <TabsTrigger value="programs">
             <Star className="h-4 w-4 mr-2" />
-            Programas
+            Programs
           </TabsTrigger>
           <TabsTrigger value="customers">
             <Users className="h-4 w-4 mr-2" />
-            Clientes
+            Customers
           </TabsTrigger>
           <TabsTrigger value="rewards">
             <Gift className="h-4 w-4 mr-2" />
-            Recompensas
+            Rewards
           </TabsTrigger>
           <TabsTrigger value="coupons">
             <Ticket className="h-4 w-4 mr-2" />
-            Cupones
+            Coupons
           </TabsTrigger>
         </TabsList>
 

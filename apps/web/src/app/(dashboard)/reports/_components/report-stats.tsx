@@ -2,10 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@restai/ui/components/card";
 import { formatCurrency } from "@/lib/utils";
-
-function Skeleton({ className }: { className?: string }) {
-  return <div className={`animate-pulse bg-muted rounded ${className ?? ""}`} />;
-}
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ReportStatsProps {
   totalOrders: number;
@@ -27,7 +24,7 @@ export function ReportStats({
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-medium text-muted-foreground">
-            Total Ordenes
+            Total Orders
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -41,7 +38,7 @@ export function ReportStats({
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-medium text-muted-foreground">
-            Ingresos
+            Revenue
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -55,7 +52,7 @@ export function ReportStats({
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-medium text-muted-foreground">
-            Ticket Promedio
+            Average Order
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -69,7 +66,7 @@ export function ReportStats({
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-medium text-muted-foreground">
-            IGV Recaudado
+            VAT Collected (or Tax Collected)
           </CardTitle>
         </CardHeader>
         <CardContent>

@@ -43,7 +43,7 @@ export default function MenuPage() {
         </div>
         <div className="p-4 rounded-lg border border-destructive/50 bg-destructive/5 flex items-center justify-between">
           <p className="text-sm text-destructive">
-            Error al cargar el menu: {(error as Error).message}
+            Error loading the menu: {(error as Error).message}
           </p>
           <Button
             variant="outline"
@@ -54,7 +54,7 @@ export default function MenuPage() {
             }}
           >
             <RefreshCw className="h-4 w-4 mr-2" />
-            Reintentar
+            Retry
           </Button>
         </div>
       </div>
@@ -65,13 +65,13 @@ export default function MenuPage() {
     <div className="space-y-6">
       <PageHeader
         title="Menu"
-        description="Gestiona categorias, productos y modificadores"
+        description="Manage categories, products, and modifiers"
       />
 
       <Tabs defaultValue="products">
         <TabsList>
-          <TabsTrigger value="products">Productos</TabsTrigger>
-          <TabsTrigger value="modifiers">Modificadores</TabsTrigger>
+          <TabsTrigger value="products">Products</TabsTrigger>
+          <TabsTrigger value="modifiers">Modifiers</TabsTrigger>
         </TabsList>
         <TabsContent value="products">
           <ProductsPanel

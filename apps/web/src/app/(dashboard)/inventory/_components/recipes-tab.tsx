@@ -22,21 +22,20 @@ export function RecipesTab({
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <p className="text-sm text-muted-foreground">
-          Configura las recetas para deducir inventario automaticamente cuando
-          se completa una orden.
+          Configure recipes to automatically deduct inventory when an order is completed.
         </p>
         <Button onClick={onNewRecipe}>
           <Plus className="h-4 w-4 mr-2" />
-          Nueva Receta
+          New Recipe
         </Button>
       </div>
 
       <Card>
         <CardContent className="p-4 space-y-4">
           <div className="space-y-2">
-            <Label>Ver receta de un item del menu</Label>
+            <Label>View recipe for a menu item</Label>
             <Input
-              placeholder="ID del item del menu (UUID)"
+              placeholder="Menu item ID (UUID)"
               value={recipeMenuItemId}
               onChange={(e) => setRecipeMenuItemId(e.target.value)}
             />
@@ -44,11 +43,11 @@ export function RecipesTab({
           {recipeMenuItemId && recipeData && (
             <div>
               <p className="text-sm font-medium text-foreground mb-2">
-                Ingredientes:
+                Ingredients:
               </p>
               {(recipeData as any[]).length === 0 ? (
                 <p className="text-sm text-muted-foreground">
-                  Sin receta configurada
+                  No recipe configured
                 </p>
               ) : (
                 <div className="overflow-x-auto">
@@ -56,13 +55,13 @@ export function RecipesTab({
                     <thead>
                       <tr className="border-b border-border bg-muted/50">
                         <th className="text-left p-2 text-sm font-medium text-muted-foreground">
-                          Ingrediente
+                          Ingredient
                         </th>
                         <th className="text-right p-2 text-sm font-medium text-muted-foreground">
-                          Cantidad
+                          Quantity
                         </th>
                         <th className="text-center p-2 text-sm font-medium text-muted-foreground">
-                          Unidad
+                          Unit
                         </th>
                         <th className="text-right p-2 text-sm font-medium text-muted-foreground">
                           Stock

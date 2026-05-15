@@ -106,7 +106,7 @@ export function CreateCouponDialog({
           expiresAt: "",
         });
         onOpenChange(false);
-        toast.success("Cupon creado exitosamente");
+        toast.success("Coupon created successfully");
       },
       onError: (err) => toast.error(`Error: ${(err as Error).message}`),
     });
@@ -116,12 +116,12 @@ export function CreateCouponDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Crear Cupon</DialogTitle>
+          <DialogTitle>Create Coupon</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
           {/* Code */}
           <div className="space-y-2">
-            <Label htmlFor="cpn-code">Codigo del cupon</Label>
+            <Label htmlFor="cpn-code">Coupon Code</Label>
             <div className="flex gap-2">
               <Input id="cpn-code" value={form.code} onChange={(e) => setForm((p) => ({ ...p, code: e.target.value.toUpperCase() }))} required />
               <Button type="button" variant="outline" size="icon" onClick={() => setForm((p) => ({ ...p, code: generateCouponCode() }))}>
@@ -132,19 +132,19 @@ export function CreateCouponDialog({
 
           {/* Name */}
           <div className="space-y-2">
-            <Label htmlFor="cpn-name">Nombre *</Label>
-            <Input id="cpn-name" value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} required placeholder="Ej: 10% en tu primera compra" />
+            <Label htmlFor="cpn-name">Name *</Label>
+            <Input id="cpn-name" value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} required placeholder="Example: 10% on your first purchase" />
           </div>
 
           {/* Description */}
           <div className="space-y-2">
-            <Label htmlFor="cpn-desc">Descripcion</Label>
-            <Input id="cpn-desc" value={form.description} onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))} placeholder="Descripcion opcional" />
+            <Label htmlFor="cpn-desc">Description</Label>
+            <Input id="cpn-desc" value={form.description} onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))} placeholder="Optional Description" />
           </div>
 
           {/* Type */}
           <div className="space-y-2">
-            <Label htmlFor="cpn-type">Tipo de cupon</Label>
+            <Label htmlFor="cpn-type">Coupon Type</Label>
             <Select value={form.type} onValueChange={(v) => setForm((p) => ({
               ...p,
               type: v,
@@ -155,15 +155,15 @@ export function CreateCouponDialog({
               getQuantity: 1,
             }))}>
               <SelectTrigger>
-                <SelectValue placeholder="Tipo de cupon" />
+                <SelectValue placeholder="Coupon Type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="percentage">Porcentaje de descuento (%)</SelectItem>
-                <SelectItem value="fixed">Monto fijo de descuento</SelectItem>
-                <SelectItem value="item_free">Item gratis</SelectItem>
-                <SelectItem value="item_discount">Descuento en item especifico</SelectItem>
-                <SelectItem value="category_discount">Descuento en categoria</SelectItem>
-                <SelectItem value="buy_x_get_y">Compra X lleva Y</SelectItem>
+                <SelectItem value="percentage">Discount Percentage (%)</SelectItem>
+                <SelectItem value="fixed">Fixed Discount Amount (cents)</SelectItem>
+                <SelectItem value="item_free">Item Free</SelectItem>
+                <SelectItem value="item_discount">Discount in Specific Item</SelectItem>
+                <SelectItem value="category_discount">Discount in Category</SelectItem>
+                <SelectItem value="buy_x_get_y">Buy X Get Y</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -171,7 +171,7 @@ export function CreateCouponDialog({
           {/* Type-specific fields */}
           {form.type === "percentage" && (
             <div className="space-y-2">
-              <Label htmlFor="cpn-pct">Porcentaje de descuento</Label>
+              <Label htmlFor="cpn-pct">Percentage Discount (%)</Label>
               <Input id="cpn-pct" type="number" min={1} max={100} value={form.discountValue} onChange={(e) => setForm((p) => ({ ...p, discountValue: parseInt(e.target.value) || 0 }))} />
               <p className="text-xs text-muted-foreground">Ej: 10 = 10% de descuento</p>
             </div>
@@ -179,21 +179,21 @@ export function CreateCouponDialog({
 
           {form.type === "fixed" && (
             <div className="space-y-2">
-              <Label htmlFor="cpn-fixed">Monto de descuento (centimos)</Label>
+              <Label htmlFor="cpn-fixed">Fixed Discount Amount (cents)</Label>
               <Input id="cpn-fixed" type="number" min={1} value={form.discountValue} onChange={(e) => setForm((p) => ({ ...p, discountValue: parseInt(e.target.value) || 0 }))} />
-              <p className="text-xs text-muted-foreground">En centimos: 500 = S/ 5.00</p>
+              <p className="text-xs text-muted-foreground">In Cents: 500 = S/ 5.00</p>
             </div>
           )}
 
           {(form.type === "item_discount" || form.type === "item_free") && (
             <div className="space-y-2">
-              <Label>Item del menu *</Label>
+              <Label>Menu Item *</Label>
               <Select value={form.menuItemId || "none"} onValueChange={(v) => setForm((p) => ({ ...p, menuItemId: v === "none" ? "" : v }))}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Seleccionar item..." />
+                  <SelectValue placeholder="Select Item..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="none">Seleccionar item...</SelectItem>
+                  <SelectItem value="none">Select Item...</SelectItem>
                   {menuItems.map((item: any) => (
                     <SelectItem key={item.id} value={item.id}>
                       {item.name} — S/ {(item.price / 100).toFixed(2)}
@@ -206,7 +206,7 @@ export function CreateCouponDialog({
 
           {form.type === "item_discount" && (
             <div className="space-y-2">
-              <Label htmlFor="cpn-dv">Descuento (%)</Label>
+              <Label htmlFor="cpn-dv">Discount (%)</Label>
               <Input id="cpn-dv" type="number" min={1} max={100} value={form.discountValue} onChange={(e) => setForm((p) => ({ ...p, discountValue: parseInt(e.target.value) || 0 }))} />
             </div>
           )}
@@ -214,13 +214,13 @@ export function CreateCouponDialog({
           {form.type === "category_discount" && (
             <>
               <div className="space-y-2">
-                <Label>Categoria *</Label>
+                <Label>Category *</Label>
                 <Select value={form.categoryId || "none"} onValueChange={(v) => setForm((p) => ({ ...p, categoryId: v === "none" ? "" : v }))}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Seleccionar categoria..." />
+                    <SelectValue placeholder="Select Category..." />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="none">Seleccionar categoria...</SelectItem>
+                    <SelectItem value="none">Select Category...</SelectItem>
                     {categories.map((cat: any) => (
                       <SelectItem key={cat.id} value={cat.id}>
                         {cat.name}
@@ -230,7 +230,7 @@ export function CreateCouponDialog({
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="cpn-dv-cat">Descuento (%)</Label>
+                <Label htmlFor="cpn-dv-cat">Buy (X)</Label>
                 <Input id="cpn-dv-cat" type="number" min={1} max={100} value={form.discountValue} onChange={(e) => setForm((p) => ({ ...p, discountValue: parseInt(e.target.value) || 0 }))} />
               </div>
             </>
@@ -239,11 +239,11 @@ export function CreateCouponDialog({
           {form.type === "buy_x_get_y" && (
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="cpn-bx">Compra (X)</Label>
+                <Label htmlFor="cpn-bx">Buy (X)</Label>
                 <Input id="cpn-bx" type="number" min={1} value={form.buyQuantity} onChange={(e) => setForm((p) => ({ ...p, buyQuantity: parseInt(e.target.value) || 1 }))} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="cpn-gy">Lleva gratis (Y)</Label>
+                <Label htmlFor="cpn-gy">Get Free (Y)</Label>
                 <Input id="cpn-gy" type="number" min={1} value={form.getQuantity} onChange={(e) => setForm((p) => ({ ...p, getQuantity: parseInt(e.target.value) || 1 }))} />
               </div>
             </div>
@@ -251,33 +251,33 @@ export function CreateCouponDialog({
 
           {/* Common limits */}
           <div className="border-t border-border pt-4 space-y-4">
-            <p className="text-sm font-medium text-foreground">Restricciones (opcional)</p>
+            <p className="text-sm font-medium text-foreground">Restrictions (Optional)</p>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="cpn-min">Pedido minimo (centimos)</Label>
+                <Label htmlFor="cpn-min">Minimum Order Amount (Cents)</Label>
                 <Input id="cpn-min" type="number" min={0} value={form.minOrderAmount} onChange={(e) => setForm((p) => ({ ...p, minOrderAmount: parseInt(e.target.value) || 0 }))} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="cpn-maxd">Descuento maximo (centimos)</Label>
+                <Label htmlFor="cpn-maxd">Maximum Discount Amount (Cents)</Label>
                 <Input id="cpn-maxd" type="number" min={0} value={form.maxDiscountAmount} onChange={(e) => setForm((p) => ({ ...p, maxDiscountAmount: parseInt(e.target.value) || 0 }))} />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="cpn-uses">Usos totales (0 = ilimitado)</Label>
+                <Label htmlFor="cpn-uses">Total Uses (0 = Unlimited)</Label>
                 <Input id="cpn-uses" type="number" min={0} value={form.maxUsesTotal} onChange={(e) => setForm((p) => ({ ...p, maxUsesTotal: parseInt(e.target.value) || 0 }))} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="cpn-upc">Usos por cliente</Label>
+                <Label htmlFor="cpn-upc">Uses Per Customer</Label>
                 <Input id="cpn-upc" type="number" min={1} value={form.maxUsesPerCustomer} onChange={(e) => setForm((p) => ({ ...p, maxUsesPerCustomer: parseInt(e.target.value) || 1 }))} />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Fecha inicio</Label>
+                <Label>Start Date</Label>
                 <DatePicker
                   value={form.startsAt}
                   onChange={(v) => setForm((p) => ({ ...p, startsAt: v ?? "" }))}
@@ -285,18 +285,18 @@ export function CreateCouponDialog({
                 />
               </div>
               <div className="space-y-2">
-                <Label>Fecha fin</Label>
+                <Label>End Date</Label>
                 <DatePicker
                   value={form.expiresAt}
                   onChange={(v) => setForm((p) => ({ ...p, expiresAt: v ?? "" }))}
-                  placeholder="Seleccionar..."
+                  placeholder="Select..."
                 />
               </div>
             </div>
           </div>
 
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancelar</Button>
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
             <Button
               type="submit"
               disabled={
@@ -307,7 +307,7 @@ export function CreateCouponDialog({
                 (form.type === "category_discount" && !form.categoryId)
               }
             >
-              {createCoupon.isPending ? "Creando..." : "Crear Cupon"}
+              {createCoupon.isPending ? "Creating..." : "Create Coupon"}
             </Button>
           </DialogFooter>
         </form>

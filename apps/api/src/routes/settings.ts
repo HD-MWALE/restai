@@ -17,7 +17,7 @@ settings.get("/org", async (c) => {
   const [org] = await db.select().from(schema.organizations)
     .where(eq(schema.organizations.id, tenant.organizationId));
   if (!org) {
-    return c.json({ success: false, error: { code: "NOT_FOUND", message: "Organizacion no encontrada" } }, 404);
+    return c.json({ success: false, error: { code: "NOT_FOUND", message: "Organization not found" } }, 404);
   }
   return c.json({ success: true, data: org });
 });
@@ -43,12 +43,12 @@ settings.patch("/org", requirePermission("org:update"), zValidator("json", updat
 settings.get("/branch", async (c) => {
   const tenant = c.get("tenant") as any;
   if (!tenant.branchId) {
-    return c.json({ success: false, error: { code: "BAD_REQUEST", message: "Branch ID requerido" } }, 400);
+    return c.json({ success: false, error: { code: "BAD_REQUEST", message: "Branch ID required" } }, 400);
   }
   const [branch] = await db.select().from(schema.branches)
     .where(eq(schema.branches.id, tenant.branchId));
   if (!branch) {
-    return c.json({ success: false, error: { code: "NOT_FOUND", message: "Sede no encontrada" } }, 404);
+    return c.json({ success: false, error: { code: "NOT_FOUND", message: "Branch not found" } }, 404);
   }
   return c.json({ success: true, data: branch });
 });
@@ -57,7 +57,7 @@ settings.get("/branch", async (c) => {
 settings.patch("/branch", requirePermission("settings:*"), zValidator("json", updateBranchSettingsSchema), async (c) => {
   const tenant = c.get("tenant") as any;
   if (!tenant.branchId) {
-    return c.json({ success: false, error: { code: "BAD_REQUEST", message: "Branch ID requerido" } }, 400);
+    return c.json({ success: false, error: { code: "BAD_REQUEST", message: "Branch ID required" } }, 400);
   }
   const body = c.req.valid("json");
   const updateData: any = { updated_at: new Date() };

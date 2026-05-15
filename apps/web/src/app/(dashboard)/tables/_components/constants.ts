@@ -3,25 +3,25 @@ export const statusConfig: Record<
   { label: string; color: string; bgColor: string; darkBgColor: string }
 > = {
   available: {
-    label: "Disponible",
+    label: "Available",
     color: "text-green-700 dark:text-green-400",
     bgColor: "bg-green-50 border-green-200",
     darkBgColor: "dark:bg-green-950/30 dark:border-green-800",
   },
   occupied: {
-    label: "Ocupada",
+    label: "Occupied",
     color: "text-blue-700 dark:text-blue-400",
     bgColor: "bg-blue-50 border-blue-200",
     darkBgColor: "dark:bg-blue-950/30 dark:border-blue-800",
   },
   reserved: {
-    label: "Reservada",
+    label: "Reserved",
     color: "text-orange-700 dark:text-orange-400",
     bgColor: "bg-orange-50 border-orange-200",
     darkBgColor: "dark:bg-orange-950/30 dark:border-orange-800",
   },
   maintenance: {
-    label: "Mantenimiento",
+    label: "Maintenance",
     color: "text-red-700 dark:text-red-400",
     bgColor: "bg-red-50 border-red-200",
     darkBgColor: "dark:bg-red-950/30 dark:border-red-800",
@@ -29,10 +29,10 @@ export const statusConfig: Record<
 };
 
 export const statusOptions = [
-  { value: "available", label: "Disponible" },
-  { value: "occupied", label: "Ocupada" },
-  { value: "reserved", label: "Reservada" },
-  { value: "maintenance", label: "Mantenimiento" },
+  { value: "available", label: "Available" },
+  { value: "occupied", label: "Occupied" },
+  { value: "reserved", label: "Reserved" },
+  { value: "maintenance", label: "Maintenance" },
 ];
 
 export const plannerStatusColors: Record<string, { bg: string; border: string; text: string }> = {

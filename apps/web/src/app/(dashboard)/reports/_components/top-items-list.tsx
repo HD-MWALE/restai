@@ -3,10 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@restai/ui/components/card";
 import { formatCurrency } from "@/lib/utils";
 import type { TopItemReport } from "@/hooks/use-reports";
-
-function Skeleton({ className }: { className?: string }) {
-  return <div className={`animate-pulse bg-muted rounded ${className ?? ""}`} />;
-}
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface TopItemsListProps {
   topItems: TopItemReport[];
@@ -17,7 +14,7 @@ export function TopItemsList({ topItems, isLoading }: TopItemsListProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Top Productos</CardTitle>
+        <CardTitle>Top Products</CardTitle>
       </CardHeader>
       <CardContent>
         {isLoading ? (
@@ -37,7 +34,7 @@ export function TopItemsList({ topItems, isLoading }: TopItemsListProps) {
           </div>
         ) : topItems.length === 0 ? (
           <p className="text-sm text-muted-foreground text-center py-4">
-            No hay datos de productos
+            No product data available
           </p>
         ) : (
           <div className="space-y-3">
@@ -53,7 +50,7 @@ export function TopItemsList({ topItems, isLoading }: TopItemsListProps) {
                   <div>
                     <p className="font-medium text-sm">{item.name}</p>
                     <p className="text-xs text-muted-foreground">
-                      {item.totalQuantity} vendidos
+                      {item.totalQuantity} sold
                     </p>
                   </div>
                 </div>

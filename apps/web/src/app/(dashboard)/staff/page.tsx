@@ -38,18 +38,18 @@ export default function StaffPage() {
   const handleStartShift = async () => {
     try {
       await createShift.mutateAsync({});
-      toast.success("Turno iniciado");
+      toast.success("Shift started");
     } catch (err: any) {
-      toast.error(err.message || "Error al iniciar turno");
+      toast.error(err.message || "Error starting shift");
     }
   };
 
   const handleEndShift = async (shiftId: string) => {
     try {
       await endShift.mutateAsync(shiftId);
-      toast.success("Turno finalizado");
+      toast.success("Shift ended");
     } catch (err: any) {
-      toast.error(err.message || "Error al finalizar turno");
+      toast.error(err.message || "Error ending shift");
     }
   };
 
@@ -59,9 +59,9 @@ export default function StaffPage() {
         id: member.id,
         isActive: !member.isActive,
       });
-      toast.success(member.isActive ? "Staff desactivado" : "Staff activado");
+      toast.success(member.isActive ? "Staff deactivated" : "Staff activated");
     } catch (err: any) {
-      toast.error(err.message || "Error al cambiar estado");
+      toast.error(err.message || "Error changing status");
     }
   };
 
@@ -82,10 +82,10 @@ export default function StaffPage() {
           <h1 className="text-2xl font-bold">Staff</h1>
         </div>
         <div className="p-4 rounded-lg border border-destructive/50 bg-destructive/5 flex items-center justify-between">
-          <p className="text-sm text-destructive">Error al cargar staff: {(error as Error).message}</p>
+          <p className="text-sm text-destructive">Error loading staff: {(error as Error).message}</p>
           <Button variant="outline" size="sm" onClick={() => refetch()}>
             <RefreshCw className="h-4 w-4 mr-2" />
-            Reintentar
+            Retry
           </Button>
         </div>
       </div>
@@ -96,7 +96,7 @@ export default function StaffPage() {
     <div className="space-y-6">
       <PageHeader
         title="Staff"
-        description={isLoading ? "Cargando..." : `${activeCount} miembros activos`}
+        description={isLoading ? "Loading..." : `${activeCount} miembros activos`}
         actions={
           <>
             {myActiveShift ? (
@@ -106,7 +106,7 @@ export default function StaffPage() {
                 disabled={endShift.isPending}
               >
                 <LogOut className="h-4 w-4 mr-2" />
-                Finalizar Turno
+                End Shift
               </Button>
             ) : (
               <Button
@@ -115,12 +115,12 @@ export default function StaffPage() {
                 disabled={createShift.isPending}
               >
                 <LogIn className="h-4 w-4 mr-2" />
-                Iniciar Turno
+                Start Shift
               </Button>
             )}
             <Button onClick={() => setDialogOpen(true)}>
               <UserPlus className="h-4 w-4 mr-2" />
-              Agregar Staff
+              Add Staff
             </Button>
           </>
         }

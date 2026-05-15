@@ -52,7 +52,7 @@ export function CreateMovementDialog({
         notes: "",
       });
       onOpenChange(false);
-      toast.success("Movimiento registrado exitosamente");
+      toast.success("Movement registered successfully");
     } catch (err) {
       toast.error(`Error: ${(err as Error).message}`);
     }
@@ -62,7 +62,7 @@ export function CreateMovementDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Nuevo Movimiento</DialogTitle>
+          <DialogTitle>New Movement</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
@@ -72,7 +72,7 @@ export function CreateMovementDialog({
               onValueChange={(v) => setForm({ ...form, itemId: v })}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Seleccionar item..." />
+                <SelectValue placeholder="Select item..." />
               </SelectTrigger>
               <SelectContent>
                 {items.map((item: any) => (
@@ -86,24 +86,24 @@ export function CreateMovementDialog({
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="movType">Tipo</Label>
+              <Label htmlFor="movType">Type</Label>
               <Select
                 value={form.type}
                 onValueChange={(v) => setForm({ ...form, type: v })}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Seleccionar tipo..." />
+                  <SelectValue placeholder="Select type..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="purchase">Compra</SelectItem>
-                  <SelectItem value="consumption">Consumo</SelectItem>
-                  <SelectItem value="waste">Merma</SelectItem>
-                  <SelectItem value="adjustment">Ajuste</SelectItem>
+                  <SelectItem value="purchase">Purchase</SelectItem>
+                  <SelectItem value="consumption">Consumption</SelectItem>
+                  <SelectItem value="waste">Waste</SelectItem>
+                  <SelectItem value="adjustment">Adjustment</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="movQty">Cantidad *</Label>
+              <Label htmlFor="movQty">Quantity *</Label>
               <Input
                 id="movQty"
                 type="number"
@@ -118,10 +118,10 @@ export function CreateMovementDialog({
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="movRef">Referencia</Label>
+            <Label htmlFor="movRef">Reference</Label>
             <Input
               id="movRef"
-              placeholder="N. factura, proveedor, etc."
+              placeholder="Invoice no., supplier, etc."
               value={form.reference}
               onChange={(e) =>
                 setForm({ ...form, reference: e.target.value })
@@ -129,10 +129,10 @@ export function CreateMovementDialog({
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="movNotes">Notas</Label>
+            <Label htmlFor="movNotes">Notes</Label>
             <Input
               id="movNotes"
-              placeholder="Observaciones..."
+              placeholder="Observations..."
               value={form.notes}
               onChange={(e) =>
                 setForm({ ...form, notes: e.target.value })
@@ -141,7 +141,7 @@ export function CreateMovementDialog({
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancelar
+              Cancel
             </Button>
             <Button
               type="submit"
@@ -150,8 +150,8 @@ export function CreateMovementDialog({
               }
             >
               {createMovement.isPending
-                ? "Registrando..."
-                : "Registrar Movimiento"}
+                ? "Registering..."
+                : "Register Movement"}
             </Button>
           </DialogFooter>
         </form>

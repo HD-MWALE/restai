@@ -54,8 +54,8 @@ export function ConfirmDialog({
             disabled={loading}
           >
             {loading
-              ? "Procesando..."
-              : confirmLabel ?? (variant === "destructive" ? "Eliminar" : "Confirmar")}
+              ? "Processing..."
+              : confirmLabel ?? (variant === "destructive" ? "Delete" : "Confirm")}
           </Button>
         </DialogFooter>
       </DialogContent>

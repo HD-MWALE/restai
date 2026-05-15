@@ -201,7 +201,7 @@ loyalty.delete(
 
     if (!customer) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Cliente no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Customer not found" } },
         404,
       );
     }
@@ -236,7 +236,7 @@ loyalty.get(
 
     if (!customer) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Cliente no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Customer not found" } },
         404,
       );
     }
@@ -427,7 +427,7 @@ loyalty.patch(
 
     if (!existing) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Programa no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Program not found" } },
         404,
       );
     }
@@ -470,7 +470,7 @@ loyalty.delete(
 
     if (!existing) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Programa no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Program not found" } },
         404,
       );
     }
@@ -515,7 +515,7 @@ loyalty.post(
 
     if (!program) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Programa no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Program not found" } },
         404,
       );
     }
@@ -572,7 +572,7 @@ loyalty.patch(
 
     if (!tier) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Nivel no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Nivel not found" } },
         404,
       );
     }
@@ -617,7 +617,7 @@ loyalty.delete(
 
     if (!tier) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Nivel no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Nivel not found" } },
         404,
       );
     }
@@ -689,7 +689,7 @@ loyalty.post(
 
     if (!program) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Programa no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Program not found" } },
         404,
       );
     }
@@ -853,7 +853,7 @@ loyalty.post(
       }
       if (err.message === "LOYALTY_NOT_FOUND") {
         return c.json(
-          { success: false, error: { code: "NOT_FOUND", message: "Registro de lealtad no encontrado" } },
+          { success: false, error: { code: "NOT_FOUND", message: "Registro de lealtad not found" } },
           404,
         );
       }

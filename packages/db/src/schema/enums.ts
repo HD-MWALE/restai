@@ -71,12 +71,12 @@ export const paymentStatusEnum = pgEnum("payment_status", [
 
 export const invoiceTypeEnum = pgEnum("invoice_type", [
   "boleta",
-  "factura",
+  "invoice",
 ]);
 
 export const docTypeEnum = pgEnum("doc_type", [
-  "dni",
-  "ruc",
+  "nid",
+  "tpin",
   "ce",
 ]);
 

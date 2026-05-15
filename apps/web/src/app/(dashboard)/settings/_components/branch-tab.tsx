@@ -9,10 +9,7 @@ import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@
 import { cn } from "@/lib/utils";
 import { useBranchSettings, useUpdateBranch } from "@/hooks/use-settings";
 import { toast } from "sonner";
-
-function Skeleton({ className }: { className?: string }) {
-  return <div className={`animate-pulse bg-muted rounded ${className ?? ""}`} />;
-}
+import { Skeleton } from "@/components/ui/skeleton";
 
 const TIMEZONES = [
   "America/Lima",
@@ -76,9 +73,9 @@ export function BranchTab() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Sede Actual</CardTitle>
+        <CardTitle>Current Branch</CardTitle>
         <CardDescription>
-          Configuracion de la sede seleccionada
+          Settings for the selected branch
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -92,7 +89,7 @@ export function BranchTab() {
           <>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="branchName">Nombre de la Sede</Label>
+                <Label htmlFor="branchName">Branch Name</Label>
                 <Input
                   id="branchName"
                   value={branchForm.name}
@@ -100,7 +97,7 @@ export function BranchTab() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="branchPhone">Telefono</Label>
+                <Label htmlFor="branchPhone">Phone</Label>
                 <Input
                   id="branchPhone"
                   value={branchForm.phone}
@@ -109,7 +106,7 @@ export function BranchTab() {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="branchAddress">Direccion</Label>
+              <Label htmlFor="branchAddress">Address</Label>
               <Input
                 id="branchAddress"
                 value={branchForm.address}
@@ -118,10 +115,10 @@ export function BranchTab() {
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label>Zona Horaria</Label>
+                <Label>Time Zone</Label>
                 <Select value={branchForm.timezone} onValueChange={(v) => setBranchForm({ ...branchForm, timezone: v })}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecciona zona horaria" />
+                    <SelectValue placeholder="Select time zone" />
                   </SelectTrigger>
                   <SelectContent>
                     {TIMEZONES.map((tz) => (
@@ -131,21 +128,21 @@ export function BranchTab() {
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label>Moneda</Label>
+                <Label>Currency</Label>
                 <Select value={branchForm.currency} onValueChange={(v) => setBranchForm({ ...branchForm, currency: v })}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecciona moneda" />
+                    <SelectValue placeholder="Select currency" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="PEN">PEN (Soles)</SelectItem>
-                    <SelectItem value="USD">USD (Dolares)</SelectItem>
+                    <SelectItem value="USD">USD (Dollars)</SelectItem>
                     <SelectItem value="EUR">EUR (Euros)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="branchTaxRate">IGV (%)</Label>
+              <Label htmlFor="branchTaxRate">VAT (%)</Label>
               <Input
                 id="branchTaxRate"
                 type="number"
@@ -156,14 +153,14 @@ export function BranchTab() {
                 onChange={(e) => setBranchForm({ ...branchForm, taxRate: e.target.value })}
               />
               <p className="text-xs text-muted-foreground">
-                Ingresa el porcentaje (ej: 18.00 para 18%)
+                Enter percentage (e.g. 17.50 for 17.5%)
               </p>
             </div>
             <div className="flex items-center justify-between rounded-lg border p-4">
               <div>
-                <p className="text-sm font-medium">Control de Inventario</p>
+                <p className="text-sm font-medium">Inventory Control</p>
                 <p className="text-xs text-muted-foreground">
-                  Activa el seguimiento de stock y recetas
+                  Enable stock and recipe tracking
                 </p>
               </div>
               <button
@@ -186,9 +183,9 @@ export function BranchTab() {
             </div>
             <div className="flex items-center justify-between rounded-lg border p-4">
               <div>
-                <p className="text-sm font-medium">Asignacion de mozos a mesas</p>
+                <p className="text-sm font-medium">Waiter Table Assignment</p>
                 <p className="text-xs text-muted-foreground">
-                  Permite asignar mozos especificos a cada mesa
+                  Allow assigning specific waiters to each table
                 </p>
               </div>
               <button
@@ -210,7 +207,7 @@ export function BranchTab() {
               </button>
             </div>
             <Button onClick={handleBranchSave} disabled={updateBranch.isPending}>
-              {updateBranch.isPending ? "Guardando..." : "Guardar Cambios"}
+              {updateBranch.isPending ? "Saving..." : "Save Changes"}
             </Button>
           </>
         )}

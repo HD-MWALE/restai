@@ -23,9 +23,9 @@ export function ImageUploadButton({
     try {
       const result = await uploadImage.mutateAsync({ file, type: uploadType });
       onUploaded(result.url);
-      toast.success("Imagen subida");
+      toast.success("Image uploaded");
     } catch (err: any) {
-      toast.error(err.message || "Error al subir imagen");
+      toast.error(err.message || "Error uploading image");
     }
     if (fileRef.current) fileRef.current.value = "";
   };
@@ -47,10 +47,10 @@ export function ImageUploadButton({
       >
         <Upload className="h-3 w-3" />
         {uploadImage.isPending
-          ? "Subiendo..."
+          ? "Uploading..."
           : currentUrl
-            ? "Cambiar"
-            : "Imagen"}
+            ? "Change"
+            : "Image"}
       </button>
       <input
         ref={fileRef}

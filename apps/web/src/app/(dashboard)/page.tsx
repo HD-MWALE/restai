@@ -17,6 +17,7 @@ import { Button } from "@restai/ui/components/button";
 import { formatCurrency } from "@/lib/utils";
 import { useDashboardStats, useRecentOrders } from "@/hooks/use-dashboard";
 import { useTables } from "@/hooks/use-tables";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const statusColors: Record<string, string> = {
   pending: "bg-yellow-100 text-yellow-800",
@@ -28,17 +29,13 @@ const statusColors: Record<string, string> = {
 };
 
 const statusLabels: Record<string, string> = {
-  pending: "Pendiente",
-  preparing: "Preparando",
-  ready: "Listo",
-  served: "Servido",
-  confirmed: "Confirmado",
-  completed: "Completado",
+  pending: "Pending",
+  preparing: "Preparing",
+  ready: "Ready",
+  served: "Served",
+  confirmed: "Confirmed",
+  completed: "Completed",
 };
-
-function Skeleton({ className }: { className?: string }) {
-  return <div className={`animate-pulse bg-muted rounded ${className ?? ""}`} />;
-}
 
 export default function DashboardPage() {
   const { data: dashboardStats, isLoading: statsLoading, error: statsError, refetch: refetchStats } = useDashboardStats();
@@ -48,26 +45,26 @@ export default function DashboardPage() {
   const stats = dashboardStats
     ? [
         {
-          title: "Ordenes Hoy",
+          title: "Orders Today",
           value: dashboardStats.ordersToday ?? 0,
           icon: ClipboardList,
           description: dashboardStats.ordersChange ?? "",
         },
         {
-          title: "Ingresos Hoy",
+          title: "Revenue Today",
           value: dashboardStats.revenueToday ?? 0,
           icon: DollarSign,
           description: dashboardStats.revenueChange ?? "",
           isCurrency: true,
         },
         {
-          title: "Ordenes Activas",
+          title: "Active Orders",
           value: dashboardStats.activeOrders ?? 0,
           icon: TrendingUp,
           description: dashboardStats.activeOrdersDetail ?? "",
         },
         {
-          title: "Mesas Ocupadas",
+          title: "Occupied Tables",
           value: dashboardStats.tablesOccupied ?? "0/0",
           icon: Grid3X3,
           description: dashboardStats.tablesDetail ?? "",
@@ -83,17 +80,17 @@ export default function DashboardPage() {
       <div>
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <p className="text-muted-foreground">
-          Resumen del dia de tu restaurante
+          Today’s restaurant overview
         </p>
       </div>
 
       {/* Stats Cards */}
       {statsError ? (
         <div className="p-4 rounded-lg border border-destructive/50 bg-destructive/5 flex items-center justify-between">
-          <p className="text-sm text-destructive">Error al cargar estadisticas: {(statsError as Error).message}</p>
+          <p className="text-sm text-destructive">Error loading statistics: {(statsError as Error).message}</p>
           <Button variant="outline" size="sm" onClick={() => refetchStats()}>
             <RefreshCw className="h-4 w-4 mr-2" />
-            Reintentar
+            Retry
           </Button>
         </div>
       ) : (
@@ -138,15 +135,15 @@ export default function DashboardPage() {
         {/* Recent Orders */}
         <Card>
           <CardHeader>
-            <CardTitle>Ordenes Recientes</CardTitle>
+            <CardTitle>Recent Orders</CardTitle>
           </CardHeader>
           <CardContent>
             {ordersError ? (
               <div className="text-center py-4">
-                <p className="text-sm text-destructive mb-2">Error al cargar ordenes</p>
+                <p className="text-sm text-destructive mb-2">Error loading orders</p>
                 <Button variant="outline" size="sm" onClick={() => refetchOrders()}>
                   <RefreshCw className="h-4 w-4 mr-2" />
-                  Reintentar
+                  Retry
                 </Button>
               </div>
             ) : ordersLoading ? (
@@ -168,7 +165,7 @@ export default function DashboardPage() {
               </div>
             ) : orders.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-4">
-                No hay ordenes recientes
+                No recent orders
               </p>
             ) : (
               <div className="space-y-3">
@@ -207,7 +204,7 @@ export default function DashboardPage() {
         {/* Table Activity */}
         <Card>
           <CardHeader>
-            <CardTitle>Actividad de Mesas</CardTitle>
+            <CardTitle>Table Activity</CardTitle>
           </CardHeader>
           <CardContent>
             {tablesLoading ? (
@@ -218,7 +215,7 @@ export default function DashboardPage() {
               </div>
             ) : tableList.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-4">
-                No hay mesas configuradas
+                No tables configured
               </p>
             ) : (
               <div className="grid grid-cols-4 gap-3">
@@ -237,7 +234,7 @@ export default function DashboardPage() {
                         {table.number ?? table.table_number}
                       </span>
                       <span className="text-[10px]">
-                        {occupied ? "Ocupada" : "Libre"}
+                        {occupied ? "Occupied" : "Available"}
                       </span>
                     </div>
                   );

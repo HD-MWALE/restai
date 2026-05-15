@@ -48,7 +48,7 @@ export function ProgramDialog({
     mutation.mutate(data, {
       onSuccess: () => {
         onOpenChange(false);
-        toast.success(isEdit ? "Programa actualizado" : "Programa creado exitosamente");
+        toast.success(isEdit ? "Program updated successfully" : "Program created successfully");
       },
       onError: (err) => toast.error(`Error: ${(err as Error).message}`),
     });
@@ -63,15 +63,15 @@ export function ProgramDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{isEdit ? "Editar Programa" : "Crear Programa de Fidelizacion"}</DialogTitle>
+          <DialogTitle>{isEdit ? "Edit Program" : "Create Loyalty Program"}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="prog-name">Nombre del programa</Label>
+            <Label htmlFor="prog-name">Program name</Label>
             <Input id="prog-name" value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} required />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="prog-ppu">Puntos por sol gastado</Label>
+            <Label htmlFor="prog-ppu">Points per currency unit spent</Label>
             <Input
               id="prog-ppu"
               type="number"
@@ -79,10 +79,10 @@ export function ProgramDialog({
               value={form.pointsPerCurrencyUnit}
               onChange={(e) => setForm((p) => ({ ...p, pointsPerCurrencyUnit: parseInt(e.target.value) || 1 }))}
             />
-            <p className="text-xs text-muted-foreground">Cuantos puntos gana el cliente por cada S/ 1.00 gastado</p>
+            <p className="text-xs text-muted-foreground">How many points a customer earns for every S/ 1.00 spent</p>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="prog-cpp">Valor por punto (centimos)</Label>
+            <Label htmlFor="prog-cpp">Value per point (cents)</Label>
             <Input
               id="prog-cpp"
               type="number"
@@ -90,26 +90,26 @@ export function ProgramDialog({
               value={form.currencyPerPoint}
               onChange={(e) => setForm((p) => ({ ...p, currencyPerPoint: parseInt(e.target.value) || 100 }))}
             />
-            <p className="text-xs text-muted-foreground">Valor en centimos de cada punto al canjear (100 = S/ 1.00)</p>
+            <p className="text-xs text-muted-foreground">Value in cents of each point when redeeming (100 = S/ 1.00)</p>
           </div>
 
           {/* Simulator */}
           <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-2">
-            <p className="text-sm font-medium text-foreground">Vista previa</p>
+            <p className="text-sm font-medium text-foreground">Preview</p>
             <p className="text-xs text-muted-foreground">
-              Si tu cliente gasta <span className="font-bold text-foreground">S/ {exampleSpend}.00</span>, gana{" "}
-              <span className="font-bold text-primary">{pointsEarned} puntos</span>.
+              If your customer spends <span className="font-bold text-foreground">S/ {exampleSpend}.00</span>, they earn{" "}
+              <span className="font-bold text-primary">{pointsEarned} points</span>.
             </p>
             <p className="text-xs text-muted-foreground">
-              Con <span className="font-bold text-foreground">100 puntos</span> acumulados, puede canjear{" "}
-              <span className="font-bold text-primary">S/ {(100 * pointValue).toFixed(2)}</span> en descuentos.
+              With <span className="font-bold text-foreground">100 points</span> accumulated, they can redeem{" "}
+              <span className="font-bold text-primary">S/ {(100 * pointValue).toFixed(2)}</span> in discounts.
             </p>
           </div>
 
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancelar</Button>
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
             <Button type="submit" disabled={createProgram.isPending || updateProgram.isPending}>
-              {(createProgram.isPending || updateProgram.isPending) ? "Guardando..." : isEdit ? "Guardar Cambios" : "Crear Programa"}
+              {(createProgram.isPending || updateProgram.isPending) ? "Saving..." : isEdit ? "Save Changes" : "Create Program"}
             </Button>
           </DialogFooter>
         </form>

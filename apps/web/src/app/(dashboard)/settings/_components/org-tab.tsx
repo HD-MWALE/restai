@@ -9,10 +9,7 @@ import { Upload } from "lucide-react";
 import { useOrgSettings, useUpdateOrg } from "@/hooks/use-settings";
 import { useUploadImage } from "@/hooks/use-uploads";
 import { toast } from "sonner";
-
-function Skeleton({ className }: { className?: string }) {
-  return <div className={`animate-pulse bg-muted rounded ${className ?? ""}`} />;
-}
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function OrgTab() {
   const { data: orgData, isLoading: orgLoading } = useOrgSettings();
@@ -37,18 +34,18 @@ export function OrgTab() {
         name: orgForm.name,
         logoUrl: orgForm.logoUrl || null,
       });
-      toast.success("Organizacion actualizada correctamente");
+      toast.success("Organization updated successfully");
     } catch (err: any) {
-      toast.error(err.message || "Error al actualizar organizacion");
+      toast.error(err.message || "Error updating organization");
     }
   };
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Organizacion</CardTitle>
+        <CardTitle>Organization</CardTitle>
         <CardDescription>
-          Configuracion general de tu restaurante
+          General settings for your restaurant
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -60,7 +57,7 @@ export function OrgTab() {
         ) : (
           <>
             <div className="space-y-2">
-              <Label htmlFor="orgName">Nombre</Label>
+              <Label htmlFor="orgName">Name</Label>
               <Input
                 id="orgName"
                 value={orgForm.name}
@@ -86,7 +83,7 @@ export function OrgTab() {
                     disabled={uploadImage.isPending}
                   >
                     <Upload className="h-4 w-4 mr-2" />
-                    {uploadImage.isPending ? "Subiendo..." : orgForm.logoUrl ? "Cambiar Logo" : "Subir Logo"}
+                    {uploadImage.isPending ? "Uploading..." : orgForm.logoUrl ? "Change Logo" : "Upload Logo"}
                   </Button>
                   <p className="text-xs text-muted-foreground">
                     JPEG, PNG, WebP o GIF. Max 5MB
@@ -103,9 +100,9 @@ export function OrgTab() {
                     try {
                       const result = await uploadImage.mutateAsync({ file, type: "logo" });
                       setOrgForm({ ...orgForm, logoUrl: result.url });
-                      toast.success("Logo subido correctamente");
+                      toast.success("Logo uploaded successfully");
                     } catch (err: any) {
-                      toast.error(err.message || "Error al subir logo");
+                      toast.error(err.message || "Error uploading logo");
                     }
                     if (logoFileRef.current) logoFileRef.current.value = "";
                   }}
@@ -113,7 +110,7 @@ export function OrgTab() {
               </div>
             </div>
             <Button onClick={handleOrgSave} disabled={updateOrg.isPending}>
-              {updateOrg.isPending ? "Guardando..." : "Guardar Cambios"}
+              {updateOrg.isPending ? "Saving..." : "Save Changes"}
             </Button>
           </>
         )}

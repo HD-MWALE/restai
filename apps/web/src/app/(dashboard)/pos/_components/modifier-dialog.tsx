@@ -161,14 +161,14 @@ export function ModifierDialog({
                       {group.name}
                       {group.is_required && (
                         <span className="ml-1.5 text-xs font-normal text-destructive">
-                          * Requerido
+                          * Required
                         </span>
                       )}
                     </p>
                     <div className="flex items-center gap-2">
                       {!isOpen && selCount > 0 && (
                         <Badge variant="secondary" className="text-xs">
-                          {selCount} sel.
+                          {selCount} selected
                         </Badge>
                       )}
                       {group.max_selections > 1 && (
@@ -237,9 +237,9 @@ export function ModifierDialog({
 
             {/* Notes */}
             <div>
-              <p className="text-sm font-semibold mb-1.5">Notas (opcional)</p>
+              <p className="text-sm font-semibold mb-1.5">Notes (optional)</p>
               <Input
-                placeholder="Sin cebolla, extra picante..."
+                placeholder="No onions, extra spicy..."
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 className="text-sm"
@@ -252,7 +252,7 @@ export function ModifierDialog({
           <DialogFooter className="flex-col gap-2 sm:flex-col">
             {/* Quantity */}
             <div className="flex items-center justify-between w-full">
-              <span className="text-sm font-medium text-muted-foreground">Cantidad</span>
+              <span className="text-sm font-medium text-muted-foreground">Quantity</span>
               <div className="flex items-center gap-2">
                 <Button
                   variant="outline"
@@ -280,7 +280,7 @@ export function ModifierDialog({
               onClick={handleConfirm}
             >
               <Plus className="h-4 w-4 mr-2" />
-              Agregar · {formatCurrency(lineTotal)}
+              Add · {formatCurrency(lineTotal)}
             </Button>
           </DialogFooter>
         )}

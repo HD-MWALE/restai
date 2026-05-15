@@ -71,7 +71,7 @@ export async function apiFetch<T = any>(path: string, options?: ApiFetchOptions)
 
   const json = await res.json();
   if (!json.success) {
-    throw new Error(json.error?.message || "Error desconocido");
+    throw new Error(json.error?.message || "Unknown error");
   }
   return json.data as T;
 }

@@ -177,7 +177,7 @@ orders.get(
 
     if (!order) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Orden no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Order no encontrada" } },
         404,
       );
     }
@@ -215,7 +215,7 @@ orders.patch(
 
     if (!order) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Orden no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Order no encontrada" } },
         404,
       );
     }
@@ -296,7 +296,7 @@ orders.patch(
 
     if (!order) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Orden no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Order no encontrada" } },
         404,
       );
     }

@@ -35,8 +35,8 @@ export default function OrdersPage() {
       const branch = branchSettings as any;
       const items = (orderDetail as any)?.items || [];
       printReceipt({
-        businessName: org?.name || "Restaurante",
-        ruc: org?.settings?.ruc || undefined,
+        businessName: org?.name || "Restaurant",
+        tpin: org?.settings?.tpin || undefined,
         address: branch?.address || undefined,
         orderNumber: order.order_number || order.id,
         createdAt: order.created_at || new Date().toISOString(),
@@ -54,7 +54,7 @@ export default function OrdersPage() {
     } catch {
       const org = orgSettings as any;
       printReceipt({
-        businessName: org?.name || "Restaurante",
+        businessName: org?.name || "Restaurant",
         orderNumber: order.order_number || order.id,
         createdAt: order.created_at || new Date().toISOString(),
         items: [],
@@ -77,12 +77,12 @@ export default function OrdersPage() {
   if (error) {
     return (
       <div className="space-y-6">
-        <PageHeader title="Ordenes" />
+        <PageHeader title="Orders" />
         <div className="p-4 rounded-lg border border-destructive/50 bg-destructive/5 flex items-center justify-between">
-          <p className="text-sm text-destructive">Error al cargar ordenes: {(error as Error).message}</p>
+          <p className="text-sm text-destructive">Error loading orders: {(error as Error).message}</p>
           <Button variant="outline" size="sm" onClick={() => refetch()}>
             <RefreshCw className="h-4 w-4 mr-2" />
-            Reintentar
+            Retry
           </Button>
         </div>
       </div>
@@ -92,8 +92,8 @@ export default function OrdersPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Ordenes"
-        description="Gestiona y rastrea todas las ordenes"
+        title="Orders"
+        description="Manage and track all orders in your restaurant"
       />
 
       <OrderFilters

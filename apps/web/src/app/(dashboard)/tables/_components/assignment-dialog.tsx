@@ -36,19 +36,19 @@ export function AssignmentDialog({ table, onClose }: AssignmentDialogProps) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            Asignar Mozos - Mesa {table?.number}
+            Assign Waiters - Table {table?.number}
           </DialogTitle>
           <DialogDescription>
-            Gestiona los mozos asignados a esta mesa
+            Manage the waiters assigned to this table
           </DialogDescription>
         </DialogHeader>
         {table && (
           <div className="space-y-4">
             {/* Current assignments */}
             <div>
-              <Label className="text-sm mb-2 block">Mozos asignados</Label>
+              <Label className="text-sm mb-2 block">Assigned waiters</Label>
               {assignments.length === 0 ? (
-                <p className="text-sm text-muted-foreground py-2">Ningun mozo asignado</p>
+                <p className="text-sm text-muted-foreground py-2">No waiters assigned</p>
               ) : (
                 <div className="space-y-2">
                   {assignments.map((a: any) => (
@@ -82,7 +82,7 @@ export function AssignmentDialog({ table, onClose }: AssignmentDialogProps) {
 
             {/* Add waiter */}
             <div>
-              <Label className="text-sm mb-2 block">Agregar mozo</Label>
+              <Label className="text-sm mb-2 block">Add waiter</Label>
               <Select
                 key={assignKey}
                 onValueChange={(userId) => {
@@ -93,7 +93,7 @@ export function AssignmentDialog({ table, onClose }: AssignmentDialogProps) {
                 }}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Seleccionar mozo..." />
+                  <SelectValue placeholder="Select waiter..." />
                 </SelectTrigger>
                 <SelectContent>
                   {waiters
@@ -110,7 +110,7 @@ export function AssignmentDialog({ table, onClose }: AssignmentDialogProps) {
         )}
         <DialogFooter>
           <Button variant="outline" onClick={onClose}>
-            Cerrar
+            Close
           </Button>
         </DialogFooter>
       </DialogContent>

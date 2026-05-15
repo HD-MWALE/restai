@@ -51,20 +51,20 @@ export default function InventoryPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Inventario</h1>
+          <h1 className="text-2xl font-bold text-foreground">Inventory</h1>
           <p className="text-muted-foreground">
-            Control de stock y recetas
+            Stock and recipe management
           </p>
         </div>
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-16">
             <Package className="h-12 w-12 text-muted-foreground mb-4" />
-            <p className="text-lg font-medium mb-2">Inventario desactivado</p>
+            <p className="text-lg font-medium mb-2">Inventory disabled</p>
             <p className="text-sm text-muted-foreground text-center max-w-md mb-4">
-              El control de inventario no esta activado para esta sede. Puedes activarlo desde la configuracion de la sede.
+              Inventory control is not enabled for this branch. You can enable it from the branch settings.
             </p>
             <Button variant="outline" onClick={() => window.location.href = "/settings"}>
-              Ir a Configuracion
+              Go to Settings
             </Button>
           </CardContent>
         </Card>
@@ -76,15 +76,15 @@ export default function InventoryPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Inventario</h1>
+          <h1 className="text-2xl font-bold text-foreground">Inventory</h1>
         </div>
         <div className="p-4 rounded-lg border border-destructive/50 bg-destructive/10 flex items-center justify-between">
           <p className="text-sm text-destructive">
-            Error al cargar inventario: {(error as Error).message}
+            Error loading inventory: {(error as Error).message}
           </p>
           <Button variant="outline" size="sm" onClick={() => refetch()}>
             <RefreshCw className="h-4 w-4 mr-2" />
-            Reintentar
+            Retry
           </Button>
         </div>
       </div>
@@ -99,7 +99,7 @@ export default function InventoryPage() {
           <div>
             <p className="text-sm font-medium text-destructive">
               {alerts.length}{" "}
-              {alerts.length === 1 ? "item" : "items"} bajo stock minimo
+              {alerts.length === 1 ? "item" : "items"} items below minimum stock
             </p>
             <p className="text-xs text-destructive/80">
               {alerts.map((a: any) => a.name).join(", ")}
@@ -112,8 +112,8 @@ export default function InventoryPage() {
         title="Inventario"
         description={
           isLoading
-            ? "Cargando..."
-            : `${items.length} items en total`
+            ? "Loading..."
+            : `${items.length} total items`
         }
       />
 
@@ -125,11 +125,11 @@ export default function InventoryPage() {
           </TabsTrigger>
           <TabsTrigger value="movements">
             <ArrowUpDown className="h-4 w-4 mr-1" />
-            Movimientos
+            Movements
           </TabsTrigger>
           <TabsTrigger value="recipes">
             <ChefHat className="h-4 w-4 mr-1" />
-            Recetas
+            Recipes
           </TabsTrigger>
         </TabsList>
 

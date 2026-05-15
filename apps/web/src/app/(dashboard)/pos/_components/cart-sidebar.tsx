@@ -60,7 +60,7 @@ export function CartSidebar({
       <div className="flex items-center justify-between mb-3">
         <h2 className="font-bold flex items-center gap-2">
           <ShoppingCart className="h-5 w-5" />
-          Orden
+          Order
           {totalQty > 0 && (
             <Badge variant="secondary" className="text-xs">
               {totalQty}
@@ -74,7 +74,7 @@ export function CartSidebar({
             className="text-destructive"
             onClick={onClearCart}
           >
-            Limpiar
+            Clear
           </Button>
         )}
       </div>
@@ -87,7 +87,7 @@ export function CartSidebar({
           className="flex-1"
           onClick={() => onOrderTypeChange("dine_in")}
         >
-          Para aqui
+          For here
         </Button>
         <Button
           variant={orderType === "takeout" ? "default" : "outline"}
@@ -95,7 +95,7 @@ export function CartSidebar({
           className="flex-1"
           onClick={() => onOrderTypeChange("takeout")}
         >
-          Para llevar
+          To go
         </Button>
       </div>
 
@@ -104,7 +104,7 @@ export function CartSidebar({
         <div className="relative">
           <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Nombre del cliente (opcional)"
+            placeholder="Customer name (optional)"
             value={customerName}
             onChange={(e) => onCustomerNameChange(e.target.value)}
             className="pl-9 text-sm"
@@ -117,7 +117,7 @@ export function CartSidebar({
         {cart.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-8 text-muted-foreground">
             <ShoppingCart className="h-10 w-10 mb-2 opacity-20" />
-            <p className="text-sm">Toca un producto para agregar</p>
+            <p className="text-sm">Tap a product to add to cart</p>
           </div>
         ) : (
           cart.map((item) => {
@@ -144,7 +144,7 @@ export function CartSidebar({
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">{item.name}</p>
                     <p className="text-xs text-muted-foreground">
-                      {formatCurrency(item.unitPrice + modTotal)} c/u
+                      {formatCurrency(item.unitPrice + modTotal)} each
                     </p>
                   </div>
                   <button
@@ -210,7 +210,7 @@ export function CartSidebar({
       {cart.length > 0 && (
         <div className="mb-3">
           <Input
-            placeholder="Notas de la orden..."
+            placeholder="Order notes..."
             value={orderNotes}
             onChange={(e) => onOrderNotesChange(e.target.value)}
             className="text-sm"
@@ -226,7 +226,7 @@ export function CartSidebar({
             <span>{formatCurrency(subtotal)}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">IGV (18%)</span>
+            <span className="text-muted-foreground">VAT (18%)</span>
             <span>{formatCurrency(tax)}</span>
           </div>
           <div className="flex justify-between font-bold text-lg pt-1.5 border-t">
@@ -245,12 +245,12 @@ export function CartSidebar({
         {isPending ? (
           <>
             <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-            Creando...
+            Creating...
           </>
         ) : (
           <>
             <Check className="h-5 w-5 mr-2" />
-            Crear Orden {cart.length > 0 && `· ${formatCurrency(total)}`}
+            Create Order {cart.length > 0 && `· ${formatCurrency(total)}`}
           </>
         )}
       </Button>

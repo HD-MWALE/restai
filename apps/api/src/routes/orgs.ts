@@ -42,7 +42,7 @@ orgs.get(
     // Non-super admin can only access their own org
     if (user.role !== "super_admin" && user.org !== id) {
       return c.json(
-        { success: false, error: { code: "FORBIDDEN", message: "Sin acceso a esta organización" } },
+        { success: false, error: { code: "FORBIDDEN", message: "No access to this organization" } },
         403,
       );
     }
@@ -55,7 +55,7 @@ orgs.get(
 
     if (!org) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Organización no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Organization not found" } },
         404,
       );
     }
@@ -84,7 +84,7 @@ orgs.patch(
 
     if (user.role !== "super_admin" && user.org !== id) {
       return c.json(
-        { success: false, error: { code: "FORBIDDEN", message: "Sin acceso a esta organización" } },
+        { success: false, error: { code: "FORBIDDEN", message: "No access to this organization" } },
         403,
       );
     }
@@ -97,7 +97,7 @@ orgs.patch(
 
     if (!updated) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Organización no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Organization not found" } },
         404,
       );
     }

@@ -140,7 +140,7 @@ export async function awardPoints(params: {
       order_id: orderId,
       points: pointsEarned,
       type: "earned",
-      description: `Orden #${orderNumber} completada`,
+      description: `Order #${orderNumber} completada`,
     });
 
     // Re-read totals for tier check

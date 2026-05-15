@@ -57,7 +57,7 @@ function ItemRow({
             disabled={isUpdatingItem}
             onClick={() => onItemReady(item.id)}
           >
-            Listo
+            Ready
           </button>
         )
       )}
@@ -161,7 +161,7 @@ export function KitchenOrderCard({
           <button
             className="text-white/70 hover:text-white p-2 rounded-lg transition-colors"
             onClick={() => onPrint(order)}
-            title="Imprimir Ticket"
+            title="Print Ticket"
           >
             <Printer className="h-5 w-5" />
           </button>
@@ -188,12 +188,12 @@ export function KitchenOrderCard({
             {expanded ? (
               <>
                 <ChevronUp className="h-3.5 w-3.5" />
-                Mostrar menos
+                Show less
               </>
             ) : (
               <>
                 <ChevronDown className="h-3.5 w-3.5" />
-                y {hiddenCount} mas...
+                Show {hiddenCount} more...  
               </>
             )}
           </button>
@@ -215,7 +215,7 @@ export function KitchenOrderCard({
             disabled={isAdvancing}
             onClick={() => onAdvance(order.id, "pending")}
           >
-            Preparar
+            Prepare
             <ArrowRight className="h-5 w-5 ml-2" />
           </Button>
         )}
@@ -226,7 +226,7 @@ export function KitchenOrderCard({
             onClick={() => onAdvance(order.id, "preparing")}
           >
             <CheckCircle className="h-5 w-5 mr-2" />
-            Listo
+            Ready
           </Button>
         )}
         {columnStatus === "ready" && (
@@ -237,7 +237,7 @@ export function KitchenOrderCard({
             onClick={() => onAdvance(order.id, "ready")}
           >
             <UtensilsCrossed className="h-5 w-5 mr-2" />
-            Entregado
+            Delivered
           </Button>
         )}
       </div>

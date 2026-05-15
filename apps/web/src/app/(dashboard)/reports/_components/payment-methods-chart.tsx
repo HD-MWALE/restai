@@ -10,12 +10,9 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const PIE_COLORS = ["#0f766e", "#2563eb", "#16a34a", "#d97706", "#e11d48", "#4b5563"];
-
-function Skeleton({ className }: { className?: string }) {
-  return <div className={`animate-pulse bg-muted rounded ${className ?? ""}`} />;
-}
 
 interface PaymentMethodsChartProps {
   paymentMethods: PaymentMethodShare[];
@@ -26,7 +23,7 @@ export function PaymentMethodsChart({ paymentMethods, isLoading }: PaymentMethod
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Metodos de Pago</CardTitle>
+        <CardTitle>Payment Methods</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="h-[300px]">
@@ -64,7 +61,7 @@ export function PaymentMethodsChart({ paymentMethods, isLoading }: PaymentMethod
             </ResponsiveContainer>
           ) : (
             <div className="h-full flex items-center justify-center text-sm text-muted-foreground">
-              No hay datos de metodos de pago
+              No payment method data available
             </div>
           )}
         </div>

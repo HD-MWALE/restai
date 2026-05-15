@@ -4,13 +4,13 @@ import { Button } from "@restai/ui/components/button";
 import { SearchInput } from "@/components/search-input";
 
 const statusConfig: Record<string, { label: string }> = {
-  pending: { label: "Pendiente" },
-  confirmed: { label: "Confirmado" },
-  preparing: { label: "Preparando" },
-  ready: { label: "Listo" },
-  served: { label: "Servido" },
-  completed: { label: "Completado" },
-  cancelled: { label: "Cancelado" },
+  pending: { label: "Pending" },
+  confirmed: { label: "Confirmed" },
+  preparing: { label: "Preparing" },
+  ready: { label: "Ready" },
+  served: { label: "Served" },
+  completed: { label: "Completed" },
+  cancelled: { label: "Cancelled" },
 };
 
 interface OrderFiltersProps {
@@ -31,7 +31,7 @@ export function OrderFilters({
       <SearchInput
         value={search}
         onChange={onSearchChange}
-        placeholder="Buscar por numero, mesa o cliente..."
+        placeholder="Search by number, table or customer..."
         className="flex-1"
       />
       <div className="flex gap-2 flex-wrap">

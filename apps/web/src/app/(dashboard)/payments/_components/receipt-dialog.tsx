@@ -24,7 +24,7 @@ interface ReceiptDialogProps {
 }
 
 export function ReceiptDialog({ open, onOpenChange, payment }: ReceiptDialogProps) {
-  const [docType, setDocType] = useState<"boleta_simple" | "boleta_electronica" | "factura">("boleta_simple");
+  const [docType, setDocType] = useState<"basic_receipt" | "electronic_receipt" | "invoice">("basic_receipt");
   const [docNumber, setDocNumber] = useState("");
   const [docHolderName, setDocHolderName] = useState("");
   const [printing, setPrinting] = useState(false);
@@ -34,14 +34,14 @@ export function ReceiptDialog({ open, onOpenChange, payment }: ReceiptDialogProp
   const printReceipt = usePrintReceipt();
 
   const isFormValid = () => {
-    if (docType === "boleta_simple") return true;
-    if (docType === "boleta_electronica") return /^\d{8}$/.test(docNumber);
-    if (docType === "factura") return /^\d{11}$/.test(docNumber) && docHolderName.trim().length > 0;
+    if (docType === "basic_receipt") return true;
+    if (docType === "electronic_receipt") return /^\d{8}$/.test(docNumber);
+    if (docType === "invoice") return /^\d{11}$/.test(docNumber) && docHolderName.trim().length > 0;
     return false;
   };
 
   const handleDocTypeChange = (v: string) => {
-    setDocType(v as "boleta_simple" | "boleta_electronica" | "factura");
+    setDocType(v as "basic_receipt" | "electronic_receipt" | "invoice");
     setDocNumber("");
     setDocHolderName("");
   };
@@ -56,8 +56,8 @@ export function ReceiptDialog({ open, onOpenChange, payment }: ReceiptDialogProp
       const orderData = orderDetail as any;
       const items = orderData?.items || [];
       printReceipt({
-        businessName: org?.name || "Restaurante",
-        ruc: org?.settings?.ruc || undefined,
+        businessName: org?.name || "Restaurant",
+        tpin: org?.settings?.tpin || undefined,
         address: branch?.address || undefined,
         orderNumber: payment.order_number || orderData?.order_number || "",
         createdAt: payment.created_at || new Date().toISOString(),
@@ -73,13 +73,13 @@ export function ReceiptDialog({ open, onOpenChange, payment }: ReceiptDialogProp
         paymentMethod: payment.method,
         customerName: orderData?.customer_name || undefined,
         docType,
-        docNumber: docType !== "boleta_simple" ? docNumber : undefined,
-        docHolderName: docType === "factura" ? docHolderName : undefined,
+        docNumber: docType !== "basic_receipt" ? docNumber : undefined,
+        docHolderName: docType === "invoice" ? docHolderName : undefined,
       });
     } catch {
       const org = orgSettings as any;
       printReceipt({
-        businessName: org?.name || "Restaurante",
+        businessName: org?.name || "Restaurant",
         orderNumber: payment.order_number || "",
         createdAt: payment.created_at || new Date().toISOString(),
         items: [],
@@ -88,8 +88,8 @@ export function ReceiptDialog({ open, onOpenChange, payment }: ReceiptDialogProp
         total: payment.amount ?? 0,
         paymentMethod: payment.method,
         docType,
-        docNumber: docType !== "boleta_simple" ? docNumber : undefined,
-        docHolderName: docType === "factura" ? docHolderName : undefined,
+        docNumber: docType !== "basic_receipt" ? docNumber : undefined,
+        docHolderName: docType === "invoice" ? docHolderName : undefined,
       });
     } finally {
       setPrinting(false);
@@ -101,25 +101,25 @@ export function ReceiptDialog({ open, onOpenChange, payment }: ReceiptDialogProp
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Imprimir Comprobante</DialogTitle>
+          <DialogTitle>Print Receipt</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label>Tipo de Documento</Label>
+            <Label>Document Type</Label>
             <Select value={docType} onValueChange={handleDocTypeChange}>
               <SelectTrigger>
-                <SelectValue placeholder="Seleccionar tipo" />
+                <SelectValue placeholder="Select type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="boleta_simple">Boleta Simple</SelectItem>
-                <SelectItem value="boleta_electronica">Boleta Electronica</SelectItem>
-                <SelectItem value="factura">Factura</SelectItem>
+                <SelectItem value="basic_receipt">Standard Receipt</SelectItem>
+                <SelectItem value="electronic_receipt">Electronic Receipt</SelectItem>
+                <SelectItem value="invoice">Invoice</SelectItem>
               </SelectContent>
             </Select>
           </div>
-          {docType === "boleta_electronica" && (
+          {docType === "electronic_receipt" && (
             <div className="space-y-2">
-              <Label htmlFor="receiptDni">DNI</Label>
+              <Label htmlFor="receiptDni">Receipt Number</Label>
               <Input
                 id="receiptDni"
                 placeholder="12345678"
@@ -128,14 +128,14 @@ export function ReceiptDialog({ open, onOpenChange, payment }: ReceiptDialogProp
                 onChange={(e) => setDocNumber(e.target.value.replace(/\D/g, "").slice(0, 8))}
               />
               {docNumber.length > 0 && docNumber.length !== 8 && (
-                <p className="text-xs text-destructive">El DNI debe tener 8 digitos</p>
+                <p className="text-xs text-destructive">The Receipt Number must have 8 digits</p>
               )}
             </div>
           )}
-          {docType === "factura" && (
+          {docType === "invoice" && (
             <>
               <div className="space-y-2">
-                <Label htmlFor="receiptRuc">RUC</Label>
+                <Label htmlFor="receiptRuc">TPIN</Label>
                 <Input
                   id="receiptRuc"
                   placeholder="20123456789"
@@ -144,14 +144,14 @@ export function ReceiptDialog({ open, onOpenChange, payment }: ReceiptDialogProp
                   onChange={(e) => setDocNumber(e.target.value.replace(/\D/g, "").slice(0, 11))}
                 />
                 {docNumber.length > 0 && docNumber.length !== 11 && (
-                  <p className="text-xs text-destructive">El RUC debe tener 11 digitos</p>
+                  <p className="text-xs text-destructive">The TPIN must have 11 digits</p>
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="receiptRazonSocial">Razon Social</Label>
+                <Label htmlFor="receiptBusinessName">Registered Business Name</Label>
                 <Input
-                  id="receiptRazonSocial"
-                  placeholder="Nombre de la empresa"
+                  id="receiptBusinessName"
+                  placeholder="Registered company name"
                   value={docHolderName}
                   onChange={(e) => setDocHolderName(e.target.value)}
                 />
@@ -161,14 +161,14 @@ export function ReceiptDialog({ open, onOpenChange, payment }: ReceiptDialogProp
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancelar
+            Cancel
           </Button>
           <Button
             onClick={handlePrint}
             disabled={printing || !isFormValid()}
           >
             <Printer className="h-4 w-4 mr-2" />
-            {printing ? "Imprimiendo..." : "Imprimir"}
+            {printing ? "Printing..." : "Print"}
           </Button>
         </DialogFooter>
       </DialogContent>

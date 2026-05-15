@@ -39,13 +39,13 @@ export default function PaymentsPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold">Pagos</h1>
+          <h1 className="text-2xl font-bold">Payments</h1>
         </div>
         <div className="p-4 rounded-lg border border-destructive/50 bg-destructive/5 flex items-center justify-between">
-          <p className="text-sm text-destructive">Error al cargar pagos: {(error as Error).message}</p>
+          <p className="text-sm text-destructive">Error loading payments: {(error as Error).message}</p>
           <Button variant="outline" size="sm" onClick={() => refetch()}>
             <RefreshCw className="h-4 w-4 mr-2" />
-            Reintentar
+            Retry
           </Button>
         </div>
       </div>
@@ -55,12 +55,12 @@ export default function PaymentsPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Pagos"
-        description={isLoading ? "Cargando..." : `${payments.length} pagos registrados`}
+        title="Payments"
+        description={isLoading ? "Loading..." : `${payments.length} payment history`}
         actions={
           <Button onClick={() => setPaymentDialogOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
-            Registrar Pago
+            Process Payment
           </Button>
         }
       />

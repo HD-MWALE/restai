@@ -84,7 +84,7 @@ inventory.post(
 
     if (!menuItem) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Item de menú no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Menu item not found" } },
         404,
       );
     }
@@ -105,7 +105,7 @@ inventory.post(
       return c.json(
         {
           success: false,
-          error: { code: "BAD_REQUEST", message: "Hay ingredientes que no pertenecen a la sucursal" },
+          error: { code: "BAD_REQUEST", message: "There are ingredients that do not belong to the branch" },
         },
         400,
       );
@@ -155,7 +155,7 @@ inventory.get(
 
     if (!menuItem) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Item de menú no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Menu item not found" } },
         404,
       );
     }
@@ -229,7 +229,7 @@ inventory.post(
 
       if (!category) {
         return c.json(
-          { success: false, error: { code: "NOT_FOUND", message: "Categoría de inventario no encontrada" } },
+          { success: false, error: { code: "NOT_FOUND", message: "Inventory category not found" } },
           404,
         );
       }
@@ -288,7 +288,7 @@ inventory.patch(
 
       if (!category) {
         return c.json(
-          { success: false, error: { code: "NOT_FOUND", message: "Categoría de inventario no encontrada" } },
+          { success: false, error: { code: "NOT_FOUND", message: "Inventory category not found" } },
           404,
         );
       }
@@ -314,7 +314,7 @@ inventory.patch(
 
     if (!updated) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Item de inventario no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Inventory item not found" } },
         404,
       );
     }
@@ -349,7 +349,7 @@ inventory.post(
 
     if (!item) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Item no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "inventory item not found" } },
         404,
       );
     }
@@ -368,7 +368,7 @@ inventory.post(
     } catch (err) {
       if (err instanceof InventoryItemNotFoundError) {
         return c.json(
-          { success: false, error: { code: "NOT_FOUND", message: "Item no encontrado" } },
+          { success: false, error: { code: "NOT_FOUND", message: "Inventory item not found" } },
           404,
         );
       }
@@ -408,7 +408,7 @@ inventory.get("/movements", requirePermission("inventory:read"), zValidator("que
 
     if (!item) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Item no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Inventory item not found" } },
         404,
       );
     }

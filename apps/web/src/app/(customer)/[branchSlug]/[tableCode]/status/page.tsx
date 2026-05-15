@@ -211,7 +211,7 @@ export default function OrderStatusPage({
     const token = getToken();
 
     if (!orderId || !token) {
-      setError("No se encontro la orden. Intenta realizar un nuevo pedido.");
+      setError("No se encontro la order. Intenta realizar un nuevo pedido.");
       setLoading(false);
       return;
     }
@@ -225,7 +225,7 @@ export default function OrderStatusPage({
       );
       const result = await res.json();
       if (!result.success) {
-        throw new Error(result.error?.message || "Error al obtener la orden");
+        throw new Error(result.error?.message || "Error al obtener la order");
       }
       setOrder(result.data);
       setError(null);
@@ -332,7 +332,7 @@ export default function OrderStatusPage({
   if (error || !order) {
     return (
       <div className="p-6 mt-12 text-center">
-        <p className="text-destructive font-medium mb-4">{error || "Orden no encontrada"}</p>
+        <p className="text-destructive font-medium mb-4">{error || "Order no encontrada"}</p>
         <Link href={`/${branchSlug}/${tableCode}/menu`}>
           <Button variant="outline">Volver al Menu</Button>
         </Link>
@@ -360,14 +360,14 @@ export default function OrderStatusPage({
         <div className="rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 text-center animate-in fade-in slide-in-from-top-2 duration-300">
           <CheckCircle className="h-8 w-8 text-green-600 dark:text-green-400 mx-auto mb-2" />
           <p className="font-semibold text-green-800 dark:text-green-300">Pedido recibido</p>
-          <p className="text-sm text-green-600 dark:text-green-400">Tu orden fue enviada a cocina</p>
+          <p className="text-sm text-green-600 dark:text-green-400">Tu order fue enviada a cocina</p>
         </div>
       )}
 
       {/* Header */}
       <div className="text-center pt-2">
         <h1 className="text-2xl font-bold">Tu Pedido</h1>
-        <p className="text-muted-foreground mt-1">Orden #{order.order_number}</p>
+        <p className="text-muted-foreground mt-1">Order #{order.order_number}</p>
       </div>
 
       {/* Cancelled banner */}

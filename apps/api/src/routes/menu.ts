@@ -101,7 +101,7 @@ menu.patch(
 
     if (!updated) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Categoría no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Category not found" } },
         404,
       );
     }
@@ -131,12 +131,12 @@ menu.delete(
 
     if (!deleted) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Categoría no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Category not found" } },
         404,
       );
     }
 
-    return c.json({ success: true, data: { message: "Categoría eliminada" } });
+    return c.json({ success: true, data: { message: "Category deleted" } });
   },
 );
 
@@ -187,7 +187,7 @@ menu.post(
 
     if (!category) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Categoría no encontrada" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Category not found" } },
         404,
       );
     }
@@ -246,7 +246,7 @@ menu.patch(
 
     if (!updated) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Item no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Item not found" } },
         404,
       );
     }
@@ -276,12 +276,12 @@ menu.delete(
 
     if (!deleted) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Item no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Item not found" } },
         404,
       );
     }
 
-    return c.json({ success: true, data: { message: "Item eliminado" } });
+    return c.json({ success: true, data: { message: "Item deleted" } });
   },
 );
 
@@ -337,7 +337,7 @@ menu.post(
 
     if (!group) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Grupo no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Group not found" } },
         404,
       );
     }
@@ -393,7 +393,7 @@ menu.post(
 
     if (!item || !group) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Item o grupo no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Item or group not found" } },
         404,
       );
     }
@@ -403,7 +403,7 @@ menu.post(
       .values({ item_id: id, group_id: groupId })
       .onConflictDoNothing();
 
-    return c.json({ success: true, data: { message: "Grupo de modificadores vinculado" } }, 201);
+    return c.json({ success: true, data: { message: "Modifier group linked" } }, 201);
   },
 );
 
@@ -473,7 +473,7 @@ menu.patch(
 
     if (!updated) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Grupo no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Group not found" } },
         404,
       );
     }
@@ -503,12 +503,12 @@ menu.delete(
 
     if (!deleted) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Grupo no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Group not found" } },
         404,
       );
     }
 
-    return c.json({ success: true, data: { message: "Grupo eliminado" } });
+    return c.json({ success: true, data: { message: "Group deleted" } });
   },
 );
 
@@ -543,7 +543,7 @@ menu.patch(
 
     if (!existingModifier) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Modificador no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Modifier not found" } },
         404,
       );
     }
@@ -561,7 +561,7 @@ menu.patch(
 
     if (!updated) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Modificador no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Modifier not found" } },
         404,
       );
     }
@@ -599,7 +599,7 @@ menu.delete(
 
     if (!existingModifier) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Modificador no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Modifier not found" } },
         404,
       );
     }
@@ -611,12 +611,12 @@ menu.delete(
 
     if (!deleted) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Modificador no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Modifier not found" } },
         404,
       );
     }
 
-    return c.json({ success: true, data: { message: "Modificador eliminado" } });
+    return c.json({ success: true, data: { message: "Modifier deleted" } });
   },
 );
 
@@ -643,7 +643,7 @@ menu.get(
 
     if (!item) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Item no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Item not found" } },
         404,
       );
     }
@@ -728,7 +728,7 @@ menu.delete(
 
     if (!item || !group) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Item o grupo no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Item or group not found" } },
         404,
       );
     }
@@ -745,12 +745,12 @@ menu.delete(
 
     if (!deleted) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Vínculo no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Link not found" } },
         404,
       );
     }
 
-    return c.json({ success: true, data: { message: "Grupo desvinculado" } });
+    return c.json({ success: true, data: { message: "Group unlinked" } });
   },
 );
 

@@ -95,7 +95,7 @@ export function NotificationBell() {
       if (msg.type === "table:call_waiter") {
         addNotification({
           type: "call_waiter",
-          message: `Mesa ${payload.tableNumber}: ${payload.customerName || "Cliente"} solicita al mozo`,
+          message: `Table ${payload.tableNumber}: ${payload.customerName || "Customer"} Call the waiter`,
           tableNumber: payload.tableNumber,
           tableId: payload.tableId,
           timestamp: msg.timestamp,
@@ -103,7 +103,7 @@ export function NotificationBell() {
       } else if (msg.type === "table:request_bill") {
         addNotification({
           type: "request_bill",
-          message: `Mesa ${payload.tableNumber}: ${payload.customerName || "Cliente"} solicita la cuenta`,
+          message: `Table ${payload.tableNumber}: ${payload.customerName || "Customer"} Request the bill`,
           tableNumber: payload.tableNumber,
           tableId: payload.tableId,
           timestamp: msg.timestamp,
@@ -111,7 +111,7 @@ export function NotificationBell() {
       } else if (msg.type === "session:pending") {
         addNotification({
           type: "session_pending",
-          message: `Mesa ${payload.tableNumber}: Nueva conexion de ${payload.customerName || "cliente"}`,
+          message: `Table ${payload.tableNumber}: New connection from ${payload.customerName || "Customer"}`,
           tableNumber: payload.tableNumber,
           tableId: payload.tableId,
           timestamp: msg.timestamp,
@@ -203,13 +203,13 @@ export function NotificationBell() {
         {open && (
           <div className="absolute right-0 top-full mt-2 w-80 bg-popover border rounded-lg shadow-lg z-50">
             <div className="flex items-center justify-between px-4 py-3 border-b">
-              <h3 className="text-sm font-semibold">Notificaciones</h3>
+              <h3 className="text-sm font-semibold">Notifications</h3>
               {notifications.length > 0 && (
                 <button
                   onClick={clearAll}
                   className="text-xs text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Limpiar todo
+                  Clear all
                 </button>
               )}
             </div>
@@ -217,7 +217,7 @@ export function NotificationBell() {
             <div className="max-h-80 overflow-y-auto">
               {notifications.length === 0 ? (
                 <div className="px-4 py-8 text-center text-sm text-muted-foreground">
-                  Sin notificaciones
+                  No notifications
                 </div>
               ) : (
                 notifications.map((notif) => {

@@ -108,7 +108,7 @@ export default function PosPage() {
     try {
       const result = await createOrder.mutateAsync({
         type: orderType,
-        customerName: customerName || "Cliente POS",
+        customerName: customerName || "Customer POS",
         items: cart.map((item) => ({
           menuItemId: item.menuItemId,
           quantity: item.quantity,
@@ -123,9 +123,9 @@ export default function PosPage() {
       setCustomerName("");
       setOrderNotes("");
       setSuccessDialog(true);
-      toast.success("Orden creada exitosamente");
+      toast.success("Order created successfully");
     } catch (err: any) {
-      toast.error(err.message || "Error al crear orden");
+      toast.error(err.message || "Error creating order");
     }
   };
 

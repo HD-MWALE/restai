@@ -18,15 +18,15 @@ function KitchenContent() {
   if (error) {
     return (
       <div className="space-y-4 h-full">
-        <h1 className="text-2xl font-bold">Cocina (KDS)</h1>
+        <h1 className="text-2xl font-bold">Kitchen (KDS)</h1>
         <div className="p-4 rounded-lg border border-destructive/50 bg-destructive/5 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <AlertCircle className="h-5 w-5 text-destructive" />
-            <p className="text-sm text-destructive">Error al cargar ordenes: {error.message}</p>
+            <p className="text-sm text-destructive">Error loading orders: {error.message}</p>
           </div>
           <Button variant="outline" size="sm" onClick={() => refetch()}>
             <RefreshCw className="h-4 w-4 mr-2" />
-            Reintentar
+            Retry
           </Button>
         </div>
       </div>
@@ -51,7 +51,7 @@ function KitchenContent() {
       {/* Header */}
       <div className="flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold tracking-tight">Cocina</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Kitchen</h1>
           <Badge variant="secondary" className="font-mono text-xs">
             KDS
           </Badge>

@@ -16,10 +16,10 @@ function formatDate(dateStr: string) {
 }
 
 const statusConfig: Record<string, { label: string; color: string; icon: any }> = {
-  pending: { label: "Pendiente", color: "bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/20", icon: Clock },
-  active: { label: "Activa", color: "bg-green-500/15 text-green-700 dark:text-green-400 border-green-500/20", icon: UserCheck },
-  completed: { label: "Completada", color: "bg-muted text-muted-foreground border-border", icon: Check },
-  rejected: { label: "Rechazada", color: "bg-red-500/15 text-red-700 dark:text-red-400 border-red-500/20", icon: UserX },
+  pending: { label: "Pending", color: "bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/20", icon: Clock },
+  active: { label: "Active", color: "bg-green-500/15 text-green-700 dark:text-green-400 border-green-500/20", icon: UserCheck },
+  completed: { label: "Completed", color: "bg-muted text-muted-foreground border-border", icon: Check },
+  rejected: { label: "Rejected", color: "bg-red-500/15 text-red-700 dark:text-red-400 border-red-500/20", icon: UserX },
 };
 
 export default function ConnectionsPage() {
@@ -51,21 +51,21 @@ export default function ConnectionsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Conexiones</h1>
-          <p className="text-muted-foreground">Gestiona las sesiones de clientes</p>
+          <h1 className="text-2xl font-bold">Connections</h1>
+          <p className="text-muted-foreground">Manage customer sessions</p>
         </div>
         <Button variant="outline" size="sm" onClick={() => refetch()}>
           <RefreshCw className="h-4 w-4 mr-2" />
-          Actualizar
+          Refresh
         </Button>
       </div>
 
       <Tabs value={tab} onValueChange={setTab}>
         <TabsList>
-          <TabsTrigger value="pending">Pendientes</TabsTrigger>
-          <TabsTrigger value="active">Activas</TabsTrigger>
-          <TabsTrigger value="completed">Historial</TabsTrigger>
-          <TabsTrigger value="all">Todas</TabsTrigger>
+          <TabsTrigger value="pending">Pending</TabsTrigger>
+          <TabsTrigger value="active">Active</TabsTrigger>
+          <TabsTrigger value="completed">Completed</TabsTrigger>
+          <TabsTrigger value="all">All</TabsTrigger>
         </TabsList>
 
         <TabsContent value={tab}>
@@ -79,7 +79,7 @@ export default function ConnectionsPage() {
             <Card>
               <CardContent className="flex flex-col items-center justify-center py-12">
                 <Wifi className="h-12 w-12 text-muted-foreground mb-4" />
-                <p className="text-muted-foreground">No hay sesiones {tab === "pending" ? "pendientes" : tab === "active" ? "activas" : ""}</p>
+                <p className="text-muted-foreground">No sessions {tab === "pending" ? "pending" : tab === "active" ? "active" : ""}</p>
               </CardContent>
             </Card>
           ) : (
@@ -131,7 +131,7 @@ export default function ConnectionsPage() {
                               endSession.mutate(session.id, { onSettled: () => setMutatingId(null) });
                             }}>
                               {mutatingId === session.id && endSession.isPending ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : <X className="h-4 w-4 mr-1" />}
-                              Terminar
+                              End
                             </Button>
                           )}
                         </div>

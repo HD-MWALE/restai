@@ -98,7 +98,7 @@ coupons.post(
 
     if (existing) {
       return c.json(
-        { success: false, error: { code: "CONFLICT", message: "Ya existe un cupon con este codigo" } },
+        { success: false, error: { code: "CONFLICT", message: "Coupon code already exists" } },
         409,
       );
     }
@@ -246,7 +246,7 @@ coupons.delete(
 
     if (!existing) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Cupon no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Coupon not found" } },
         404,
       );
     }
@@ -279,14 +279,14 @@ coupons.post(
 
     if (!coupon) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Cupon no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Coupon not found" } },
         404,
       );
     }
 
     if (coupon.status !== "active") {
       return c.json(
-        { success: false, error: { code: "INVALID", message: "El cupon no esta activo" } },
+        { success: false, error: { code: "INVALID", message: "Coupon is not active" } },
         400,
       );
     }
@@ -294,21 +294,21 @@ coupons.post(
     const now = new Date();
     if (coupon.starts_at && now < coupon.starts_at) {
       return c.json(
-        { success: false, error: { code: "INVALID", message: "El cupon aun no esta vigente" } },
+        { success: false, error: { code: "INVALID", message: "Coupon is not yet valid" } },
         400,
       );
     }
 
     if (coupon.expires_at && now > coupon.expires_at) {
       return c.json(
-        { success: false, error: { code: "INVALID", message: "El cupon ha expirado" } },
+        { success: false, error: { code: "INVALID", message: "Coupon has expired" } },
         400,
       );
     }
 
     if (coupon.max_uses_total && coupon.current_uses >= coupon.max_uses_total) {
       return c.json(
-        { success: false, error: { code: "INVALID", message: "El cupon ha alcanzado el limite de usos" } },
+        { success: false, error: { code: "INVALID", message: "Coupon has reached usage limit" } },
         400,
       );
     }
@@ -361,7 +361,7 @@ coupons.post(
 
     if (!coupon) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Cupon no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Coupon not found" } },
         404,
       );
     }
@@ -402,7 +402,7 @@ coupons.get(
 
     if (!coupon) {
       return c.json(
-        { success: false, error: { code: "NOT_FOUND", message: "Cupon no encontrado" } },
+        { success: false, error: { code: "NOT_FOUND", message: "Coupon not found" } },
         404,
       );
     }

@@ -41,7 +41,7 @@ export function rateLimiter(maxRequests = 100, windowMs = 60_000, prefix = "glob
       return c.json(
         {
           success: false,
-          error: { code: "RATE_LIMITED", message: "Demasiadas solicitudes, intenta más tarde" },
+          error: { code: "RATE_LIMITED", message: "Too many requests, try again later" },
         },
         429,
       );

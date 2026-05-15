@@ -21,7 +21,7 @@ interface KitchenTicketData {
 
 interface ReceiptTicketData {
   businessName: string;
-  ruc?: string;
+  tpin?: string;
   address?: string;
   orderNumber: string;
   createdAt: string;
@@ -31,7 +31,7 @@ interface ReceiptTicketData {
   total: number;
   paymentMethod?: string;
   customerName?: string;
-  docType?: "boleta_simple" | "boleta_electronica" | "factura";
+  docType?: "basic_receipt" | "electronic_receipt" | "invoice";
   docNumber?: string;
   docHolderName?: string;
 }
@@ -53,12 +53,12 @@ function formatDateTime(dateStr: string): string {
 }
 
 const methodLabels: Record<string, string> = {
-  cash: "Efectivo",
-  card: "Tarjeta",
+  cash: "Cash",
+  card: "Card",
   yape: "Yape",
   plin: "Plin",
-  transfer: "Transferencia",
-  other: "Otro",
+  transfer: "Bank transfer",
+  other: "Other",
 };
 
 function buildKitchenTicketHtml(data: KitchenTicketData): string {
@@ -75,29 +75,29 @@ function buildKitchenTicketHtml(data: KitchenTicketData): string {
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Ticket Cocina - #${data.orderNumber}</title>
+  <title>Ticket Kitchen - #${data.orderNumber}</title>
   <style>
     ${thermalStyles(80)}
     .order-num { font-size: 28px; font-weight: bold; text-align: center; letter-spacing: 2px; }
   </style>
 </head>
 <body>
-  <div class="center bold" style="font-size:14px;">COCINA</div>
+  <div class="center bold" style="font-size:14px;">Kitchen</div>
   <div class="divider"></div>
   <div class="order-num">#${data.orderNumber}</div>
   <div class="divider"></div>
   <table>
     <tr>
-      <td>${data.tableNumber ? `Mesa: ${data.tableNumber}` : "Para llevar"}</td>
+      <td>${data.tableNumber ? `Table: ${data.tableNumber}` : "Takeaway"}</td>
       <td style="text-align:right;">${formatDateTime(data.createdAt)}</td>
     </tr>
-    ${data.customerName ? `<tr><td colspan="2">Cliente: ${data.customerName}</td></tr>` : ""}
+    ${data.customerName ? `<tr><td colspan="2">Customer: ${data.customerName}</td></tr>` : ""}
   </table>
   <div class="divider"></div>
   <table>${itemsHtml}</table>
-  ${data.notes ? `<div class="divider"></div><div style="font-size:11px;">Nota: ${data.notes}</div>` : ""}
+  ${data.notes ? `<div class="divider"></div><div style="font-size:11px;">Note: ${data.notes}</div>` : ""}
   <div class="divider"></div>
-  <div class="center" style="font-size:10px;margin-top:4px;">*** FIN ***</div>
+  <div class="center" style="font-size:10px;margin-top:4px;">*** END ***</div>
 </body>
 </html>`;
 }
@@ -132,28 +132,28 @@ function buildReceiptTicketHtml(data: ReceiptTicketData): string {
     .join("");
 
   // Determine document title and customer info based on docType
-  let docTitle = "BOLETA DE VENTA";
+  let docTitle = "SALES RECEIPT"; 
   let docInfoHtml = "";
-  if (data.docType === "boleta_electronica") {
-    docTitle = "BOLETA DE VENTA ELECTRONICA";
+  if (data.docType === "electronic_receipt") {
+    docTitle = "ELECTRONIC SALES RECEIPT";
     if (data.docNumber) {
-      docInfoHtml = `<div>DNI: ${data.docNumber}</div>`;
+      docInfoHtml = `<div>Receipt Number: ${data.docNumber}</div>`;
     }
     if (data.customerName) {
-      docInfoHtml += `<div>Cliente: ${data.customerName}</div>`;
+      docInfoHtml += `<div>Customer: ${data.customerName}</div>`;
     }
-  } else if (data.docType === "factura") {
-    docTitle = "FACTURA";
+  } else if (data.docType === "invoice") {
+    docTitle = "INVOICE";
     if (data.docNumber) {
-      docInfoHtml = `<div>RUC: ${data.docNumber}</div>`;
+      docInfoHtml = `<div>TPIN: ${data.docNumber}</div>`;
     }
     if (data.docHolderName) {
-      docInfoHtml += `<div>Razon Social: ${data.docHolderName}</div>`;
+      docInfoHtml += `<div>Customer Name: ${data.docHolderName}</div>`;
     }
   } else {
-    // boleta_simple or default
+    // basic_receipt or default
     if (data.customerName) {
-      docInfoHtml = `<div>Cliente: ${data.customerName}</div>`;
+      docInfoHtml = `<div>Customer: ${data.customerName}</div>`;
     }
   }
 
@@ -169,12 +169,12 @@ function buildReceiptTicketHtml(data: ReceiptTicketData): string {
 </head>
 <body>
   <div class="center bold" style="font-size:14px;">${data.businessName}</div>
-  ${data.ruc ? `<div class="center" style="font-size:10px;">RUC: ${data.ruc}</div>` : ""}
+  ${data.tpin ? `<div class="center" style="font-size:10px;">TPIN: ${data.tpin}</div>` : ""}
   ${data.address ? `<div class="center" style="font-size:10px;">${data.address}</div>` : ""}
   <div class="divider"></div>
   <div class="center bold">${docTitle}</div>
   <div class="center" style="font-size:10px;">${formatDateTime(data.createdAt)}</div>
-  <div class="center">Orden: #${data.orderNumber}</div>
+  <div class="center">Order: #${data.orderNumber}</div>
   ${docInfoHtml}
   <div class="divider"></div>
   <table>${itemsHtml}</table>
@@ -185,7 +185,7 @@ function buildReceiptTicketHtml(data: ReceiptTicketData): string {
       <td style="text-align:right;">S/ ${formatCents(data.subtotal)}</td>
     </tr>
     <tr>
-      <td>IGV (18%):</td>
+      <td>VAT (17.5%):</td>
       <td style="text-align:right;">S/ ${formatCents(data.tax)}</td>
     </tr>
     <tr class="bold">
@@ -196,8 +196,8 @@ function buildReceiptTicketHtml(data: ReceiptTicketData): string {
   <div class="divider"></div>
   ${data.paymentMethod ? `<div>Metodo de pago: ${methodLabels[data.paymentMethod] || data.paymentMethod}</div>` : ""}
   <div class="divider"></div>
-  <div class="center" style="font-size:10px;margin-top:4px;">Gracias por su preferencia</div>
-  <div class="center" style="font-size:9px;">*** FIN ***</div>
+  <div class="center" style="font-size:10px;margin-top:4px;">Thank you for your business</div>
+  <div class="center" style="font-size:9px;">*** END ***</div>
 </body>
 </html>`;
 }

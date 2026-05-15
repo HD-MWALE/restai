@@ -8,7 +8,7 @@ export const authMiddleware = createMiddleware<AppEnv>(async (c, next) => {
     return c.json(
       {
         success: false,
-        error: { code: "UNAUTHORIZED", message: "Token no proporcionado" },
+        error: { code: "UNAUTHORIZED", message: "Token not provided" },
       },
       401,
     );
@@ -23,7 +23,7 @@ export const authMiddleware = createMiddleware<AppEnv>(async (c, next) => {
     return c.json(
       {
         success: false,
-        error: { code: "UNAUTHORIZED", message: "Token inválido o expirado" },
+        error: { code: "UNAUTHORIZED", message: "Invalid or expired token" },
       },
       401,
     );

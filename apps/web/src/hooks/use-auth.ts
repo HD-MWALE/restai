@@ -26,7 +26,7 @@ export function useAuth() {
     );
     const data = await res.json();
     if (!data.success)
-      throw new Error(data.error?.message || "Error al iniciar sesion");
+      throw new Error(data.error?.message || "Error signing in");
     setAuth(data.data.user, data.data.accessToken, data.data.refreshToken);
     if (data.data.user.branches?.length > 0) {
       setSelectedBranch(data.data.user.branches[0]);
@@ -51,7 +51,7 @@ export function useAuth() {
     );
     const data = await res.json();
     if (!data.success)
-      throw new Error(data.error?.message || "Error al registrarse");
+      throw new Error(data.error?.message || "Error registering");
     setAuth(data.data.user, data.data.accessToken, data.data.refreshToken);
     router.push("/orders");
   };

@@ -80,12 +80,12 @@ export function ProductDialog({
 
     const priceInCents = Math.round(parseFloat(priceSoles) * 100);
     if (isNaN(priceInCents) || priceInCents < 0) {
-      toast.error("Precio invalido");
+      toast.error("Invalid price");
       return;
     }
 
     if (!categoryId) {
-      toast.error("Selecciona una categoria");
+      toast.error("Select a category");
       return;
     }
 
@@ -101,14 +101,14 @@ export function ProductDialog({
     try {
       if (isEdit) {
         await updateItem.mutateAsync({ id: initial.id, ...payload });
-        toast.success("Producto actualizado");
+        toast.success("Product updated");
       } else {
         await createItem.mutateAsync(payload);
-        toast.success("Producto creado");
+        toast.success("Product created");
       }
       onOpenChange(false);
     } catch (err: any) {
-      toast.error(err.message || "Error al guardar");
+      toast.error(err.message || "Error saving");
     }
   };
 
@@ -116,9 +116,9 @@ export function ProductDialog({
     if (!initial?.id) return;
     try {
       await linkGroup.mutateAsync({ itemId: initial.id, groupId });
-      toast.success("Grupo vinculado");
+      toast.success("Group linked");
     } catch (err: any) {
-      toast.error(err.message || "Error al vincular");
+      toast.error(err.message || "Error linking");
     }
   };
 
@@ -126,9 +126,9 @@ export function ProductDialog({
     if (!initial?.id) return;
     try {
       await unlinkGroup.mutateAsync({ itemId: initial.id, groupId });
-      toast.success("Grupo desvinculado");
+      toast.success("Group unlinked");
     } catch (err: any) {
-      toast.error(err.message || "Error al desvincular");
+      toast.error(err.message || "Error unlinking");
     }
   };
 
@@ -137,26 +137,26 @@ export function ProductDialog({
       <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {isEdit ? "Editar Producto" : "Nuevo Producto"}
+            {isEdit ? "Edit Product" : "New Product"}
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2 col-span-2 sm:col-span-1">
-              <Label htmlFor="prod-name">Nombre</Label>
+              <Label htmlFor="prod-name">Name</Label>
               <Input
                 id="prod-name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Ej: Ceviche clasico"
+                placeholder="Example: Classic Ceviche"
                 required
               />
             </div>
             <div className="space-y-2 col-span-2 sm:col-span-1">
-              <Label htmlFor="prod-cat">Categoria</Label>
+              <Label htmlFor="prod-cat">Category</Label>
               <Select value={categoryId || "none"} onValueChange={(v) => setCategoryId(v === "none" ? "" : v)}>
                 <SelectTrigger disabled={categories.length === 0}>
-                  <SelectValue placeholder={categories.length === 0 ? "Crea una categoria primero" : "Selecciona categoria"} />
+                  <SelectValue placeholder={categories.length === 0 ? "Create a category first" : "Select category"} />
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map((c: any) => (
@@ -169,17 +169,17 @@ export function ProductDialog({
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="prod-desc">Descripcion</Label>
+            <Label htmlFor="prod-desc">Description</Label>
             <Input
               id="prod-desc"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Descripcion opcional"
+              placeholder="Optional description"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="prod-price">Precio (S/)</Label>
+              <Label htmlFor="prod-price">Price (S/)</Label>
               <Input
                 id="prod-price"
                 type="number"
@@ -192,7 +192,7 @@ export function ProductDialog({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="prod-prep">Tiempo prep. (min)</Label>
+              <Label htmlFor="prod-prep">Prep Time (min)</Label>
               <Input
                 id="prod-prep"
                 type="number"
@@ -204,7 +204,7 @@ export function ProductDialog({
             </div>
           </div>
           <div className="space-y-2">
-            <Label>Imagen</Label>
+            <Label>Image</Label>
             <ImageUploadButton
               currentUrl={imageUrl || null}
               onUploaded={(url) => setImageUrl(url)}
@@ -216,10 +216,10 @@ export function ProductDialog({
             <div className="space-y-3 rounded-lg border border-border p-4 bg-muted/30">
               <div className="flex items-center justify-between">
                 <Label className="text-sm font-medium">
-                  Grupos de Modificadores
+                  Modifier Groups
                 </Label>
                 <Badge variant="secondary" className="text-[10px]">
-                  {linkedGroupIds.length} vinculados
+                  {linkedGroupIds.length} linked
                 </Badge>
               </div>
 
@@ -237,7 +237,7 @@ export function ProductDialog({
                         <Link2 className="h-3.5 w-3.5 text-primary" />
                         <span className="text-sm font-medium">{g.name}</span>
                         <span className="text-[10px] text-muted-foreground">
-                          ({g.modifiers?.length ?? 0} opciones)
+                          ({g.modifiers?.length ?? 0} options)
                         </span>
                       </div>
                       <button
@@ -253,7 +253,7 @@ export function ProductDialog({
                 </div>
               ) : (
                 <p className="text-xs text-muted-foreground text-center py-2">
-                  Sin grupos vinculados
+                  No linked groups
                 </p>
               )}
 
@@ -261,12 +261,12 @@ export function ProductDialog({
               {unlinkedGroups.length > 0 && (
                 <Select key={linkKey} onValueChange={(v) => { handleLink(v); setLinkKey((k) => k + 1); }}>
                   <SelectTrigger>
-                    <SelectValue placeholder="+ Vincular grupo..." />
+                    <SelectValue placeholder="+ Link group..." />
                   </SelectTrigger>
                   <SelectContent>
                     {unlinkedGroups.map((g: any) => (
                       <SelectItem key={g.id} value={g.id}>
-                        {g.name} ({g.modifiers?.length ?? 0} opciones)
+                        {g.name} ({g.modifiers?.length ?? 0} options)
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -282,10 +282,10 @@ export function ProductDialog({
               onClick={() => onOpenChange(false)}
               disabled={loading}
             >
-              Cancelar
+              Cancel
             </Button>
             <Button type="submit" disabled={loading}>
-              {loading ? "Guardando..." : isEdit ? "Actualizar" : "Crear"}
+              {loading ? "Saving..." : isEdit ? "Update" : "Create"}
             </Button>
           </DialogFooter>
         </form>

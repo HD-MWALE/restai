@@ -49,7 +49,7 @@ export function QrDialog({ table, branchSlug, onClose }: QrDialogProps) {
     <Dialog open={!!table} onOpenChange={(open) => !open && onClose()}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Codigo QR - Mesa {table?.number}</DialogTitle>
+          <DialogTitle>QR Code - Table {table?.number}</DialogTitle>
         </DialogHeader>
         {table && (
           <div className="flex flex-col items-center gap-4 py-4">
@@ -63,17 +63,17 @@ export function QrDialog({ table, branchSlug, onClose }: QrDialogProps) {
               {qrUrl}
             </p>
             <p className="text-xs text-muted-foreground">
-              Codigo: {table.qr_code}
+              Code: {table.qr_code}
             </p>
           </div>
         )}
         <DialogFooter>
           <Button variant="outline" onClick={onClose}>
-            Cerrar
+            Close
           </Button>
           <Button onClick={handleDownloadQR}>
             <Download className="h-4 w-4 mr-2" />
-            Descargar PNG
+            Download PNG
           </Button>
         </DialogFooter>
       </DialogContent>

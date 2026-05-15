@@ -10,10 +10,10 @@ const movementTypeLabels: Record<
   string,
   { label: string; variant: "default" | "secondary" | "destructive" | "outline" }
 > = {
-  purchase: { label: "Compra", variant: "default" },
-  consumption: { label: "Consumo", variant: "secondary" },
-  waste: { label: "Merma", variant: "destructive" },
-  adjustment: { label: "Ajuste", variant: "outline" },
+  purchase: { label: "Purchase", variant: "default" },
+  consumption: { label: "Consumption", variant: "secondary" },
+  waste: { label: "Waste", variant: "destructive" },
+  adjustment: { label: "Adjustment", variant: "outline" },
 };
 
 export function MovementsTab({
@@ -28,7 +28,7 @@ export function MovementsTab({
       <div className="flex justify-end">
         <Button onClick={onNewMovement}>
           <ArrowUpDown className="h-4 w-4 mr-2" />
-          Nuevo Movimiento
+          New Movement
         </Button>
       </div>
 
@@ -39,19 +39,19 @@ export function MovementsTab({
               <thead>
                 <tr className="border-b border-border bg-muted/50">
                   <th className="text-left p-3 text-sm font-medium text-muted-foreground">
-                    Tipo
+                    Type
                   </th>
                   <th className="text-left p-3 text-sm font-medium text-muted-foreground">
                     Item
                   </th>
                   <th className="text-right p-3 text-sm font-medium text-muted-foreground">
-                    Cantidad
+                    Quantity
                   </th>
                   <th className="text-left p-3 text-sm font-medium text-muted-foreground hidden sm:table-cell">
-                    Referencia
+                    Reference
                   </th>
                   <th className="text-right p-3 text-sm font-medium text-muted-foreground hidden md:table-cell">
-                    Fecha
+                    Date
                   </th>
                 </tr>
               </thead>
@@ -62,7 +62,7 @@ export function MovementsTab({
                       colSpan={5}
                       className="p-8 text-center text-sm text-muted-foreground"
                     >
-                      No hay movimientos registrados
+                      No movements registered
                     </td>
                   </tr>
                 ) : (

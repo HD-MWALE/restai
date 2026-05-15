@@ -19,12 +19,12 @@ export default function SettingsPage() {
   if (error) {
     return (
       <div className="space-y-6 max-w-2xl">
-        <PageHeader title="Configuracion" />
+        <PageHeader title="Settings" />
         <div className="p-4 rounded-lg border border-destructive/50 bg-destructive/5 flex items-center justify-between">
-          <p className="text-sm text-destructive">Error al cargar: {(error as Error).message}</p>
+          <p className="text-sm text-destructive">Error loading: {(error as Error).message}</p>
           <Button variant="outline" size="sm" onClick={() => { refetchOrg(); refetchBranch(); }}>
             <RefreshCw className="h-4 w-4 mr-2" />
-            Reintentar
+            Retry
           </Button>
         </div>
       </div>
@@ -34,8 +34,8 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6 max-w-2xl">
       <PageHeader
-        title="Configuracion"
-        description="Administra la configuracion de tu organizacion y sedes"
+        title="Settings"
+        description="Manage your organization and branches"
       />
 
       <div className="flex gap-2 border-b pb-2">
@@ -45,7 +45,7 @@ export default function SettingsPage() {
           onClick={() => setActiveTab("org")}
         >
           <Building2 className="h-4 w-4 mr-2" />
-          Organizacion
+          Organization
         </Button>
         <Button
           variant={activeTab === "branch" ? "default" : "ghost"}
@@ -53,7 +53,7 @@ export default function SettingsPage() {
           onClick={() => setActiveTab("branch")}
         >
           <MapPin className="h-4 w-4 mr-2" />
-          Sede
+          Branch / Location
         </Button>
         <Button
           variant={activeTab === "sedes" ? "default" : "ghost"}
@@ -61,7 +61,7 @@ export default function SettingsPage() {
           onClick={() => setActiveTab("sedes")}
         >
           <Store className="h-4 w-4 mr-2" />
-          Sedes
+          Branches / Locations
         </Button>
       </div>
 

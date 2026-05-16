@@ -51,7 +51,7 @@ services:
       REDIS_URL: redis://redis:6379
       JWT_SECRET: ${JWT_SECRET}
       JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
-      CORS_ORIGINS: ${CORS_ORIGINS:-https://app.hosteleria.me}
+      CORS_ORIGINS: ${CORS_ORIGINS:-https://restaurant.assethub.site}
       LOG_LEVEL: ${LOG_LEVEL:-info}
       R2_ACCOUNT_ID: ${R2_ACCOUNT_ID:-}
       R2_ACCESS_KEY_ID: ${R2_ACCESS_KEY_ID:-}

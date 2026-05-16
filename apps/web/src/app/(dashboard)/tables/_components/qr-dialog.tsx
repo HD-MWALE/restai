@@ -11,7 +11,7 @@ import {
 import { Download } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://app.hosteleria.me";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://restaurant.assethub.site";
 
 interface QrDialogProps {
   table: any | null;
